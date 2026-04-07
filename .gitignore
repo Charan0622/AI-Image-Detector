@@ -1,0 +1,14 @@
+data/
+checkpoints/
+*.pth
+*.pt
+__pycache__/
+*.pyc
+.env
+node_modules/
+dist/
+.DS_Store
+*.egg-info/
+wandb/
+frontend/node_modules/
+.venv/
