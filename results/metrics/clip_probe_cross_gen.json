@@ -1,0 +1,44 @@
+{
+  "adm": {
+    "accuracy": 0.892,
+    "auc": 0.9586,
+    "precision": 0.8719,
+    "recall": 0.919,
+    "f1": 0.8948
+  },
+  "glide": {
+    "accuracy": 0.9415,
+    "auc": 0.9949,
+    "precision": 0.8995,
+    "recall": 0.994,
+    "f1": 0.9444
+  },
+  "midjourney": {
+    "accuracy": 0.8525,
+    "auc": 0.9299,
+    "precision": 0.8722,
+    "recall": 0.826,
+    "f1": 0.8485
+  },
+  "sd15": {
+    "accuracy": 0.906,
+    "auc": 0.9676,
+    "precision": 0.8934,
+    "recall": 0.922,
+    "f1": 0.9075
+  },
+  "vqdm": {
+    "accuracy": 0.7975,
+    "auc": 0.8936,
+    "precision": 0.8416,
+    "recall": 0.733,
+    "f1": 0.7835
+  },
+  "wukong": {
+    "accuracy": 0.8695,
+    "auc": 0.9427,
+    "precision": 0.8721,
+    "recall": 0.866,
+    "f1": 0.869
+  }
+}
