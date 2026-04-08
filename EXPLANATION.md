@@ -189,3 +189,49 @@ Solution: Pre-extract features once (20K subsample), then train linear head on c
 - `scripts/extract_features.py` — CLIP feature extraction to disk
 
 ### Git commit: `feat: CLIP linear probe baseline with cross-gen evaluation`
+
+---
+
+## Phase 3: AIDE-Style Hybrid Detector
+**Date:** 2026-04-08
+**Status:** ✅ Complete
+
+### What was done:
+- Built AIDE-style hybrid detector: CLIP features + DCT frequency CNN + fusion MLP
+- Used cached CLIP features + live DCT computation for efficient training
+- Trained for 30 epochs (~4.3 min/epoch on MPS)
+- Evaluated cross-generator performance
+
+### Architecture:
+- Branch 1: Frozen CLIP ViT-B/16 -> 512-dim (reused cached features)
+- Branch 2: FrequencyCNN(1->32->64->128->256, GAP) -> 256-dim
+- Fusion: Concat(512+256=768) -> Linear(768,256) -> GELU -> Dropout(0.3) -> Linear(256,2)
+- Trainable parameters: **651,970**
+
+### Training results:
+- Best val AUC: **0.9822** (vs 0.9458 for CLIP probe — +3.6%)
+- Best val accuracy: **93.14%**
+- Training time: ~2 hours (30 epochs)
+
+### Cross-Generator Results (Hybrid vs CLIP Probe):
+| Generator | Hybrid Acc | Hybrid AUC | Probe AUC | Delta |
+|-----------|-----------|------------|-----------|-------|
+| ADM | 0.9520 | 0.9929 | 0.9586 | +0.0343 |
+| GLIDE | 0.9585 | 0.9955 | 0.9949 | +0.0006 |
+| Midjourney | 0.8990 | 0.9695 | 0.9299 | +0.0396 |
+| SD v1.5 | 0.9500 | 0.9883 | 0.9676 | +0.0207 |
+| VQDM | 0.9110 | 0.9707 | 0.8936 | +0.0771 |
+| Wukong | 0.9270 | 0.9771 | 0.9427 | +0.0344 |
+| **Average** | **0.9329** | **0.9823** | **0.9479** | **+0.0344** |
+
+### Analysis:
+- Hybrid improves on CLIP probe across ALL generators
+- Biggest improvement on VQDM (+7.7% AUC) — frequency features help most on harder cases
+- GLIDE barely improved (+0.06%) — already near-perfect with CLIP alone
+- Frequency branch adds meaningful signal, especially for generators with strong spectral artifacts
+
+### Files created:
+- `src/models/hybrid.py` — HybridDetector with FrequencyCNN
+- `src/train_hybrid.py` — Fast hybrid training on cached features + live DCT
+
+### Git commit: `feat: AIDE-style hybrid detector baseline 2`
