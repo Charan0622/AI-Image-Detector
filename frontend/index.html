@@ -23,7 +23,7 @@
 
 <script type="text/babel">
 const { useState, useRef, useEffect } = React;
-const API_URL = "http://localhost:8001";
+const API_URL = window.location.origin;
 
 // ===== Upload Zone =====
 function UploadZone({ onImageSelect }) {
@@ -57,14 +57,13 @@ function UploadZone({ onImageSelect }) {
 function VerdictCard({ result }) {
     if (!result) return null;
     const isFake = result.verdict === "AI-Generated";
-    const color = isFake ? "red" : "green";
     const pct = Math.round(result.confidence * 100);
 
     return (
-        <div className={`glass rounded-2xl p-6 fade-in`}>
+        <div className="glass rounded-2xl p-6 fade-in">
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-bold">
-                    <span className={`text-${color}-400`}>{result.verdict}</span>
+                    <span style={{ color: isFake ? '#f87171' : '#4ade80' }}>{result.verdict}</span>
                 </h2>
                 <span className="text-sm text-gray-400">{result.inference_time_ms}ms</span>
             </div>
@@ -73,8 +72,8 @@ function VerdictCard({ result }) {
                 <span className="font-mono">{pct}%</span>
             </div>
             <div className="w-full bg-gray-700 rounded-full h-4 overflow-hidden">
-                <div className={`confidence-bar h-full rounded-full ${isFake ? 'bg-red-500' : 'bg-green-500'}`}
-                    style={{ width: `${pct}%` }} />
+                <div className="confidence-bar h-full rounded-full"
+                    style={{ width: `${pct}%`, background: isFake ? '#ef4444' : '#22c55e' }} />
             </div>
             <p className="text-xs text-gray-400 mt-2">Model: {result.model_name}</p>
         </div>
@@ -347,11 +346,25 @@ function App() {
                         <div className="bg-red-900/50 border border-red-500 rounded-xl p-4 text-red-300">{error}</div>
                     )}
 
+                    {/* Loading indicator */}
+                    {loading && (
+                        <div className="glass rounded-2xl p-8 text-center fade-in">
+                            <div className="text-3xl mb-3 animate-spin inline-block">&#9881;</div>
+                            <p className="text-gray-300">Analyzing image... (this takes a few seconds)</p>
+                        </div>
+                    )}
+
                     {/* Results */}
-                    {result && (
+                    {result && !loading && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <VerdictCard result={result} />
-                            <HeatmapOverlay result={result} previewUrl={previewUrl} />
+                            {result.heatmap_base64 ? (
+                                <HeatmapOverlay result={result} previewUrl={previewUrl} />
+                            ) : (
+                                <div className="glass rounded-2xl p-6 fade-in flex items-center justify-center">
+                                    <p className="text-gray-400">Heatmap available with Hybrid or Freq-Guided models</p>
+                                </div>
+                            )}
                         </div>
                     )}
 
