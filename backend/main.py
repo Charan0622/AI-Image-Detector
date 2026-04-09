@@ -15,6 +15,7 @@ from pathlib import Path
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from PIL import Image
 
 # Add project root to path
@@ -82,7 +83,12 @@ async def detect_image(
         raise HTTPException(status_code=400, detail=f"Invalid image: {e}")
 
     mgr = get_manager()
-    result = mgr.predict(image, model_name=model)
+    try:
+        result = mgr.predict(image, model_name=model)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
     return result
 
 
@@ -105,7 +111,12 @@ async def detect_comparative(file: UploadFile = File(...)) -> dict:
         raise HTTPException(status_code=400, detail=f"Invalid image: {e}")
 
     mgr = get_manager()
-    result = mgr.predict_comparative(image)
+    try:
+        result = mgr.predict_comparative(image)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Comparison error: {e}")
     return result
 
 
@@ -148,3 +159,16 @@ async def dashboard_data() -> dict:
                 }
 
     return data
+
+
+# Serve frontend — mount AFTER API routes so they take priority
+FRONTEND_DIR = PROJECT_ROOT / "frontend"
+if FRONTEND_DIR.exists():
+    from fastapi.responses import FileResponse
+
+    @app.get("/")
+    async def serve_frontend():
+        """Serve the frontend HTML."""
+        return FileResponse(FRONTEND_DIR / "index.html")
+
+    app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
