@@ -281,3 +281,34 @@ Solution: Pre-extract features once (20K subsample), then train linear head on c
 - `src/train_freq_guided.py` — Training with ablation support
 
 ### Git commit: `feat: freq-guided attention + robustness training + ablation study`
+
+---
+
+## Phase 5: Grad-CAM Explainability
+**Date:** 2026-04-08
+**Status:** ✅ Complete
+
+### What was done:
+- Built Grad-CAM pipeline for frequency branch visualization
+- Built frequency spatial attention map extraction
+- Created text explanation generator with spectral analysis
+- Generated Grad-CAM visualizations for all 6 generators (3 real + 3 fake each)
+- Created summary panel with side-by-side real vs fake heatmaps
+
+### Explainability approach:
+1. **Grad-CAM on frequency CNN**: Gradient-weighted activations from last conv layer
+   show which spatial frequency regions drive the fake/real classification
+2. **Frequency spatial attention**: Direct attention weights from MultiScaleFreqCNN
+3. **Text explanations**: Automated analysis of DCT spectrum for artifact signatures
+   (frequency rolloff, grid artifacts, spectral entropy)
+
+### Output files:
+- `results/gradcam_samples/gradcam_{gen}.png` — Per-generator visualizations (6 files)
+- `results/gradcam_samples/gradcam_summary.png` — Combined summary panel
+
+### Files created:
+- `src/gradcam_utils.py` — Grad-CAM computation, heatmap overlay
+- `src/explain.py` — Text explanation generation with spectral analysis
+- `scripts/generate_gradcam_samples.py` — Batch visualization generator
+
+### Git commit: `feat: Grad-CAM explainability + text explanations`
