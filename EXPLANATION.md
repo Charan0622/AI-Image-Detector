@@ -312,3 +312,46 @@ Solution: Pre-extract features once (20K subsample), then train linear head on c
 - `scripts/generate_gradcam_samples.py` — Batch visualization generator
 
 ### Git commit: `feat: Grad-CAM explainability + text explanations`
+
+---
+
+## Phase 6: Web Application
+**Date:** 2026-04-08
+**Status:** ✅ Complete
+
+### What was done:
+- Built FastAPI backend with detection, comparison, and dashboard endpoints
+- Built single-page React frontend with CDN-loaded dependencies (no npm install needed)
+- Tested all endpoints: health, detect, compare, dashboard
+
+### Backend (FastAPI):
+- `POST /detect` — Single image detection with verdict, confidence, heatmap, explanations
+- `POST /detect/compare` — Side-by-side comparison of all 3 models
+- `GET /dashboard/data` — Cross-generator metrics and ablation results
+- `GET /health` — Health check
+- ModelManager class with lazy model loading and caching
+- Port: 8001
+
+### Frontend (React + Tailwind via CDN):
+- **UploadZone**: Drag-and-drop image upload with file validation
+- **VerdictCard**: Large verdict display with animated confidence meter
+- **HeatmapOverlay**: Toggle between original image and Grad-CAM overlay
+- **ExplanationPanel**: Accordion list of region-specific explanations with severity bars
+- **ComparativePanel**: Side-by-side cards for all 3 models
+- **Dashboard**: Cross-generator accuracy table + ablation study results
+- Single HTML file — no build step, no node_modules
+
+### How to run:
+```bash
+bash scripts/start_app.sh
+# Then open frontend/index.html in browser
+```
+
+### Files created:
+- `backend/main.py` — FastAPI application
+- `backend/inference.py` — Model loading + prediction pipeline
+- `backend/requirements.txt` — Backend-specific deps
+- `frontend/index.html` — Single-page React app
+- `scripts/start_app.sh` — One-command app launcher
+
+### Git commit: `feat: full-stack web application`

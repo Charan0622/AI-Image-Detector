@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Detector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .confidence-bar { transition: width 0.8s ease-in-out; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .drag-active { border-color: #3b82f6 !important; background: rgba(59,130,246,0.1) !important; }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useRef, useEffect } = React;
+const API_URL = "http://localhost:8001";
+
+// ===== Upload Zone =====
+function UploadZone({ onImageSelect }) {
+    const [dragActive, setDragActive] = useState(false);
+    const inputRef = useRef(null);
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setDragActive(false);
+        if (e.dataTransfer.files?.[0]) onImageSelect(e.dataTransfer.files[0]);
+    };
+
+    return (
+        <div
+            className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${dragActive ? 'drag-active' : 'border-gray-600 hover:border-gray-400'}`}
+            onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+            onDragLeave={() => setDragActive(false)}
+            onDrop={handleDrop}
+            onClick={() => inputRef.current?.click()}
+        >
+            <div className="text-5xl mb-4">&#128248;</div>
+            <p className="text-xl font-semibold mb-2">Drop an image here</p>
+            <p className="text-gray-400">or click to browse (JPG, PNG, max 10MB)</p>
+            <input ref={inputRef} type="file" accept="image/*" className="hidden"
+                onChange={(e) => e.target.files?.[0] && onImageSelect(e.target.files[0])} />
+        </div>
+    );
+}
+
+// ===== Verdict Card =====
+function VerdictCard({ result }) {
+    if (!result) return null;
+    const isFake = result.verdict === "AI-Generated";
+    const color = isFake ? "red" : "green";
+    const pct = Math.round(result.confidence * 100);
+
+    return (
+        <div className={`glass rounded-2xl p-6 fade-in`}>
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-bold">
+                    <span className={`text-${color}-400`}>{result.verdict}</span>
+                </h2>
+                <span className="text-sm text-gray-400">{result.inference_time_ms}ms</span>
+            </div>
+            <div className="mb-2 flex justify-between text-sm">
+                <span>Confidence</span>
+                <span className="font-mono">{pct}%</span>
+            </div>
+            <div className="w-full bg-gray-700 rounded-full h-4 overflow-hidden">
+                <div className={`confidence-bar h-full rounded-full ${isFake ? 'bg-red-500' : 'bg-green-500'}`}
+                    style={{ width: `${pct}%` }} />
+            </div>
+            <p className="text-xs text-gray-400 mt-2">Model: {result.model_name}</p>
+        </div>
+    );
+}
+
+// ===== Heatmap Overlay =====
+function HeatmapOverlay({ result, previewUrl }) {
+    const [showHeatmap, setShowHeatmap] = useState(true);
+    if (!result?.heatmap_base64) return null;
+
+    return (
+        <div className="glass rounded-2xl p-6 fade-in">
+            <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Grad-CAM Heatmap</h3>
+                <button onClick={() => setShowHeatmap(!showHeatmap)}
+                    className="px-3 py-1 text-sm bg-gray-700 rounded-lg hover:bg-gray-600">
+                    {showHeatmap ? 'Show Original' : 'Show Heatmap'}
+                </button>
+            </div>
+            <div className="rounded-xl overflow-hidden">
+                <img src={showHeatmap ? result.heatmap_base64 : previewUrl}
+                    alt="Detection visualization" className="w-full" />
+            </div>
+        </div>
+    );
+}
+
+// ===== Explanation Panel =====
+function ExplanationPanel({ result }) {
+    if (!result?.explanations?.length) return null;
+
+    return (
+        <div className="glass rounded-2xl p-6 fade-in">
+            <h3 className="text-lg font-semibold mb-4">Why This Verdict?</h3>
+            <div className="space-y-3">
+                {result.explanations.map((exp, i) => (
+                    <div key={i} className="bg-gray-800/50 rounded-xl p-4">
+                        <div className="flex justify-between items-center mb-1">
+                            <span className="text-sm font-medium text-blue-300">{exp.region}</span>
+                            <div className="flex items-center gap-2">
+                                <div className="w-20 bg-gray-700 rounded-full h-2">
+                                    <div className="bg-yellow-400 h-2 rounded-full"
+                                        style={{ width: `${Math.round(exp.severity * 100)}%` }} />
+                                </div>
+                            </div>
+                        </div>
+                        <p className="text-sm text-gray-300">{exp.reason}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// ===== Comparative Panel =====
+function ComparativePanel({ results }) {
+    if (!results?.models) return null;
+
+    const modelLabels = {
+        clip_probe: { name: "CLIP Linear Probe", desc: "Frozen CLIP + linear head" },
+        hybrid: { name: "Hybrid Detector", desc: "CLIP + DCT frequency CNN" },
+        freq_guided: { name: "Freq-Guided (Ours)", desc: "Multi-scale freq + gated fusion" },
+    };
+
+    return (
+        <div className="glass rounded-2xl p-6 fade-in">
+            <h3 className="text-lg font-semibold mb-4">Model Comparison</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {results.models.map((r, i) => {
+                    const info = modelLabels[r.model_name] || { name: r.model_name, desc: "" };
+                    const isFake = r.verdict === "AI-Generated";
+                    const pct = Math.round(r.confidence * 100);
+                    return (
+                        <div key={i} className={`bg-gray-800/50 rounded-xl p-4 ${r.model_name === 'freq_guided' ? 'ring-2 ring-blue-500' : ''}`}>
+                            <h4 className="font-semibold text-sm mb-1">{info.name}</h4>
+                            <p className="text-xs text-gray-400 mb-3">{info.desc}</p>
+                            <div className={`text-xl font-bold mb-2 ${isFake ? 'text-red-400' : 'text-green-400'}`}>
+                                {r.verdict}
+                            </div>
+                            <div className="w-full bg-gray-700 rounded-full h-3 mb-1">
+                                <div className={`h-full rounded-full ${isFake ? 'bg-red-500' : 'bg-green-500'}`}
+                                    style={{ width: `${pct}%` }} />
+                            </div>
+                            <p className="text-xs text-gray-400">{pct}% confidence | {r.inference_time_ms}ms</p>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
+
+// ===== Dashboard =====
+function Dashboard({ data }) {
+    const [tab, setTab] = useState("crossgen");
+    if (!data) return null;
+
+    const tabs = [
+        { id: "crossgen", label: "Cross-Generator" },
+        { id: "ablation", label: "Ablation Study" },
+    ];
+
+    const generators = data.cross_generator?.freq_guided ? Object.keys(data.cross_generator.freq_guided) : [];
+    const models = Object.keys(data.cross_generator || {});
+
+    return (
+        <div className="glass rounded-2xl p-6 fade-in">
+            <h3 className="text-lg font-semibold mb-4">Evaluation Dashboard</h3>
+            <div className="flex gap-2 mb-4">
+                {tabs.map(t => (
+                    <button key={t.id} onClick={() => setTab(t.id)}
+                        className={`px-4 py-2 rounded-lg text-sm ${tab === t.id ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'}`}>
+                        {t.label}
+                    </button>
+                ))}
+            </div>
+
+            {tab === "crossgen" && (
+                <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                        <thead>
+                            <tr className="text-gray-400 border-b border-gray-700">
+                                <th className="text-left p-2">Generator</th>
+                                {models.map(m => <th key={m} className="text-center p-2">{m}<br/><span className="text-xs">AUC</span></th>)}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {generators.map(gen => (
+                                <tr key={gen} className="border-b border-gray-800">
+                                    <td className="p-2 font-medium">{gen}</td>
+                                    {models.map(m => {
+                                        const auc = data.cross_generator[m]?.[gen]?.auc;
+                                        const color = auc > 0.95 ? 'text-green-400' : auc > 0.90 ? 'text-yellow-400' : 'text-red-400';
+                                        return <td key={m} className={`text-center p-2 font-mono ${color}`}>{auc?.toFixed(4) || '-'}</td>;
+                                    })}
+                                </tr>
+                            ))}
+                            <tr className="font-bold border-t-2 border-gray-600">
+                                <td className="p-2">Average</td>
+                                {models.map(m => {
+                                    const vals = generators.map(g => data.cross_generator[m]?.[g]?.auc).filter(Boolean);
+                                    const avg = vals.length ? (vals.reduce((a,b) => a+b, 0) / vals.length) : 0;
+                                    return <td key={m} className="text-center p-2 font-mono text-blue-300">{avg.toFixed(4)}</td>;
+                                })}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            )}
+
+            {tab === "ablation" && data.ablation?.table_md && (
+                <div className="bg-gray-800/50 rounded-xl p-4 overflow-x-auto">
+                    <pre className="text-sm font-mono whitespace-pre-wrap">{data.ablation.table_md}</pre>
+                </div>
+            )}
+        </div>
+    );
+}
+
+// ===== Main App =====
+function App() {
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [result, setResult] = useState(null);
+    const [compareResults, setCompareResults] = useState(null);
+    const [dashboardData, setDashboardData] = useState(null);
+    const [view, setView] = useState("detect"); // detect | dashboard
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch(`${API_URL}/dashboard/data`)
+            .then(r => r.json())
+            .then(setDashboardData)
+            .catch(() => {});
+    }, []);
+
+    const handleImageSelect = async (selectedFile) => {
+        if (selectedFile.size > 10 * 1024 * 1024) {
+            setError("File too large (max 10MB)");
+            return;
+        }
+        setFile(selectedFile);
+        setPreviewUrl(URL.createObjectURL(selectedFile));
+        setResult(null);
+        setCompareResults(null);
+        setError(null);
+    };
+
+    const handleDetect = async () => {
+        if (!file) return;
+        setLoading(true);
+        setError(null);
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            const res = await fetch(`${API_URL}/detect?model=freq_guided`, { method: "POST", body: formData });
+            if (!res.ok) throw new Error(await res.text());
+            setResult(await res.json());
+        } catch (e) {
+            setError(`Detection failed: ${e.message}`);
+        }
+        setLoading(false);
+    };
+
+    const handleCompare = async () => {
+        if (!file) return;
+        setLoading(true);
+        setError(null);
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            const res = await fetch(`${API_URL}/detect/compare`, { method: "POST", body: formData });
+            if (!res.ok) throw new Error(await res.text());
+            setCompareResults(await res.json());
+        } catch (e) {
+            setError(`Comparison failed: ${e.message}`);
+        }
+        setLoading(false);
+    };
+
+    return (
+        <div className="max-w-6xl mx-auto px-4 py-8">
+            {/* Header */}
+            <div className="text-center mb-8">
+                <h1 className="text-4xl font-bold mb-2">AI Image Detector</h1>
+                <p className="text-gray-400">Frequency-guided detection with Grad-CAM explainability</p>
+                <div className="flex justify-center gap-3 mt-4">
+                    <button onClick={() => setView("detect")}
+                        className={`px-5 py-2 rounded-xl ${view === 'detect' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'}`}>
+                        Detect
+                    </button>
+                    <button onClick={() => setView("dashboard")}
+                        className={`px-5 py-2 rounded-xl ${view === 'dashboard' ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'}`}>
+                        Dashboard
+                    </button>
+                </div>
+            </div>
+
+            {view === "dashboard" ? (
+                <Dashboard data={dashboardData} />
+            ) : (
+                <div className="space-y-6">
+                    {/* Upload */}
+                    <UploadZone onImageSelect={handleImageSelect} />
+
+                    {/* Preview + Actions */}
+                    {previewUrl && (
+                        <div className="glass rounded-2xl p-6 fade-in">
+                            <div className="flex flex-col md:flex-row gap-6">
+                                <div className="md:w-1/3">
+                                    <img src={previewUrl} alt="Preview" className="rounded-xl w-full" />
+                                </div>
+                                <div className="md:w-2/3 flex flex-col justify-center gap-3">
+                                    <button onClick={handleDetect} disabled={loading}
+                                        className="w-full py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-gray-600 rounded-xl font-semibold text-lg transition-colors">
+                                        {loading ? 'Analyzing...' : 'Detect AI'}
+                                    </button>
+                                    <button onClick={handleCompare} disabled={loading}
+                                        className="w-full py-3 bg-purple-600 hover:bg-purple-500 disabled:bg-gray-600 rounded-xl font-semibold transition-colors">
+                                        {loading ? 'Analyzing...' : 'Compare All Models'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {error && (
+                        <div className="bg-red-900/50 border border-red-500 rounded-xl p-4 text-red-300">{error}</div>
+                    )}
+
+                    {/* Results */}
+                    {result && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <VerdictCard result={result} />
+                            <HeatmapOverlay result={result} previewUrl={previewUrl} />
+                        </div>
+                    )}
+
+                    {result && <ExplanationPanel result={result} />}
+                    {compareResults && <ComparativePanel results={compareResults} />}
+                </div>
+            )}
+
+            {/* Footer */}
+            <div className="text-center mt-12 text-gray-500 text-sm">
+                <p>CMPE 258 Deep Learning | SJSU Spring 2026</p>
+                <p>Frequency-Guided CLIP Adaptation for Cross-Generator AI Image Detection</p>
+            </div>
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
