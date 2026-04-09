@@ -252,8 +252,8 @@ def main() -> None:
 
     # Get matching image paths for DCT computation
     print("Resolving image paths...")
-    train_paths = get_image_paths_for_features(config.data_dir, "train", 20000)
-    val_paths = get_image_paths_for_features(config.data_dir, "val", 8000)
+    train_paths = get_image_paths_for_features(config.data_dir, "train", 60000)
+    val_paths = get_image_paths_for_features(config.data_dir, "val", 16000)
 
     print(f"Train: {len(train_feats)} samples | Val: {len(val_feats)} samples")
 

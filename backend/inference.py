@@ -16,6 +16,7 @@ from PIL import Image
 
 from src.config import Config
 from src.explain import generate_explanations
+from src.freq_heuristic import freq_heuristic_score
 from src.gradcam_utils import create_heatmap_overlay, gradcam_freq_branch
 from src.models.freq_guided import FreqGuidedFromFeatures
 from src.models.hybrid import FrequencyCNN
@@ -97,7 +98,7 @@ class ModelManager:
         self._models[name] = model
         return model
 
-    def predict(self, image_pil: Image.Image, model_name: str = "freq_guided") -> dict:
+    def predict(self, image_pil: Image.Image, model_name: str = "hybrid") -> dict:
         """Run prediction on a single image.
 
         Args:
@@ -118,7 +119,7 @@ class ModelManager:
 
         model = self._load_model(model_name)
 
-        # Inference
+        # Model inference
         with torch.no_grad():
             if model_name == "clip_probe":
                 logits = model(clip_feat)
@@ -128,6 +129,9 @@ class ModelManager:
             probs = torch.softmax(logits, dim=1)[0]
             fake_prob = probs[1].item()
             real_prob = probs[0].item()
+
+        # Frequency heuristic (for explanations only, not verdict)
+        heuristic_score, heuristic_reasons = freq_heuristic_score(image_pil)
 
         verdict = "AI-Generated" if fake_prob > 0.5 else "Real"
         confidence = fake_prob if verdict == "AI-Generated" else real_prob
@@ -142,10 +146,18 @@ class ModelManager:
             overlay.save(buffer, format="PNG")
             heatmap_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
-        # Generate explanations
+        # Generate explanations (combine model + heuristic)
         explanations = []
         if heatmap_np is not None:
             explanations = generate_explanations(image_pil, heatmap_np, confidence, verdict)
+
+        # Add heuristic reasons
+        for reason in heuristic_reasons[:3]:
+            explanations.append({
+                "region": "frequency analysis",
+                "reason": reason,
+                "severity": min(heuristic_score, 1.0),
+            })
 
         inference_time = (time.time() - t0) * 1000
 

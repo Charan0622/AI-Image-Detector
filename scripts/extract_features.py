@@ -26,9 +26,9 @@ from src.seed import fix_seeds
 from src.transforms import get_eval_transforms
 
 
-# Max training samples (10K real + 10K fake)
-MAX_TRAIN_SAMPLES = 20000
-MAX_VAL_SAMPLES = 8000
+# Max training samples (30K real + 30K fake)
+MAX_TRAIN_SAMPLES = 60000
+MAX_VAL_SAMPLES = 16000
 
 
 def extract_features(

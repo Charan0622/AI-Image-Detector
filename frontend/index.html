@@ -272,7 +272,7 @@ function App() {
         try {
             const formData = new FormData();
             formData.append("file", file);
-            const res = await fetch(`${API_URL}/detect?model=freq_guided`, { method: "POST", body: formData });
+            const res = await fetch(`${API_URL}/detect?model=hybrid`, { method: "POST", body: formData });
             if (!res.ok) throw new Error(await res.text());
             setResult(await res.json());
         } catch (e) {
