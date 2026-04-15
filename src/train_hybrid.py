@@ -113,17 +113,19 @@ class HybridFromFeatures(nn.Module):
 
 
 def get_image_paths_for_features(
-    data_dir: Path, split: str, max_samples: int, seed: int = 42
+    data_dir: Path, split: str, max_samples: int = 0, seed: int = 42
 ) -> list[Path]:
-    """Get image paths matching the subsampled feature extraction order.
+    """Get image paths matching the feature extraction order.
 
-    Must match the exact same subsample as extract_features.py.
+    If features were extracted for the full dataset (no subsampling),
+    returns all paths in dataset order. If max_samples > 0 and less
+    than dataset size, returns the subsampled paths.
 
     Args:
         data_dir: Path to processed data.
         split: 'train' or 'val'.
-        max_samples: Max samples used during extraction.
-        seed: Random seed used during extraction.
+        max_samples: Max samples (0 = use all).
+        seed: Random seed.
 
     Returns:
         List of image paths in the same order as extracted features.
@@ -132,6 +134,11 @@ def get_image_paths_for_features(
 
     ds = AIDetectDataset(data_dir, split=split)
 
+    # If no subsampling needed, return all in order
+    if max_samples <= 0 or max_samples >= len(ds):
+        return [ds.samples[i][0] for i in range(len(ds))]
+
+    # Subsampled mode
     random.seed(seed)
     real_indices = [i for i, (_, label) in enumerate(ds.samples) if label == 0]
     fake_indices = [i for i, (_, label) in enumerate(ds.samples) if label == 1]
@@ -252,8 +259,8 @@ def main() -> None:
 
     # Get matching image paths for DCT computation
     print("Resolving image paths...")
-    train_paths = get_image_paths_for_features(config.data_dir, "train", 60000)
-    val_paths = get_image_paths_for_features(config.data_dir, "val", 16000)
+    train_paths = get_image_paths_for_features(config.data_dir, "train")
+    val_paths = get_image_paths_for_features(config.data_dir, "val")
 
     print(f"Train: {len(train_feats)} samples | Val: {len(val_feats)} samples")
 

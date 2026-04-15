@@ -111,11 +111,14 @@ class HybridRobustFromFeatures(nn.Module):
         return self.classifier(fused)
 
 
-def get_image_paths(data_dir: Path, split: str, max_samples: int, seed: int = 42) -> list[Path]:
+def get_image_paths(data_dir: Path, split: str, max_samples: int = 0, seed: int = 42) -> list[Path]:
     """Get image paths matching feature extraction order."""
     from src.dataset import AIDetectDataset
 
     ds = AIDetectDataset(data_dir, split=split)
+    if max_samples <= 0 or max_samples >= len(ds):
+        return [ds.samples[i][0] for i in range(len(ds))]
+
     random.seed(seed)
     real_idx = [i for i, (_, l) in enumerate(ds.samples) if l == 0]
     fake_idx = [i for i, (_, l) in enumerate(ds.samples) if l == 1]
@@ -217,8 +220,8 @@ def train_variant(variant: str, config: Config) -> dict:
     val_feats = np.load(feat_dir / "val_features.npy")
     val_labels = np.load(feat_dir / "val_labels.npy")
 
-    train_paths = get_image_paths(config.data_dir, "train", 20000)
-    val_paths = get_image_paths(config.data_dir, "val", 8000)
+    train_paths = get_image_paths(config.data_dir, "train")
+    val_paths = get_image_paths(config.data_dir, "val")
 
     # Robustness augmentation (only for training)
     rob_aug = RobustnessAugmentation(
