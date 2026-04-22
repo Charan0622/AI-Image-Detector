@@ -1,0 +1,206 @@
+{
+  "adm": {
+    "clean": {
+      "accuracy": 0.915,
+      "auc": 0.9738
+    },
+    "jpeg_q70": {
+      "accuracy": 0.7183,
+      "auc": 0.9243
+    },
+    "jpeg_q50": {
+      "accuracy": 0.6917,
+      "auc": 0.9301
+    },
+    "jpeg_q30": {
+      "accuracy": 0.8283,
+      "auc": 0.9321
+    },
+    "blur_s1": {
+      "accuracy": 0.6567,
+      "auc": 0.8268
+    },
+    "blur_s2": {
+      "accuracy": 0.6117,
+      "auc": 0.743
+    },
+    "blur_s3": {
+      "accuracy": 0.5217,
+      "auc": 0.6548
+    },
+    "resize_112": {
+      "accuracy": 0.715,
+      "auc": 0.8521
+    }
+  },
+  "glide": {
+    "clean": {
+      "accuracy": 0.94,
+      "auc": 0.9969
+    },
+    "jpeg_q70": {
+      "accuracy": 0.8833,
+      "auc": 0.9806
+    },
+    "jpeg_q50": {
+      "accuracy": 0.6917,
+      "auc": 0.9585
+    },
+    "jpeg_q30": {
+      "accuracy": 0.7283,
+      "auc": 0.8799
+    },
+    "blur_s1": {
+      "accuracy": 0.6417,
+      "auc": 0.833
+    },
+    "blur_s2": {
+      "accuracy": 0.62,
+      "auc": 0.765
+    },
+    "blur_s3": {
+      "accuracy": 0.5183,
+      "auc": 0.684
+    },
+    "resize_112": {
+      "accuracy": 0.715,
+      "auc": 0.8828
+    }
+  },
+  "midjourney": {
+    "clean": {
+      "accuracy": 0.89,
+      "auc": 0.9502
+    },
+    "jpeg_q70": {
+      "accuracy": 0.675,
+      "auc": 0.8924
+    },
+    "jpeg_q50": {
+      "accuracy": 0.5667,
+      "auc": 0.841
+    },
+    "jpeg_q30": {
+      "accuracy": 0.6333,
+      "auc": 0.7808
+    },
+    "blur_s1": {
+      "accuracy": 0.6517,
+      "auc": 0.8768
+    },
+    "blur_s2": {
+      "accuracy": 0.6267,
+      "auc": 0.8094
+    },
+    "blur_s3": {
+      "accuracy": 0.54,
+      "auc": 0.7494
+    },
+    "resize_112": {
+      "accuracy": 0.7033,
+      "auc": 0.8816
+    }
+  },
+  "sd15": {
+    "clean": {
+      "accuracy": 0.9333,
+      "auc": 0.9752
+    },
+    "jpeg_q70": {
+      "accuracy": 0.7167,
+      "auc": 0.9376
+    },
+    "jpeg_q50": {
+      "accuracy": 0.63,
+      "auc": 0.9003
+    },
+    "jpeg_q30": {
+      "accuracy": 0.7317,
+      "auc": 0.8637
+    },
+    "blur_s1": {
+      "accuracy": 0.62,
+      "auc": 0.9338
+    },
+    "blur_s2": {
+      "accuracy": 0.6117,
+      "auc": 0.8267
+    },
+    "blur_s3": {
+      "accuracy": 0.5217,
+      "auc": 0.7871
+    },
+    "resize_112": {
+      "accuracy": 0.7333,
+      "auc": 0.9444
+    }
+  },
+  "vqdm": {
+    "clean": {
+      "accuracy": 0.8183,
+      "auc": 0.9
+    },
+    "jpeg_q70": {
+      "accuracy": 0.63,
+      "auc": 0.84
+    },
+    "jpeg_q50": {
+      "accuracy": 0.5767,
+      "auc": 0.8274
+    },
+    "jpeg_q30": {
+      "accuracy": 0.6517,
+      "auc": 0.7511
+    },
+    "blur_s1": {
+      "accuracy": 0.6,
+      "auc": 0.7865
+    },
+    "blur_s2": {
+      "accuracy": 0.5617,
+      "auc": 0.6659
+    },
+    "blur_s3": {
+      "accuracy": 0.5167,
+      "auc": 0.6191
+    },
+    "resize_112": {
+      "accuracy": 0.6667,
+      "auc": 0.7733
+    }
+  },
+  "wukong": {
+    "clean": {
+      "accuracy": 0.8483,
+      "auc": 0.9314
+    },
+    "jpeg_q70": {
+      "accuracy": 0.685,
+      "auc": 0.8857
+    },
+    "jpeg_q50": {
+      "accuracy": 0.6183,
+      "auc": 0.8771
+    },
+    "jpeg_q30": {
+      "accuracy": 0.7617,
+      "auc": 0.8701
+    },
+    "blur_s1": {
+      "accuracy": 0.63,
+      "auc": 0.8824
+    },
+    "blur_s2": {
+      "accuracy": 0.6117,
+      "auc": 0.8129
+    },
+    "blur_s3": {
+      "accuracy": 0.5167,
+      "auc": 0.7481
+    },
+    "resize_112": {
+      "accuracy": 0.7133,
+      "auc": 0.9014
+    }
+  }
+}

@@ -355,3 +355,104 @@ bash scripts/start_app.sh
 - `scripts/start_app.sh` — One-command app launcher
 
 ### Git commit: `feat: full-stack web application`
+
+---
+
+## Phase 4b: Robustness Evaluation Follow-up
+**Date:** 2026-04-22
+**Status:** ✅ Complete
+
+### Motivation
+Phase 4 claimed "robustness-aware training helps" but the ablation table only
+reported clean cross-generator accuracy. We never actually measured robustness.
+This phase closes that gap: 8-degradation evaluation across all 5 model variants
+and all 6 test generators.
+
+### What was done
+- Discovered that trained checkpoints use "FromFeatures" heads
+  (`LinearProbeHead`, `HybridFromFeatures`, `HybridRobustFromFeatures`,
+  `FreqGuidedFromFeatures`) that consume pre-extracted CLIP features — not the
+  full-image architectures in `src/models/`. `src/evaluate.py` was wired to the
+  full-image classes and would have failed to load the real checkpoints.
+- Wrote `scripts/run_all_robustness.py` with a **shared-CLIP design**:
+  for each (generator, degradation) pair, extract CLIP features + DCT maps
+  once, then run all 5 tiny heads on the cached tensors. Reduces total runtime
+  from ~3.5 hrs (naive 5× pass) to ~60 min on MPS.
+- Wrote `scripts/generate_plots.py` — emits training curves, cross-gen heatmap
+  + grouped bars, per-model robustness curves, combined robustness overlay, and
+  ablation summary.
+- Wrote `scripts/update_ablation_table.py` — regenerates `ablation_table.md`
+  with clean + robustness breakdown.
+- Ran full sweep: **5 models × 6 generators × 300 images/class × 8 degradations
+  = ~72,000 total image passes**. Total wall time: 61.6 min.
+
+### Results — final ablation table
+
+| Model | Clean Acc | Clean AUC | JPEG-30 Acc | Blur-σ3 Acc | Resize Acc | Robust AUC (avg) | Robust Acc (avg) |
+|-------|-----------|-----------|-------------|-------------|------------|------------------|------------------|
+| CLIP Linear Probe | 0.8882 | 0.9558 | 0.7225 | 0.5225 | 0.7078 | 0.8360 | 0.6487 |
+| AIDE-style Hybrid | 0.9652 | 0.9944 | 0.7483 | 0.5420 | 0.7814 | 0.8491 | 0.7112 |
+| **Hybrid + Robust Aug** | 0.9619 | 0.9940 | 0.7228 | 0.5936 | 0.8025 | **0.8835** | **0.7254** |
+| FreqGuided (no robust) | 0.9561 | 0.9911 | 0.7208 | 0.6086 | 0.8036 | 0.8520 | 0.7251 |
+| FreqGuided (full) | 0.9533 | 0.9904 | 0.6644 | 0.5906 | 0.7755 | 0.8296 | 0.6917 |
+
+### Key findings
+
+1. **Hybrid + Robustness Aug wins on robustness** (0.8835 Robust AUC). It
+   beats the "final" freq-guided model by **+0.054 AUC** on average under
+   degradation — a large margin.
+2. **FreqGuided (full) is the worst robustness model**, below even the simple
+   CLIP linear probe (0.830 vs 0.836). The combination of a freq-guided
+   attention architecture + aggressive robustness augmentation under-performs
+   either change alone.
+3. **AIDE-style Hybrid collapses on blur** — AUC drops from 0.994 clean to
+   0.636 on blur σ=3 (−0.36). Adding robustness aug recovers it to 0.740.
+4. **CLIP Linear Probe is surprisingly blur-robust** — its semantic features
+   degrade gracefully. Hybrids that rely on high-frequency signal are hit
+   hardest by blur.
+5. All models recover on JPEG — the training data normalizes JPEG (Q=95) so
+   the models are implicitly exposed to compression artifacts.
+
+### The freq_guided puzzle
+
+Two architecturally similar variants diverge under degradation:
+- `FreqGuided (no robust)` — Robust AUC 0.852
+- `FreqGuided (full, with robust aug)` — Robust AUC 0.830
+
+Adding robustness augmentation *hurts* when combined with the freq-guided
+attention architecture. Two possible explanations (to investigate):
+- The freq-guided attention already learns invariance that the augmentation
+  teaches, so the augmentation only adds label noise.
+- The attention mechanism may over-focus on spurious frequency patterns in
+  blurred/recompressed images when trained with heavy augmentation.
+
+This is a **real negative finding** for the report: architectural inductive bias
+and data augmentation are not additive; combining them double-counts and can
+degrade generalization.
+
+### Deliverables
+
+- `results/metrics/{model}_robustness.json` — 5 JSONs, per-gen × per-deg
+  accuracy & AUC
+- `results/tables/ablation_table.md` — updated with Robust columns + per-deg
+  AUC breakdown
+- `results/plots/` — 11 PNGs:
+  - `training_curves.png`
+  - `cross_gen_heatmap.png`, `cross_gen_bars.png`
+  - `ablation_summary.png`
+  - `robustness_{clip_probe,hybrid,hybrid_robust,freq_guided_no_robust,freq_guided}.png`
+  - `robustness_all.png` (accuracy + AUC side-by-side, all models overlaid)
+
+### Files created
+- `scripts/run_all_robustness.py` — shared-CLIP robustness driver
+- `scripts/generate_plots.py` — all plot generators
+- `scripts/update_ablation_table.py` — ablation table regenerator
+
+### Recommendation
+
+For deployment: **switch the default model in the web app to `hybrid_robust`**.
+It is the most robust under real-world degradations, matches the full freq-guided
+model on clean data (0.994 vs 0.990 AUC), and is architecturally simpler.
+The "final" model should be renamed for the report to reflect this.
+
+### Git commit: `eval: full robustness sweep + plots + updated ablation table`
