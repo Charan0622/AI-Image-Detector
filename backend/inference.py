@@ -17,7 +17,11 @@ from PIL import Image
 from src.config import Config
 from src.explain import generate_explanations
 from src.freq_heuristic import freq_heuristic_score
-from src.gradcam_utils import create_heatmap_overlay, gradcam_freq_branch
+from src.gradcam_utils import (
+    clip_attention_rollout,
+    create_heatmap_overlay,
+    gradcam_freq_branch,
+)
 from src.models.freq_guided import FreqGuidedFromFeatures
 from src.models.hybrid import FrequencyCNN
 from src.seed import fix_seeds
@@ -25,6 +29,30 @@ from src.train_freq_guided import HybridRobustFromFeatures
 from src.train_hybrid import HybridFromFeatures
 from src.train_probe import LinearProbeHead
 from src.transforms import compute_dct_map, get_eval_transforms
+
+
+def canonicalize_for_inference(img: Image.Image) -> Image.Image:
+    """Match the exact preprocessing applied during training.
+
+    All training images went through: LANCZOS resize to 224x224, then re-saved
+    as JPEG Q=95. Any image that skips the re-encode looks out-of-distribution
+    to the trained models, especially uncompressed PNGs and high-quality JPEGs.
+
+    This applies the same pipeline at inference so user uploads match the
+    training distribution.
+    """
+    rgb = img.convert("RGB")
+    # Resize to 224 preserving aspect ratio via center crop
+    short = min(rgb.size)
+    left = (rgb.size[0] - short) // 2
+    top = (rgb.size[1] - short) // 2
+    rgb = rgb.crop((left, top, left + short, top + short))
+    rgb = rgb.resize((224, 224), Image.LANCZOS)
+    # Re-encode as JPEG Q=95, then reload
+    buf = io.BytesIO()
+    rgb.save(buf, format="JPEG", quality=95)
+    buf.seek(0)
+    return Image.open(buf).convert("RGB")
 
 
 class ModelManager:
@@ -124,6 +152,11 @@ class ModelManager:
 
         t0 = time.time()
 
+        # Canonicalize the upload to match training preprocessing exactly.
+        # Training data was 224x224 LANCZOS + JPEG Q=95. Skipping this step
+        # makes PNGs and high-quality JPEGs look out-of-distribution.
+        image_pil = canonicalize_for_inference(image_pil)
+
         # Extract features
         clip_feat = self._extract_clip_features(image_pil)
         dct_map = compute_dct_map(image_pil)
@@ -150,15 +183,24 @@ class ModelManager:
         verdict = "AI-Generated" if fake_prob > 0.5 else "Real"
         confidence = fake_prob if verdict == "AI-Generated" else real_prob
 
-        # Generate heatmap (for models with freq branch)
+        # Spatial heatmap via CLIP attention rollout — this actually aligns
+        # with the original image, unlike the previous DCT-space Grad-CAM.
         heatmap_b64 = None
         heatmap_np = None
-        if model_name in ("hybrid", "hybrid_robust", "freq_guided", "freq_guided_no_robust"):
-            heatmap_np = gradcam_freq_branch(model, clip_feat, dct_tensor, self.device, target_class=1)
-            overlay = create_heatmap_overlay(image_pil, heatmap_np, alpha=0.4)
+        try:
+            encoder = self._get_clip_encoder()
+            img_tensor = self.transform(image_pil).unsqueeze(0).to(self.device)
+            heatmap_np = clip_attention_rollout(encoder, img_tensor, self.device)
+            # For real (not fake) verdicts, the story is "here is what the
+            # model finds salient". For fake verdicts, show same region as
+            # "what the model found suspicious".
+            overlay = create_heatmap_overlay(image_pil, heatmap_np, alpha=0.65)
             buffer = io.BytesIO()
             overlay.save(buffer, format="PNG")
             heatmap_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+        except Exception as e:
+            # Fallback gracefully: no heatmap rather than crashing the request
+            print(f"[inference] attention rollout failed: {e}")
 
         # Generate explanations (combine model + heuristic)
         explanations = []
