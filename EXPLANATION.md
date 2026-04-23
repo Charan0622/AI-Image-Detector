@@ -456,3 +456,117 @@ model on clean data (0.994 vs 0.990 AUC), and is architecturally simpler.
 The "final" model should be renamed for the report to reflect this.
 
 ### Git commit: `eval: full robustness sweep + plots + updated ablation table`
+
+---
+
+## Phase 4c: Model Quality Improvements (Tier 2)
+**Date:** 2026-04-22
+**Status:** ✅ Complete
+
+### Motivation
+With the robustness picture clear, we explored three standard techniques for
+squeezing more performance from the existing checkpoints without retraining:
+temperature-scaling calibration, model ensembling, and test-time augmentation.
+
+### 1. Temperature Scaling Calibration (Guo et al., ICML 2017)
+
+Fit a scalar T > 0 per model such that softmax(logits / T) minimizes NLL on a
+held-out val subset (4000 images, balanced). Applied at inference only —
+argmax is T-invariant so verdicts don't change, only confidence values do.
+
+**Results** (`results/metrics/calibration.json`):
+
+| Model | T | NLL before → after | ECE before → after |
+|-------|---|--------------------|--------------------|
+| clip_probe | 0.87 | 0.2316 → 0.2294 | 0.017 → 0.008 |
+| **hybrid** | **2.45** | 0.0876 → 0.0581 | 0.015 → 0.004 |
+| hybrid_robust | 1.73 | 0.0734 → 0.0615 | 0.013 → 0.005 |
+| freq_guided_no_robust | 1.90 | 0.0974 → 0.0761 | 0.014 → 0.007 |
+| freq_guided | 1.37 | 0.1118 → 0.1057 | 0.013 → 0.005 |
+
+- ECE drops 2-4× across the board.
+- `hybrid` is **massively overconfident** (T=2.45) — a confidence of 0.99
+  was really ~0.75 honest probability. `hybrid_robust` is more calibrated
+  from the start (T=1.73) — another signal it's the healthier model.
+- Temperatures wired into `backend/inference.py`; loaded from
+  `calibration.json` at startup and applied per-model before softmax.
+
+### 2. Ensemble Evaluation
+
+Three ensembles, all using temperature-calibrated probabilities:
+- `ensemble_all` — equal-weight mean of all 5 heads
+- `ensemble_top3` — mean of hybrid_robust + freq_guided_no_robust + clip_probe
+  (most architecturally diverse subset)
+- `ensemble_weighted` — softmax-weighted mean by val-AUC (exp(50*(auc - max_auc)))
+
+**Results** (`results/tables/ensemble_comparison.md`):
+
+| Model | Clean AUC | Robust AUC |
+|-------|-----------|------------|
+| **hybrid_robust** (single) | 0.9936 | **0.8908** ← best |
+| hybrid (single) | 0.9943 | 0.8835 |
+| **ensemble_weighted** | **0.9947** | 0.8754 |
+| ensemble_top3 | 0.9913 | 0.8765 |
+| ensemble_all | 0.9936 | 0.8748 |
+
+**Finding — ensembles don't beat the single best model.** On clean data,
+`ensemble_weighted` ties `hybrid` (0.9947 vs 0.9943 — within noise). Under
+robustness, **every ensemble underperforms `hybrid_robust` by 1.4–1.6 AUC
+points**. See `results/plots/robustness_ensembles.png`.
+
+Root cause: all 5 models share the frozen CLIP ViT-B/16 backbone, so their
+errors are strongly correlated. Averaging decorrelated predictions is what
+makes ensembles work — we don't have decorrelated predictions, we have
+correlated errors on CLIP's failure modes. Mixing in the weaker models
+(freq_guided full, clip_probe) just drags the ensemble toward their error
+distribution.
+
+This validates the deployment choice: single `hybrid_robust` is the right model.
+
+### 3. Test-Time Augmentation (TTA)
+
+Horizontal-flip TTA: logits = 0.5 × (head(features_orig) + head(features_hflip)).
+Evaluated on the two best models (hybrid_robust, freq_guided_no_robust) across
+all 6 generators × {clean, jpeg_q30, blur_s3, resize_112}.
+
+**Results** (`results/tables/tta_comparison.md`):
+
+| Model | No-TTA avg AUC | TTA avg AUC | Δ AUC |
+|-------|----------------|-------------|-------|
+| hybrid_robust | 0.8960 | 0.8971 | +0.0011 |
+| freq_guided_no_robust | 0.8740 | 0.8752 | +0.0012 |
+
+**Finding — TTA gives ~0.001 AUC for 2× inference cost. Not worth it.**
+Near-zero on both models, below the per-generator noise floor (≈ ±0.005).
+
+Why this makes sense:
+- For `hybrid_robust`: the robustness augmentation already teaches similar
+  invariances, so hflip TTA is largely redundant.
+- For `freq_guided_no_robust`: operates on DCT frequency features, which are
+  approximately invariant to horizontal flip anyway.
+
+Decision: **TTA not deployed**. 2× cost for noise-level gain.
+
+### Summary of Tier 2
+
+| Technique | Effect | Decision |
+|-----------|--------|----------|
+| Temperature scaling | ECE ↓ 2-4×, honest confidences | **Deployed** in backend |
+| Ensembling | Robust AUC ↓ 1.5 points vs best single | **Rejected** |
+| TTA (hflip) | +0.001 AUC for 2× cost | **Rejected** |
+
+### Deliverables
+- `scripts/fit_temperature.py` — per-model T fitting on val set
+- `scripts/run_ensemble_eval.py` — shared-CLIP ensemble driver
+- `scripts/run_tta_eval.py` — TTA driver (focused degradation subset)
+- `results/metrics/calibration.json` — 5 temperatures + NLL/ECE before/after
+- `results/metrics/ensemble_cross_gen.json`, `ensemble_robustness.json`
+- `results/metrics/tta_hybrid_robust.json`, `tta_freq_guided_no_robust.json`
+- `results/tables/ensemble_comparison.md`, `tta_comparison.md`
+- `results/plots/robustness_ensembles.png`
+- `backend/inference.py` — loads temperatures, applies calibrated softmax,
+  supports hybrid_robust and freq_guided_no_robust variants
+- `backend/main.py` — adds hybrid_robust and freq_guided_no_robust to
+  endpoints; default switched from freq_guided → hybrid_robust
+
+### Git commit: `eval: temperature calibration + ensemble + TTA (Tier 2)`

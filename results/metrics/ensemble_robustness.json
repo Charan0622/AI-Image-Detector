@@ -1,0 +1,620 @@
+{
+  "ensemble_all": {
+    "adm": {
+      "clean": {
+        "accuracy": 0.98,
+        "auc": 0.9994
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8333,
+        "auc": 0.9729
+      },
+      "jpeg_q50": {
+        "accuracy": 0.7667,
+        "auc": 0.9759
+      },
+      "jpeg_q30": {
+        "accuracy": 0.8683,
+        "auc": 0.976
+      },
+      "blur_s1": {
+        "accuracy": 0.6983,
+        "auc": 0.8726
+      },
+      "blur_s2": {
+        "accuracy": 0.685,
+        "auc": 0.7407
+      },
+      "blur_s3": {
+        "accuracy": 0.58,
+        "auc": 0.6363
+      },
+      "resize_112": {
+        "accuracy": 0.8017,
+        "auc": 0.8969
+      }
+    },
+    "glide": {
+      "clean": {
+        "accuracy": 0.9783,
+        "auc": 0.9994
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8867,
+        "auc": 0.9775
+      },
+      "jpeg_q50": {
+        "accuracy": 0.675,
+        "auc": 0.9604
+      },
+      "jpeg_q30": {
+        "accuracy": 0.6567,
+        "auc": 0.8918
+      },
+      "blur_s1": {
+        "accuracy": 0.6933,
+        "auc": 0.8083
+      },
+      "blur_s2": {
+        "accuracy": 0.71,
+        "auc": 0.8132
+      },
+      "blur_s3": {
+        "accuracy": 0.57,
+        "auc": 0.7189
+      },
+      "resize_112": {
+        "accuracy": 0.7983,
+        "auc": 0.91
+      }
+    },
+    "midjourney": {
+      "clean": {
+        "accuracy": 0.95,
+        "auc": 0.9929
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8833,
+        "auc": 0.9794
+      },
+      "jpeg_q50": {
+        "accuracy": 0.6917,
+        "auc": 0.9564
+      },
+      "jpeg_q30": {
+        "accuracy": 0.645,
+        "auc": 0.891
+      },
+      "blur_s1": {
+        "accuracy": 0.67,
+        "auc": 0.8689
+      },
+      "blur_s2": {
+        "accuracy": 0.6867,
+        "auc": 0.8421
+      },
+      "blur_s3": {
+        "accuracy": 0.58,
+        "auc": 0.7183
+      },
+      "resize_112": {
+        "accuracy": 0.8033,
+        "auc": 0.9229
+      }
+    },
+    "sd15": {
+      "clean": {
+        "accuracy": 0.9767,
+        "auc": 0.9973
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8733,
+        "auc": 0.9765
+      },
+      "jpeg_q50": {
+        "accuracy": 0.7267,
+        "auc": 0.9683
+      },
+      "jpeg_q30": {
+        "accuracy": 0.7533,
+        "auc": 0.9238
+      },
+      "blur_s1": {
+        "accuracy": 0.65,
+        "auc": 0.9204
+      },
+      "blur_s2": {
+        "accuracy": 0.7117,
+        "auc": 0.8952
+      },
+      "blur_s3": {
+        "accuracy": 0.5733,
+        "auc": 0.8361
+      },
+      "resize_112": {
+        "accuracy": 0.8183,
+        "auc": 0.957
+      }
+    },
+    "vqdm": {
+      "clean": {
+        "accuracy": 0.935,
+        "auc": 0.9811
+      },
+      "jpeg_q70": {
+        "accuracy": 0.7417,
+        "auc": 0.894
+      },
+      "jpeg_q50": {
+        "accuracy": 0.625,
+        "auc": 0.87
+      },
+      "jpeg_q30": {
+        "accuracy": 0.6717,
+        "auc": 0.8027
+      },
+      "blur_s1": {
+        "accuracy": 0.6483,
+        "auc": 0.8146
+      },
+      "blur_s2": {
+        "accuracy": 0.62,
+        "auc": 0.6882
+      },
+      "blur_s3": {
+        "accuracy": 0.5483,
+        "auc": 0.6337
+      },
+      "resize_112": {
+        "accuracy": 0.7667,
+        "auc": 0.8426
+      }
+    },
+    "wukong": {
+      "clean": {
+        "accuracy": 0.9533,
+        "auc": 0.9914
+      },
+      "jpeg_q70": {
+        "accuracy": 0.825,
+        "auc": 0.9552
+      },
+      "jpeg_q50": {
+        "accuracy": 0.7133,
+        "auc": 0.9471
+      },
+      "jpeg_q30": {
+        "accuracy": 0.7517,
+        "auc": 0.9329
+      },
+      "blur_s1": {
+        "accuracy": 0.6667,
+        "auc": 0.8939
+      },
+      "blur_s2": {
+        "accuracy": 0.715,
+        "auc": 0.8931
+      },
+      "blur_s3": {
+        "accuracy": 0.5933,
+        "auc": 0.8225
+      },
+      "resize_112": {
+        "accuracy": 0.8133,
+        "auc": 0.9421
+      }
+    }
+  },
+  "ensemble_top3": {
+    "adm": {
+      "clean": {
+        "accuracy": 0.9783,
+        "auc": 0.9989
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8367,
+        "auc": 0.966
+      },
+      "jpeg_q50": {
+        "accuracy": 0.7717,
+        "auc": 0.9675
+      },
+      "jpeg_q30": {
+        "accuracy": 0.8683,
+        "auc": 0.9728
+      },
+      "blur_s1": {
+        "accuracy": 0.7,
+        "auc": 0.8769
+      },
+      "blur_s2": {
+        "accuracy": 0.7017,
+        "auc": 0.7876
+      },
+      "blur_s3": {
+        "accuracy": 0.5817,
+        "auc": 0.7026
+      },
+      "resize_112": {
+        "accuracy": 0.7983,
+        "auc": 0.9181
+      }
+    },
+    "glide": {
+      "clean": {
+        "accuracy": 0.98,
+        "auc": 0.9992
+      },
+      "jpeg_q70": {
+        "accuracy": 0.885,
+        "auc": 0.9818
+      },
+      "jpeg_q50": {
+        "accuracy": 0.69,
+        "auc": 0.9679
+      },
+      "jpeg_q30": {
+        "accuracy": 0.675,
+        "auc": 0.8999
+      },
+      "blur_s1": {
+        "accuracy": 0.69,
+        "auc": 0.8389
+      },
+      "blur_s2": {
+        "accuracy": 0.7183,
+        "auc": 0.8089
+      },
+      "blur_s3": {
+        "accuracy": 0.5733,
+        "auc": 0.712
+      },
+      "resize_112": {
+        "accuracy": 0.7917,
+        "auc": 0.9187
+      }
+    },
+    "midjourney": {
+      "clean": {
+        "accuracy": 0.9483,
+        "auc": 0.9889
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8417,
+        "auc": 0.9727
+      },
+      "jpeg_q50": {
+        "accuracy": 0.665,
+        "auc": 0.9352
+      },
+      "jpeg_q30": {
+        "accuracy": 0.6283,
+        "auc": 0.866
+      },
+      "blur_s1": {
+        "accuracy": 0.67,
+        "auc": 0.8732
+      },
+      "blur_s2": {
+        "accuracy": 0.7033,
+        "auc": 0.8291
+      },
+      "blur_s3": {
+        "accuracy": 0.5817,
+        "auc": 0.713
+      },
+      "resize_112": {
+        "accuracy": 0.7883,
+        "auc": 0.9126
+      }
+    },
+    "sd15": {
+      "clean": {
+        "accuracy": 0.9733,
+        "auc": 0.9957
+      },
+      "jpeg_q70": {
+        "accuracy": 0.855,
+        "auc": 0.9734
+      },
+      "jpeg_q50": {
+        "accuracy": 0.71,
+        "auc": 0.9611
+      },
+      "jpeg_q30": {
+        "accuracy": 0.7417,
+        "auc": 0.9102
+      },
+      "blur_s1": {
+        "accuracy": 0.6433,
+        "auc": 0.9371
+      },
+      "blur_s2": {
+        "accuracy": 0.7317,
+        "auc": 0.8876
+      },
+      "blur_s3": {
+        "accuracy": 0.5883,
+        "auc": 0.8388
+      },
+      "resize_112": {
+        "accuracy": 0.8133,
+        "auc": 0.9539
+      }
+    },
+    "vqdm": {
+      "clean": {
+        "accuracy": 0.93,
+        "auc": 0.9776
+      },
+      "jpeg_q70": {
+        "accuracy": 0.7467,
+        "auc": 0.8917
+      },
+      "jpeg_q50": {
+        "accuracy": 0.6317,
+        "auc": 0.8636
+      },
+      "jpeg_q30": {
+        "accuracy": 0.6867,
+        "auc": 0.7992
+      },
+      "blur_s1": {
+        "accuracy": 0.65,
+        "auc": 0.8202
+      },
+      "blur_s2": {
+        "accuracy": 0.6333,
+        "auc": 0.7141
+      },
+      "blur_s3": {
+        "accuracy": 0.5583,
+        "auc": 0.6454
+      },
+      "resize_112": {
+        "accuracy": 0.765,
+        "auc": 0.8567
+      }
+    },
+    "wukong": {
+      "clean": {
+        "accuracy": 0.95,
+        "auc": 0.9876
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8017,
+        "auc": 0.9483
+      },
+      "jpeg_q50": {
+        "accuracy": 0.6867,
+        "auc": 0.9296
+      },
+      "jpeg_q30": {
+        "accuracy": 0.7483,
+        "auc": 0.9173
+      },
+      "blur_s1": {
+        "accuracy": 0.6567,
+        "auc": 0.8983
+      },
+      "blur_s2": {
+        "accuracy": 0.74,
+        "auc": 0.8834
+      },
+      "blur_s3": {
+        "accuracy": 0.6,
+        "auc": 0.8276
+      },
+      "resize_112": {
+        "accuracy": 0.7983,
+        "auc": 0.9361
+      }
+    }
+  },
+  "ensemble_weighted": {
+    "adm": {
+      "clean": {
+        "accuracy": 0.9833,
+        "auc": 0.9997
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8683,
+        "auc": 0.9725
+      },
+      "jpeg_q50": {
+        "accuracy": 0.7917,
+        "auc": 0.9787
+      },
+      "jpeg_q30": {
+        "accuracy": 0.8767,
+        "auc": 0.9771
+      },
+      "blur_s1": {
+        "accuracy": 0.7017,
+        "auc": 0.8804
+      },
+      "blur_s2": {
+        "accuracy": 0.6917,
+        "auc": 0.7409
+      },
+      "blur_s3": {
+        "accuracy": 0.5783,
+        "auc": 0.6378
+      },
+      "resize_112": {
+        "accuracy": 0.815,
+        "auc": 0.8989
+      }
+    },
+    "glide": {
+      "clean": {
+        "accuracy": 0.9767,
+        "auc": 0.9992
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8817,
+        "auc": 0.9733
+      },
+      "jpeg_q50": {
+        "accuracy": 0.675,
+        "auc": 0.953
+      },
+      "jpeg_q30": {
+        "accuracy": 0.65,
+        "auc": 0.8848
+      },
+      "blur_s1": {
+        "accuracy": 0.6967,
+        "auc": 0.7939
+      },
+      "blur_s2": {
+        "accuracy": 0.715,
+        "auc": 0.8126
+      },
+      "blur_s3": {
+        "accuracy": 0.5867,
+        "auc": 0.7185
+      },
+      "resize_112": {
+        "accuracy": 0.8,
+        "auc": 0.9085
+      }
+    },
+    "midjourney": {
+      "clean": {
+        "accuracy": 0.9517,
+        "auc": 0.9929
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8933,
+        "auc": 0.9811
+      },
+      "jpeg_q50": {
+        "accuracy": 0.71,
+        "auc": 0.9643
+      },
+      "jpeg_q30": {
+        "accuracy": 0.65,
+        "auc": 0.9073
+      },
+      "blur_s1": {
+        "accuracy": 0.6667,
+        "auc": 0.8522
+      },
+      "blur_s2": {
+        "accuracy": 0.6933,
+        "auc": 0.8414
+      },
+      "blur_s3": {
+        "accuracy": 0.5883,
+        "auc": 0.7096
+      },
+      "resize_112": {
+        "accuracy": 0.8133,
+        "auc": 0.9213
+      }
+    },
+    "sd15": {
+      "clean": {
+        "accuracy": 0.9767,
+        "auc": 0.9978
+      },
+      "jpeg_q70": {
+        "accuracy": 0.885,
+        "auc": 0.9767
+      },
+      "jpeg_q50": {
+        "accuracy": 0.7383,
+        "auc": 0.9743
+      },
+      "jpeg_q30": {
+        "accuracy": 0.7483,
+        "auc": 0.932
+      },
+      "blur_s1": {
+        "accuracy": 0.6533,
+        "auc": 0.9036
+      },
+      "blur_s2": {
+        "accuracy": 0.7233,
+        "auc": 0.901
+      },
+      "blur_s3": {
+        "accuracy": 0.5867,
+        "auc": 0.8373
+      },
+      "resize_112": {
+        "accuracy": 0.82,
+        "auc": 0.9549
+      }
+    },
+    "vqdm": {
+      "clean": {
+        "accuracy": 0.9367,
+        "auc": 0.9849
+      },
+      "jpeg_q70": {
+        "accuracy": 0.7583,
+        "auc": 0.8967
+      },
+      "jpeg_q50": {
+        "accuracy": 0.6367,
+        "auc": 0.8741
+      },
+      "jpeg_q30": {
+        "accuracy": 0.6733,
+        "auc": 0.8067
+      },
+      "blur_s1": {
+        "accuracy": 0.6517,
+        "auc": 0.8158
+      },
+      "blur_s2": {
+        "accuracy": 0.6233,
+        "auc": 0.6894
+      },
+      "blur_s3": {
+        "accuracy": 0.5483,
+        "auc": 0.6353
+      },
+      "resize_112": {
+        "accuracy": 0.7717,
+        "auc": 0.8491
+      }
+    },
+    "wukong": {
+      "clean": {
+        "accuracy": 0.96,
+        "auc": 0.9934
+      },
+      "jpeg_q70": {
+        "accuracy": 0.8383,
+        "auc": 0.9584
+      },
+      "jpeg_q50": {
+        "accuracy": 0.7283,
+        "auc": 0.956
+      },
+      "jpeg_q30": {
+        "accuracy": 0.7483,
+        "auc": 0.9409
+      },
+      "blur_s1": {
+        "accuracy": 0.6717,
+        "auc": 0.8867
+      },
+      "blur_s2": {
+        "accuracy": 0.72,
+        "auc": 0.9011
+      },
+      "blur_s3": {
+        "accuracy": 0.6033,
+        "auc": 0.8258
+      },
+      "resize_112": {
+        "accuracy": 0.8233,
+        "auc": 0.943
+      }
+    }
+  }
+}

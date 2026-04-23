@@ -24,12 +24,16 @@ from src.config import Config
 
 
 MODELS = ["clip_probe", "hybrid", "hybrid_robust", "freq_guided_no_robust", "freq_guided"]
+ENSEMBLES = ["ensemble_all", "ensemble_top3", "ensemble_weighted"]
 PRETTY = {
     "clip_probe": "CLIP Probe",
     "hybrid": "Hybrid",
     "hybrid_robust": "Hybrid+Robust",
     "freq_guided_no_robust": "FreqGuided (no robust)",
     "freq_guided": "FreqGuided (full)",
+    "ensemble_all": "Ensemble (all 5)",
+    "ensemble_top3": "Ensemble (top 3)",
+    "ensemble_weighted": "Ensemble (weighted)",
 }
 COLORS = {
     "clip_probe": "#6b7280",
@@ -37,6 +41,9 @@ COLORS = {
     "hybrid_robust": "#8b5cf6",
     "freq_guided_no_robust": "#f59e0b",
     "freq_guided": "#10b981",
+    "ensemble_all": "#ec4899",
+    "ensemble_top3": "#14b8a6",
+    "ensemble_weighted": "#f43f5e",
 }
 
 
@@ -150,12 +157,19 @@ def _avg_over_gens(rob_data: dict, deg: str, metric: str = "auc") -> float:
 def plot_robustness(metrics_dir: Path, plots_dir: Path) -> None:
     rob = {m: load_json(metrics_dir / f"{m}_robustness.json") for m in MODELS}
     rob = {m: d for m, d in rob.items() if d}
+    # Merge ensembles from ensemble_robustness.json
+    ens = load_json(metrics_dir / "ensemble_robustness.json")
+    if ens:
+        for e_name, per_gen in ens.items():
+            rob[e_name] = per_gen
     if not rob:
         print("  (no robustness JSONs yet — skipping robustness plots)")
         return
 
-    # Per-model line plot (averaged across test generators)
+    # Per-model line plot (only for the base MODELS, not ensembles)
     for m, data in rob.items():
+        if m not in MODELS:
+            continue
         fig, ax = plt.subplots(figsize=(9, 5))
         gens = sorted(data.keys())
         for g in gens:
@@ -176,10 +190,12 @@ def plot_robustness(metrics_dir: Path, plots_dir: Path) -> None:
         plt.close()
         print(f"  -> {out.name}")
 
-    # Side-by-side: all models, average accuracy per degradation
+    # Side-by-side: all models, average AUC per degradation (single-model view)
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
     for metric, ax in zip(["accuracy", "auc"], axes):
         for m, data in rob.items():
+            if m not in MODELS:
+                continue
             vals = [_avg_over_gens(data, d, metric) for d in DEG_ORDER]
             ax.plot(DEG_ORDER, vals, marker="o", label=PRETTY[m], color=COLORS[m], linewidth=2)
         ax.set_title(f"Average {metric.upper()} across generators", fontsize=12, fontweight="bold")
@@ -193,6 +209,33 @@ def plot_robustness(metrics_dir: Path, plots_dir: Path) -> None:
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"  -> {out.name}")
+
+    # Ensemble-vs-single comparison plot (AUC only, ensembles included)
+    has_ens = any(k.startswith("ensemble_") for k in rob)
+    if has_ens:
+        fig, ax = plt.subplots(figsize=(10, 5.5))
+        # Highlight best single model and ensembles only (skip the bottom 3 singles)
+        focus = ["clip_probe", "hybrid_robust", "freq_guided_no_robust"] + ENSEMBLES
+        for m in focus:
+            if m not in rob:
+                continue
+            data = rob[m]
+            vals = [_avg_over_gens(data, d, "auc") for d in DEG_ORDER]
+            ls = "--" if m.startswith("ensemble_") else "-"
+            ax.plot(DEG_ORDER, vals, marker="o", label=PRETTY[m], color=COLORS[m],
+                    linewidth=2.2, linestyle=ls)
+        ax.set_title("Ensembles vs Best Singles — AUC across degradations",
+                     fontsize=12, fontweight="bold")
+        ax.set_ylabel("AUC")
+        ax.set_ylim(0.55, 1.02)
+        ax.grid(True, alpha=0.3)
+        ax.tick_params(axis="x", rotation=30)
+        ax.legend(fontsize=9, loc="lower left")
+        plt.tight_layout()
+        out = plots_dir / "robustness_ensembles.png"
+        plt.savefig(out, dpi=150, bbox_inches="tight")
+        plt.close()
+        print(f"  -> {out.name}")
 
 
 def plot_ablation_summary(metrics_dir: Path, out_path: Path) -> None:

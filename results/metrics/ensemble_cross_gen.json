@@ -1,0 +1,80 @@
+{
+  "ensemble_all": {
+    "adm": {
+      "accuracy": 0.98,
+      "auc": 0.9994
+    },
+    "glide": {
+      "accuracy": 0.9783,
+      "auc": 0.9994
+    },
+    "midjourney": {
+      "accuracy": 0.95,
+      "auc": 0.9929
+    },
+    "sd15": {
+      "accuracy": 0.9767,
+      "auc": 0.9973
+    },
+    "vqdm": {
+      "accuracy": 0.935,
+      "auc": 0.9811
+    },
+    "wukong": {
+      "accuracy": 0.9533,
+      "auc": 0.9914
+    }
+  },
+  "ensemble_top3": {
+    "adm": {
+      "accuracy": 0.9783,
+      "auc": 0.9989
+    },
+    "glide": {
+      "accuracy": 0.98,
+      "auc": 0.9992
+    },
+    "midjourney": {
+      "accuracy": 0.9483,
+      "auc": 0.9889
+    },
+    "sd15": {
+      "accuracy": 0.9733,
+      "auc": 0.9957
+    },
+    "vqdm": {
+      "accuracy": 0.93,
+      "auc": 0.9776
+    },
+    "wukong": {
+      "accuracy": 0.95,
+      "auc": 0.9876
+    }
+  },
+  "ensemble_weighted": {
+    "adm": {
+      "accuracy": 0.9833,
+      "auc": 0.9997
+    },
+    "glide": {
+      "accuracy": 0.9767,
+      "auc": 0.9992
+    },
+    "midjourney": {
+      "accuracy": 0.9517,
+      "auc": 0.9929
+    },
+    "sd15": {
+      "accuracy": 0.9767,
+      "auc": 0.9978
+    },
+    "vqdm": {
+      "accuracy": 0.9367,
+      "auc": 0.9849
+    },
+    "wukong": {
+      "accuracy": 0.96,
+      "auc": 0.9934
+    }
+  }
+}

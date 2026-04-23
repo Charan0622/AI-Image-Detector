@@ -21,6 +21,7 @@ from src.gradcam_utils import create_heatmap_overlay, gradcam_freq_branch
 from src.models.freq_guided import FreqGuidedFromFeatures
 from src.models.hybrid import FrequencyCNN
 from src.seed import fix_seeds
+from src.train_freq_guided import HybridRobustFromFeatures
 from src.train_hybrid import HybridFromFeatures
 from src.train_probe import LinearProbeHead
 from src.transforms import compute_dct_map, get_eval_transforms
@@ -39,6 +40,15 @@ class ModelManager:
         self._clip_encoder = None
         self._models: dict = {}
         fix_seeds(self.config.seed)
+
+        # Load per-model temperature scaling, if present. Defaults to 1.0 (no-op).
+        self.temperatures: dict[str, float] = {}
+        calib_path = self.config.results_dir / "metrics" / "calibration.json"
+        if calib_path.exists():
+            import json as _json
+            with open(calib_path) as _f:
+                data = _json.load(_f)
+            self.temperatures = {m: float(v.get("temperature", 1.0)) for m, v in data.items()}
 
     def _get_clip_encoder(self) -> torch.nn.Module:
         """Load and cache CLIP visual encoder."""
@@ -67,25 +77,27 @@ class ModelManager:
 
         ckpt_dir = self.config.checkpoint_dir
 
+        common_kwargs = dict(
+            clip_dim=self.config.clip_embed_dim,
+            freq_out_dim=self.config.freq_branch_out_dim,
+            fusion_hidden=self.config.fusion_hidden_dim,
+            fusion_dropout=self.config.fusion_dropout,
+        )
         if name == "clip_probe":
             model = LinearProbeHead(input_dim=512)
             ckpt_path = ckpt_dir / "clip_probe_best.pth"
         elif name == "hybrid":
-            model = HybridFromFeatures(
-                clip_dim=self.config.clip_embed_dim,
-                freq_out_dim=self.config.freq_branch_out_dim,
-                fusion_hidden=self.config.fusion_hidden_dim,
-                fusion_dropout=self.config.fusion_dropout,
-            )
+            model = HybridFromFeatures(**common_kwargs)
             ckpt_path = ckpt_dir / "hybrid_best.pth"
+        elif name == "hybrid_robust":
+            model = HybridRobustFromFeatures(**common_kwargs)
+            ckpt_path = ckpt_dir / "hybrid_robust_best.pth"
         elif name == "freq_guided":
-            model = FreqGuidedFromFeatures(
-                clip_dim=self.config.clip_embed_dim,
-                freq_out_dim=self.config.freq_branch_out_dim,
-                fusion_hidden=self.config.fusion_hidden_dim,
-                fusion_dropout=self.config.fusion_dropout,
-            )
+            model = FreqGuidedFromFeatures(**common_kwargs)
             ckpt_path = ckpt_dir / "freq_guided_best.pth"
+        elif name == "freq_guided_no_robust":
+            model = FreqGuidedFromFeatures(**common_kwargs)
+            ckpt_path = ckpt_dir / "freq_guided_no_robust_best.pth"
         else:
             raise ValueError(f"Unknown model: {name}")
 
@@ -98,7 +110,7 @@ class ModelManager:
         self._models[name] = model
         return model
 
-    def predict(self, image_pil: Image.Image, model_name: str = "hybrid") -> dict:
+    def predict(self, image_pil: Image.Image, model_name: str = "hybrid_robust") -> dict:
         """Run prediction on a single image.
 
         Args:
@@ -121,12 +133,14 @@ class ModelManager:
 
         # Model inference
         with torch.no_grad():
-            if model_name == "clip_probe":
-                logits = model(clip_feat)
-            else:
-                logits = model(clip_feat, dct_tensor)
+            needs_dct = model_name != "clip_probe"
+            logits = model(clip_feat, dct_tensor) if needs_dct else model(clip_feat)
 
-            probs = torch.softmax(logits, dim=1)[0]
+            # Apply temperature scaling for calibrated probabilities.
+            # argmax (and thus the verdict) is T-invariant; only the
+            # confidence values change to be honest about uncertainty.
+            T = self.temperatures.get(model_name, 1.0)
+            probs = torch.softmax(logits / max(T, 1e-3), dim=1)[0]
             fake_prob = probs[1].item()
             real_prob = probs[0].item()
 
@@ -139,7 +153,7 @@ class ModelManager:
         # Generate heatmap (for models with freq branch)
         heatmap_b64 = None
         heatmap_np = None
-        if model_name in ("hybrid", "freq_guided"):
+        if model_name in ("hybrid", "hybrid_robust", "freq_guided", "freq_guided_no_robust"):
             heatmap_np = gradcam_freq_branch(model, clip_feat, dct_tensor, self.device, target_class=1)
             overlay = create_heatmap_overlay(image_pil, heatmap_np, alpha=0.4)
             buffer = io.BytesIO()
@@ -181,7 +195,7 @@ class ModelManager:
             Dict with results from all models.
         """
         results = []
-        for name in ["clip_probe", "hybrid", "freq_guided"]:
+        for name in ["clip_probe", "hybrid", "hybrid_robust", "freq_guided"]:
             result = self.predict(image_pil, model_name=name)
             results.append(result)
 

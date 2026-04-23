@@ -51,27 +51,38 @@ def get_manager() -> ModelManager:
     return manager
 
 
+SUPPORTED_MODELS = (
+    "clip_probe",
+    "hybrid",
+    "hybrid_robust",
+    "freq_guided",
+    "freq_guided_no_robust",
+)
+
+
 @app.get("/health")
 async def health_check() -> dict:
     """Health check endpoint."""
-    return {"status": "ok", "models": ["clip_probe", "hybrid", "freq_guided"]}
+    return {"status": "ok", "models": list(SUPPORTED_MODELS)}
 
 
 @app.post("/detect")
 async def detect_image(
     file: UploadFile = File(...),
-    model: str = "freq_guided",
+    model: str = "hybrid_robust",
 ) -> dict:
     """Detect if an image is AI-generated.
 
     Args:
         file: Uploaded image file.
-        model: Model to use (clip_probe, hybrid, freq_guided).
+        model: One of clip_probe, hybrid, hybrid_robust, freq_guided,
+            freq_guided_no_robust. Defaults to hybrid_robust (best under
+            real-world degradations per the ablation study).
 
     Returns:
         Detection result with verdict, confidence, heatmap, explanations.
     """
-    if model not in ("clip_probe", "hybrid", "freq_guided"):
+    if model not in SUPPORTED_MODELS:
         raise HTTPException(status_code=400, detail=f"Unknown model: {model}")
 
     try:
