@@ -145,8 +145,12 @@ async def dashboard_data() -> dict:
         "ablation": {},
     }
 
-    # Load cross-gen results for each model
-    for model_name in ["clip_probe", "hybrid", "freq_guided"]:
+    # Load cross-gen results for each model (all 5 variants)
+    all_models = [
+        "clip_probe", "hybrid", "hybrid_robust",
+        "freq_guided_no_robust", "freq_guided",
+    ]
+    for model_name in all_models:
         path = results_dir / f"{model_name}_cross_gen.json"
         if path.exists():
             with open(path) as f:
@@ -159,7 +163,7 @@ async def dashboard_data() -> dict:
             data["ablation"]["table_md"] = f.read()
 
     # Load training histories
-    for model_name in ["clip_probe", "hybrid", "freq_guided"]:
+    for model_name in all_models:
         path = results_dir / f"{model_name}_training.json"
         if path.exists():
             with open(path) as f:
@@ -168,6 +172,19 @@ async def dashboard_data() -> dict:
                     "best_val_auc": training.get("best_val_auc"),
                     "total_epochs": training.get("total_epochs"),
                 }
+
+    # Load per-model robustness
+    for model_name in all_models:
+        path = results_dir / f"{model_name}_robustness.json"
+        if path.exists():
+            with open(path) as f:
+                data.setdefault("robustness", {})[model_name] = json.load(f)
+
+    # Load calibration (T, NLL, ECE per model)
+    calib_path = results_dir / "calibration.json"
+    if calib_path.exists():
+        with open(calib_path) as f:
+            data["calibration"] = json.load(f)
 
     return data
 
