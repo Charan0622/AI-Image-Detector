@@ -58,10 +58,13 @@ class Config:
     fusion_dropout: float = 0.3
 
     # Robustness augmentation
-    jpeg_q_range: tuple = (50, 100)
+    # Q range extended to 35 to cover WhatsApp/Discord recompression quality.
+    jpeg_q_range: tuple = (35, 100)
     blur_sigma_range: tuple = (0.1, 2.0)
     downscale_size: int = 112
     robustness_prob: float = 0.5
+    double_jpeg_prob: float = 0.3
+    smartphone_aesthetic_prob: float = 0.6
 
     # Evaluation
     test_generators: list = field(
