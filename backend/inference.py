@@ -78,6 +78,28 @@ class ModelManager:
                 data = _json.load(_f)
             self.temperatures = {m: float(v.get("temperature", 1.0)) for m, v in data.items()}
 
+        # Out-of-distribution detector. Uses cached CLIP features to estimate
+        # how far a new upload sits from the training distribution. If we can't
+        # load the cache (or it doesn't exist), fall back to disabling OOD.
+        self.ood_centroid: np.ndarray | None = None
+        self.ood_scale: float = 1.0  # std of training-sample distances; used to normalise
+        try:
+            feat_path = self.config.project_root / "data" / "features" / "train_features.npy"
+            if feat_path.exists():
+                feats = np.load(feat_path).astype(np.float32)            # (N, 512)
+                feats /= np.linalg.norm(feats, axis=1, keepdims=True) + 1e-8
+                self.ood_centroid = feats.mean(axis=0)                   # (512,)
+                self.ood_centroid /= np.linalg.norm(self.ood_centroid) + 1e-8
+                # Sample 10k features to estimate distance scale
+                rng = np.random.default_rng(0)
+                idx = rng.choice(feats.shape[0], size=min(10000, feats.shape[0]), replace=False)
+                dists = 1.0 - feats[idx] @ self.ood_centroid             # cosine distances
+                self.ood_mean = float(dists.mean())
+                self.ood_scale = float(dists.std() + 1e-6)
+                print(f"[ood] training centroid loaded. mean dist={self.ood_mean:.3f}, std={self.ood_scale:.3f}")
+        except Exception as e:
+            print(f"[ood] failed to build training centroid: {e}")
+
     def _get_clip_encoder(self) -> torch.nn.Module:
         """Load and cache CLIP visual encoder."""
         if self._clip_encoder is None:
@@ -97,6 +119,23 @@ class ModelManager:
         with torch.no_grad():
             features = encoder(img_tensor)
         return features  # (1, 512)
+
+    def _ood_score(self, clip_feat: torch.Tensor) -> float:
+        """Cosine-distance OOD score, z-scored against training distances.
+
+        Returns a value in roughly [0, 1] where:
+            ~0.0  → very close to the training distribution
+            ~0.5  → typical training sample (1 sigma above the mean)
+            >=1.0 → noticeably out of distribution (3+ sigma)
+        """
+        if self.ood_centroid is None:
+            return 0.0
+        f = clip_feat.detach().cpu().numpy().reshape(-1).astype(np.float32)
+        f = f / (np.linalg.norm(f) + 1e-8)
+        cos_dist = float(1.0 - f @ self.ood_centroid)
+        # Convert to a 0–1 OOD level: 0 at training mean, 1 at +3 sigma
+        z = (cos_dist - self.ood_mean) / (3.0 * self.ood_scale)
+        return float(max(0.0, min(1.0, z)))
 
     def _load_model(self, name: str) -> torch.nn.Module:
         """Load a model by name."""
@@ -180,8 +219,32 @@ class ModelManager:
         # Frequency heuristic (for explanations only, not verdict)
         heuristic_score, heuristic_reasons = freq_heuristic_score(image_pil)
 
-        verdict = "AI-Generated" if fake_prob > 0.5 else "Real"
-        confidence = fake_prob if verdict == "AI-Generated" else real_prob
+        # OOD score: how far this image is from the training distribution
+        ood_score = self._ood_score(clip_feat)
+
+        # Three-band verdict.
+        #   p < 0.30                                            → Real
+        #   p > 0.85                                            → AI-Generated
+        #   0.30 ≤ p ≤ 0.85, OR ood_score >= 0.7                → Uncertain
+        # Strong OOD score downgrades a confident verdict to Uncertain because
+        # the model is being asked about something it never trained on.
+        if ood_score >= 0.7:
+            verdict = "Uncertain"
+            band = "uncertain"
+            ood_reason = "outside training distribution"
+        elif fake_prob > 0.85:
+            verdict = "AI-Generated"
+            band = "fake"
+            ood_reason = None
+        elif fake_prob < 0.30:
+            verdict = "Real"
+            band = "real"
+            ood_reason = None
+        else:
+            verdict = "Uncertain"
+            band = "uncertain"
+            ood_reason = "borderline confidence"
+        confidence = fake_prob if verdict == "AI-Generated" else (1 - fake_prob if verdict == "Real" else max(fake_prob, 1 - fake_prob))
 
         # Spatial heatmap via CLIP attention rollout — this actually aligns
         # with the original image, unlike the previous DCT-space Grad-CAM.
@@ -219,8 +282,11 @@ class ModelManager:
 
         return {
             "verdict": verdict,
+            "band": band,
             "confidence": round(confidence, 4),
             "fake_probability": round(fake_prob, 4),
+            "ood_score": round(ood_score, 3),
+            "ood_reason": ood_reason,
             "heatmap_base64": f"data:image/png;base64,{heatmap_b64}" if heatmap_b64 else None,
             "explanations": explanations,
             "model_name": model_name,

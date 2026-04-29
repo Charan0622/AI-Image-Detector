@@ -78,17 +78,17 @@ const API_URL = window.location.origin;
 // ------------------------------------------------------------------
 // Single piece of colour logic: verdict → CSS accent
 // ------------------------------------------------------------------
-function accentFor(fakeProb) {
-    // conservative: keep the accent a muted off-white most of the time,
-    // only tint as confidence in a verdict passes 60%
-    if (fakeProb == null) return "#e6e6e6";
-    const p = Math.max(0, Math.min(1, fakeProb));
-    if (p > 0.6)  return "#d88280";       // fake
-    if (p < 0.4)  return "#9ec27e";       // real
-    return "#d9c97a";                     // borderline amber
+// Colour by *band* (real / uncertain / fake), not raw probability — the
+// backend has the threshold logic and OOD detector, we just respect it.
+function colorForBand(band) {
+    if (band === "real")       return "#9ec27e";
+    if (band === "fake")       return "#d88280";
+    if (band === "uncertain")  return "#d9c97a";
+    return "#e6e6e6";
 }
-function setAccent(fakeProb) {
-    document.documentElement.style.setProperty("--accent", accentFor(fakeProb));
+function setAccentFromResult(result) {
+    const c = result?.band ? colorForBand(result.band) : "#e6e6e6";
+    document.documentElement.style.setProperty("--accent", c);
 }
 
 // ------------------------------------------------------------------
@@ -321,38 +321,70 @@ function ImageViewer({ result, previewUrl }) {
 // ------------------------------------------------------------------
 function Verdict({ result }) {
     if (!result) return null;
-    const isFake = result.verdict === "AI-Generated";
-    const fakeProb = result.fake_probability ?? (isFake ? result.confidence : 1 - result.confidence);
+    const band = result.band || (result.verdict === "AI-Generated" ? "fake" : "real");
+    const fakeProb = result.fake_probability ?? 0;
     const pct = Math.round(result.confidence * 100);
-    const color = isFake ? "#d88280" : "#9ec27e";
-    const verdictWord = isFake ? "Synthesised" : "Authentic";
+    const color = colorForBand(band);
+    const word = band === "fake" ? "Synthesised"
+              : band === "real" ? "Authentic"
+              : "Inconclusive";
+    const subtitle = band === "fake" ? "AI-generated."
+                  : band === "real" ? "A captured photograph."
+                  : "The model isn't confident about this image.";
+
+    const oodPct = Math.round((result.ood_score ?? 0) * 100);
 
     return (
         <div className="fade">
             <div className="smallcaps">Determination</div>
             <div className="serif italic text-6xl md:text-7xl leading-none mt-3 tracking-tight"
                 style={{ color, fontWeight: 400 }}>
-                {verdictWord}.
+                {word}.
             </div>
+            <div className="serif italic text-lg text-[color:var(--mute)] mt-4">
+                {subtitle}
+            </div>
+
+            {/* explicit reason when uncertain */}
+            {band === "uncertain" && result.ood_reason && (
+                <div className="mt-4 p-3 rounded hairline text-sm leading-relaxed text-[color:var(--mute)]">
+                    <span className="smallcaps mr-2" style={{ color }}>Why uncertain</span>
+                    {result.ood_reason === "outside training distribution"
+                        ? "This image's CLIP features are far from anything the model saw during training (smartphone photo, modern AI generator, or unusual content). The reported probability shouldn't be trusted as a binary call."
+                        : "The model's calibrated probability sits between 30% and 85% — too close to the decision boundary to call confidently."}
+                </div>
+            )}
 
             {/* seismograph confidence */}
             <div className="mt-8">
                 <Seismograph value={pct / 100} color={color} />
                 <div className="flex justify-between mt-2 text-xs">
-                    <span className="smallcaps">Confidence</span>
+                    <span className="smallcaps">{band === "uncertain" ? "Margin" : "Confidence"}</span>
                     <span className="mono tabular" style={{ color }}>{pct.toFixed(0)}%</span>
                 </div>
             </div>
 
-            {/* measurements, as a lab table */}
+            {/* measurements */}
             <dl className="mt-10 space-y-2.5 text-sm">
-                <Row k="Verdict"         v={<span style={{color}} className="serif italic">{verdictWord}</span>} />
-                <Row k="P(AI)"           v={<span className="mono tabular">{fakeProb.toFixed(4)}</span>} />
-                <Row k="Model"           v={<span className="mono">{result.model_name}</span>} />
-                <Row k="Temperature"     v={<TempChip model={result.model_name} />} />
-                <Row k="Inference"       v={<span className="mono tabular">{result.inference_time_ms?.toFixed(0) || 0} ms</span>} />
+                <Row k="Verdict"      v={<span style={{color}} className="serif italic">{word}</span>} />
+                <Row k="P(AI)"        v={<span className="mono tabular">{fakeProb.toFixed(4)}</span>} />
+                <Row k="OOD score"    v={<OODBadge score={result.ood_score ?? 0} />} />
+                <Row k="Model"        v={<span className="mono">{result.model_name}</span>} />
+                <Row k="Temperature"  v={<TempChip model={result.model_name} />} />
+                <Row k="Inference"    v={<span className="mono tabular">{result.inference_time_ms?.toFixed(0) || 0} ms</span>} />
             </dl>
         </div>
+    );
+}
+
+function OODBadge({ score }) {
+    const pct = Math.round(score * 100);
+    const tone = score < 0.3 ? "in-dist" : score < 0.7 ? "edge" : "out-of-dist";
+    const color = score < 0.3 ? "#9ec27e" : score < 0.7 ? "#d9c97a" : "#d88280";
+    return (
+        <span className="mono tabular text-xs" style={{ color }}>
+            {pct}% <span className="text-[color:var(--mute)] ml-1">{tone}</span>
+        </span>
     );
 }
 function Row({ k, v }) {
@@ -406,10 +438,11 @@ function Compare({ results }) {
             <div className="smallcaps mb-5">Second opinions</div>
             <div className="space-y-4">
                 {models.map((r, i) => {
-                    const isFake = r.verdict === "AI-Generated";
-                    const color = isFake ? "#d88280" : "#9ec27e";
+                    const band = r.band || (r.verdict === "AI-Generated" ? "fake" : "real");
+                    const color = colorForBand(band);
                     const pct = Math.round(r.confidence * 100);
                     const isDefault = r.model_name === "hybrid_robust";
+                    const word = band === "fake" ? "Synthesised" : band === "real" ? "Authentic" : "Inconclusive";
                     return (
                         <div key={i} className="flex items-center gap-4 text-sm">
                             <span className="w-40 text-[color:var(--mute)] shrink-0 flex items-center gap-2">
@@ -422,7 +455,7 @@ function Compare({ results }) {
                             </div>
                             <span className="mono tabular text-xs w-14 text-right" style={{ color }}>{pct}%</span>
                             <span className="serif italic text-xs w-28 text-right" style={{ color }}>
-                                {isFake ? "Synthesised" : "Authentic"}
+                                {word}
                             </span>
                         </div>
                     );
@@ -659,7 +692,7 @@ function App() {
         setFile(selectedFile);
         setPreviewUrl(URL.createObjectURL(selectedFile));
         setResult(null); setCompareResults(null); setError(null);
-        setAccent(null);
+        setAccentFromResult(null);
     };
 
     const handleDetect = async () => {
@@ -670,8 +703,7 @@ function App() {
             const res = await fetch(`${API_URL}/detect?model=hybrid_robust`, { method: "POST", body: fd });
             if (!res.ok) throw new Error(await res.text());
             const data = await res.json();
-            const fp = data.fake_probability ?? (data.verdict === "AI-Generated" ? data.confidence : 1 - data.confidence);
-            setAccent(fp);
+            setAccentFromResult(data);
             setResult(data);
         } catch (e) { setError(e.message); }
         setLoading(false);
@@ -723,7 +755,7 @@ function App() {
                                     Is this image <span className="italic text-[color:var(--mute)]">captured</span> or <span className="italic text-[color:var(--mute)]">synthesised</span>?
                                 </h1>
                                 <p className="text-[color:var(--mute)] mt-5 max-w-lg leading-relaxed">
-                                    Frequency-guided CLIP detection with spatial evidence, calibrated confidence, and an honest audit trail. Drop an image — photograph or AI-generated — and read the spectrum.
+                                    Frequency-guided CLIP detection with spatial evidence and calibrated confidence. Drop an image — photograph or AI-generated — and read the spectrum. The model trained on 2023-era generators (Stable Diffusion, Midjourney, ADM, GLIDE), so modern generators or unusual photos return an honest <span className="text-[color:var(--ink)]">Inconclusive</span> rather than a forced binary.
                                 </p>
                                 <div className="mt-10 max-w-2xl">
                                     <UploadZone onImageSelect={handleImageSelect} />
@@ -742,7 +774,7 @@ function App() {
                                             <div className="serif italic text-lg mt-0.5 truncate max-w-xs">{file?.name}</div>
                                         </div>
                                         <button
-                                            onClick={() => { setPreviewUrl(null); setFile(null); setResult(null); setCompareResults(null); setAccent(null); }}
+                                            onClick={() => { setPreviewUrl(null); setFile(null); setResult(null); setCompareResults(null); setAccentFromResult(null); }}
                                             className="smallcaps text-[color:var(--mute)] hover:text-[color:var(--ink)] transition-colors">
                                             Replace
                                         </button>
