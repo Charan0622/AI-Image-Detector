@@ -1,44 +1,110 @@
 {
   "adm": {
-    "accuracy": 0.977,
-    "auc": 0.9989,
-    "precision": 0.9622,
-    "recall": 0.993,
-    "f1": 0.9774
+    "accuracy": 0.978,
+    "auc": 0.9987,
+    "precision": 0.9632,
+    "recall": 0.994,
+    "f1": 0.9783,
+    "confusion_matrix": [
+      [
+        962,
+        38
+      ],
+      [
+        6,
+        994
+      ]
+    ],
+    "n_samples": 2000
   },
   "glide": {
-    "accuracy": 0.9795,
-    "auc": 0.999,
-    "precision": 0.9678,
-    "recall": 0.992,
-    "f1": 0.9798
+    "accuracy": 0.981,
+    "auc": 0.9988,
+    "precision": 0.9725,
+    "recall": 0.99,
+    "f1": 0.9812,
+    "confusion_matrix": [
+      [
+        972,
+        28
+      ],
+      [
+        10,
+        990
+      ]
+    ],
+    "n_samples": 2000
   },
   "midjourney": {
-    "accuracy": 0.954,
+    "accuracy": 0.9535,
     "auc": 0.9915,
-    "precision": 0.9642,
-    "recall": 0.943,
-    "f1": 0.9535
+    "precision": 0.967,
+    "recall": 0.939,
+    "f1": 0.9528,
+    "confusion_matrix": [
+      [
+        968,
+        32
+      ],
+      [
+        61,
+        939
+      ]
+    ],
+    "n_samples": 2000
   },
   "sd15": {
-    "accuracy": 0.9715,
-    "auc": 0.9962,
-    "precision": 0.9739,
-    "recall": 0.969,
-    "f1": 0.9714
+    "accuracy": 0.9705,
+    "auc": 0.996,
+    "precision": 0.9748,
+    "recall": 0.966,
+    "f1": 0.9704,
+    "confusion_matrix": [
+      [
+        975,
+        25
+      ],
+      [
+        34,
+        966
+      ]
+    ],
+    "n_samples": 2000
   },
   "vqdm": {
-    "accuracy": 0.9455,
-    "auc": 0.9875,
-    "precision": 0.9532,
-    "recall": 0.937,
-    "f1": 0.945
+    "accuracy": 0.946,
+    "auc": 0.987,
+    "precision": 0.9607,
+    "recall": 0.93,
+    "f1": 0.9451,
+    "confusion_matrix": [
+      [
+        962,
+        38
+      ],
+      [
+        70,
+        930
+      ]
+    ],
+    "n_samples": 2000
   },
   "wukong": {
-    "accuracy": 0.964,
-    "auc": 0.9931,
-    "precision": 0.9687,
+    "accuracy": 0.966,
+    "auc": 0.9932,
+    "precision": 0.9726,
     "recall": 0.959,
-    "f1": 0.9638
+    "f1": 0.9658,
+    "confusion_matrix": [
+      [
+        973,
+        27
+      ],
+      [
+        41,
+        959
+      ]
+    ],
+    "n_samples": 2000
   }
 }

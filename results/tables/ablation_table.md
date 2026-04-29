@@ -4,11 +4,11 @@ Cross-gen = averaged across the 6 unseen test generators (adm, glide, midjourney
 
 | # | Model | Clean Acc | Clean AUC | JPEG-30 Acc | Blur-σ3 Acc | Resize Acc | Robust AUC (avg) | Robust Acc (avg) | Δ AUC vs Probe |
 |---|-------|-----------|-----------|-------------|-------------|------------|------------------|------------------|----------------|
-| 1 | CLIP Linear Probe | 0.8882 | 0.9558 | 0.7225 | 0.5225 | 0.7078 | 0.8360 | 0.6487 | +0.0000 |
-| 2 | AIDE-style Hybrid | 0.9652 | 0.9944 | 0.7483 | 0.5420 | 0.7814 | 0.8491 | 0.7112 | +0.0385 |
-| 3 | Hybrid + Robust Aug | 0.9619 | 0.9940 | 0.7228 | 0.5936 | 0.8025 | 0.8835 | 0.7254 | +0.0381 |
-| 4 | FreqGuided (no robust) | 0.9561 | 0.9911 | 0.7208 | 0.6086 | 0.8036 | 0.8520 | 0.7251 | +0.0353 |
-| 5 | FreqGuided (full, our final) | 0.9533 | 0.9904 | 0.6644 | 0.5906 | 0.7755 | 0.8296 | 0.6917 | +0.0345 |
+| 1 | CLIP Linear Probe | 0.8865 | 0.9553 | 0.7225 | 0.5225 | 0.7078 | 0.8360 | 0.6487 | +0.0000 |
+| 2 | AIDE-style Hybrid | 0.9658 | 0.9942 | 0.7483 | 0.5420 | 0.7814 | 0.8491 | 0.7112 | +0.0389 |
+| 3 | Hybrid + Robust Aug | 0.9602 | 0.9937 | 0.7228 | 0.5936 | 0.8025 | 0.8835 | 0.7254 | +0.0384 |
+| 4 | FreqGuided (no robust) | 0.9562 | 0.9910 | 0.7208 | 0.6086 | 0.8036 | 0.8520 | 0.7251 | +0.0356 |
+| 5 | FreqGuided (full, our final) | 0.9513 | 0.9897 | 0.6644 | 0.5906 | 0.7755 | 0.8296 | 0.6917 | +0.0344 |
 
 ## Robustness Breakdown (AUC averaged across generators)
 

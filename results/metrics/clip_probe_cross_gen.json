@@ -1,44 +1,110 @@
 {
   "adm": {
-    "accuracy": 0.9065,
-    "auc": 0.9709,
-    "precision": 0.8831,
-    "recall": 0.937,
-    "f1": 0.9093
+    "accuracy": 0.9045,
+    "auc": 0.9706,
+    "precision": 0.8901,
+    "recall": 0.923,
+    "f1": 0.9062,
+    "confusion_matrix": [
+      [
+        886,
+        114
+      ],
+      [
+        77,
+        923
+      ]
+    ],
+    "n_samples": 2000
   },
   "glide": {
-    "accuracy": 0.943,
-    "auc": 0.9962,
-    "precision": 0.902,
-    "recall": 0.994,
-    "f1": 0.9458
+    "accuracy": 0.9495,
+    "auc": 0.9965,
+    "precision": 0.912,
+    "recall": 0.995,
+    "f1": 0.9517,
+    "confusion_matrix": [
+      [
+        904,
+        96
+      ],
+      [
+        5,
+        995
+      ]
+    ],
+    "n_samples": 2000
   },
   "midjourney": {
-    "accuracy": 0.87,
-    "auc": 0.9384,
-    "precision": 0.8887,
-    "recall": 0.846,
-    "f1": 0.8668
+    "accuracy": 0.8605,
+    "auc": 0.9387,
+    "precision": 0.8957,
+    "recall": 0.816,
+    "f1": 0.854,
+    "confusion_matrix": [
+      [
+        905,
+        95
+      ],
+      [
+        184,
+        816
+      ]
+    ],
+    "n_samples": 2000
   },
   "sd15": {
-    "accuracy": 0.9155,
-    "auc": 0.9707,
-    "precision": 0.9022,
-    "recall": 0.932,
-    "f1": 0.9169
+    "accuracy": 0.913,
+    "auc": 0.9692,
+    "precision": 0.9081,
+    "recall": 0.919,
+    "f1": 0.9135,
+    "confusion_matrix": [
+      [
+        907,
+        93
+      ],
+      [
+        81,
+        919
+      ]
+    ],
+    "n_samples": 2000
   },
   "vqdm": {
-    "accuracy": 0.822,
-    "auc": 0.9112,
-    "precision": 0.8659,
-    "recall": 0.762,
-    "f1": 0.8106
+    "accuracy": 0.8235,
+    "auc": 0.9114,
+    "precision": 0.881,
+    "recall": 0.748,
+    "f1": 0.8091,
+    "confusion_matrix": [
+      [
+        899,
+        101
+      ],
+      [
+        252,
+        748
+      ]
+    ],
+    "n_samples": 2000
   },
   "wukong": {
-    "accuracy": 0.8725,
-    "auc": 0.9476,
-    "precision": 0.8729,
-    "recall": 0.872,
-    "f1": 0.8724
+    "accuracy": 0.868,
+    "auc": 0.9455,
+    "precision": 0.8841,
+    "recall": 0.847,
+    "f1": 0.8652,
+    "confusion_matrix": [
+      [
+        889,
+        111
+      ],
+      [
+        153,
+        847
+      ]
+    ],
+    "n_samples": 2000
   }
 }
