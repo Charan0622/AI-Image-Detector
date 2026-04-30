@@ -228,42 +228,76 @@ class ModelManager:
         # OOD score: how far this image is from the training distribution
         ood_score = self._ood_score(clip_feat)
 
+        # If the input is meaningfully out of distribution, the chosen head
+        # tends to saturate (p(AI) ≈ 1.0 for anything not matching training),
+        # so fall back to an ensemble average across all 5 heads. Ensembling
+        # softens the saturated signals and gives a more honest probability
+        # when no single model is reliable.
+        if ood_score >= 0.5:
+            ensemble_probs = []
+            for ens_name in ("clip_probe", "hybrid", "hybrid_robust", "hybrid_robust_v2", "freq_guided"):
+                try:
+                    em = self._load_model(ens_name)
+                    ens_T = self.temperatures.get(ens_name, 1.0)
+                    if ens_name == "clip_probe":
+                        en_logits = em(clip_feat)
+                    else:
+                        en_logits = em(clip_feat, dct_tensor)
+                    en_p = torch.softmax(en_logits / max(ens_T, 1e-3), dim=1)[0, 1].item()
+                    ensemble_probs.append(en_p)
+                except Exception as e:
+                    print(f"[ensemble] {ens_name} failed: {e}")
+            if ensemble_probs:
+                ensemble_fake = sum(ensemble_probs) / len(ensemble_probs)
+                # Use ensemble probability as the primary signal under OOD
+                fake_prob = ensemble_fake
+                real_prob = 1.0 - fake_prob
+
         # Four-band verdict.
-        # OOD threshold lowered from 0.7 → 0.55 now that the training set
-        # includes ~600 picsum smartphone-style real photos. The centroid
-        # is more permissive, so the same z-score is rarer and we want to
-        # fire the OOD flag on inputs we genuinely can't judge.
         #
-        #   ood_score >= 0.55                  → Uncertain (out of dist)
-        #   p > 0.85                           → AI-Generated
-        #   p < 0.20                           → Real
-        #   0.20 ≤ p ≤ 0.55                    → Likely Real (lightly edited possible)
-        #   0.55 < p ≤ 0.85                    → Uncertain (borderline)
-        OOD_THRESHOLD = 0.55
+        # The OOD threshold is set high (0.85) because user uploads almost
+        # always have *some* OOD signal compared to the training set, and
+        # we don't want to constantly route them to Inconclusive. We only
+        # flag "outside training distribution" when we're really far away.
+        #
+        # The probability bands are wider than before because the v2 head
+        # tends to give saturated p(AI) ≈ 1.0 on anything off-distribution,
+        # so requiring p < 0.20 for "Real" hides every reasonable real-photo
+        # call. The new thresholds let the model commit to a verdict; the
+        # OOD score is shown alongside as a confidence caveat.
+        #
+        #   ood_score >= 0.85                  → Uncertain (genuinely OOD)
+        #   p > 0.65                           → AI-Generated
+        #   p < 0.35                           → Real
+        #   0.35 ≤ p ≤ 0.50                    → Likely Real
+        #   0.50 < p ≤ 0.65                    → Likely AI
+        OOD_THRESHOLD = 0.85
         if ood_score >= OOD_THRESHOLD:
             verdict = "Uncertain"
             band = "uncertain"
             ood_reason = "outside training distribution"
-        elif fake_prob > 0.85:
+        elif fake_prob > 0.65:
             verdict = "AI-Generated"
             band = "fake"
-            ood_reason = None
-        elif fake_prob < 0.20:
+            ood_reason = "low-confidence reading" if ood_score >= 0.55 else None
+        elif fake_prob < 0.35:
             verdict = "Real"
             band = "real"
-            ood_reason = None
-        elif fake_prob <= 0.55:
+            ood_reason = "low-confidence reading" if ood_score >= 0.55 else None
+        elif fake_prob <= 0.50:
             verdict = "Likely Real"
             band = "likely_real"
             ood_reason = "lightly edited possible"
         else:
-            verdict = "Uncertain"
-            band = "uncertain"
+            verdict = "Likely AI"
+            band = "likely_ai"
             ood_reason = "borderline confidence"
         if verdict == "AI-Generated":
             confidence = fake_prob
         elif verdict in ("Real", "Likely Real"):
             confidence = 1 - fake_prob
+        elif verdict == "Likely AI":
+            confidence = fake_prob
         else:
             confidence = max(fake_prob, 1 - fake_prob)
 
