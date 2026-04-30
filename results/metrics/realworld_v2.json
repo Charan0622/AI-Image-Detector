@@ -1,0 +1,155 @@
+{
+  "manifest": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/manifest.csv",
+  "n_images": 117,
+  "models": {
+    "hybrid_robust_v2": {
+      "overall_acc@0.5": 0.8889,
+      "real_fpr@0.5": 0.07,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.93,
+          "acc@0.85": 0.97,
+          "fpr@0.5": 0.07,
+          "fpr@0.85": 0.03,
+          "mean_fake_prob": 0.0901,
+          "mean_ood_score": 0.2586,
+          "bands": {
+            "real": 75,
+            "fake": 3,
+            "uncertain": 17,
+            "likely_real": 5
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 0.6471,
+          "acc@0.85": 0.4118,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.6244,
+          "mean_ood_score": 0.3232,
+          "bands": {
+            "uncertain": 7,
+            "fake": 5,
+            "real": 4,
+            "likely_real": 1
+          }
+        }
+      }
+    },
+    "hybrid_robust": {
+      "overall_acc@0.5": 0.6239,
+      "real_fpr@0.5": 0.44,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.56,
+          "acc@0.85": 0.63,
+          "fpr@0.5": 0.44,
+          "fpr@0.85": 0.37,
+          "mean_fake_prob": 0.4636,
+          "mean_ood_score": 0.2586,
+          "bands": {
+            "fake": 32,
+            "real": 41,
+            "uncertain": 20,
+            "likely_real": 7
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 1.0,
+          "acc@0.85": 0.8235,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.9549,
+          "mean_ood_score": 0.3232,
+          "bands": {
+            "fake": 12,
+            "uncertain": 5
+          }
+        }
+      }
+    },
+    "hybrid": {
+      "overall_acc@0.5": 0.5897,
+      "real_fpr@0.5": 0.48,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.52,
+          "acc@0.85": 0.59,
+          "fpr@0.5": 0.48,
+          "fpr@0.85": 0.41,
+          "mean_fake_prob": 0.5,
+          "mean_ood_score": 0.2586,
+          "bands": {
+            "likely_real": 8,
+            "uncertain": 19,
+            "fake": 37,
+            "real": 36
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 1.0,
+          "acc@0.85": 0.9412,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.9687,
+          "mean_ood_score": 0.3232,
+          "bands": {
+            "fake": 14,
+            "uncertain": 3
+          }
+        }
+      }
+    },
+    "clip_probe": {
+      "overall_acc@0.5": 0.5214,
+      "real_fpr@0.5": 0.55,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.45,
+          "acc@0.85": 0.73,
+          "fpr@0.5": 0.55,
+          "fpr@0.85": 0.27,
+          "mean_fake_prob": 0.5449,
+          "mean_ood_score": 0.2586,
+          "bands": {
+            "fake": 25,
+            "real": 20,
+            "uncertain": 33,
+            "likely_real": 22
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 0.9412,
+          "acc@0.85": 0.7647,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.8758,
+          "mean_ood_score": 0.3232,
+          "bands": {
+            "uncertain": 6,
+            "fake": 11
+          }
+        }
+      }
+    }
+  },
+  "subsets": {},
+  "tag": "v2",
+  "timestamp": 1777513561.3403242
+}

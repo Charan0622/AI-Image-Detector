@@ -55,6 +55,7 @@ SUPPORTED_MODELS = (
     "clip_probe",
     "hybrid",
     "hybrid_robust",
+    "hybrid_robust_v2",
     "freq_guided",
     "freq_guided_no_robust",
 )
@@ -69,7 +70,7 @@ async def health_check() -> dict:
 @app.post("/detect")
 async def detect_image(
     file: UploadFile = File(...),
-    model: str = "hybrid_robust",
+    model: str = "hybrid_robust_v2",
 ) -> dict:
     """Detect if an image is AI-generated.
 

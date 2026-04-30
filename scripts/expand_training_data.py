@@ -188,14 +188,21 @@ def main() -> None:
 
     # ---------- Extract features ----------
     print("\nExtracting CLIP features for new images...")
-    real_feats = extract_features(real_paths, device, args.batch_size) if real_paths else np.zeros((0, 512), np.float32)
-    fake_feats = extract_features(fake_paths, device, args.batch_size) if fake_paths else np.zeros((0, 512), np.float32)
+    real_feats = extract_features(real_paths, device, args.batch_size) if real_paths else np.zeros((0, 512), dtype=np.float32)
+    fake_feats = extract_features(fake_paths, device, args.batch_size) if fake_paths else np.zeros((0, 512), dtype=np.float32)
     print(f"  real_feats={real_feats.shape}  fake_feats={fake_feats.shape}")
+    if real_feats.shape[0] == 0 and fake_feats.shape[0] == 0:
+        print("Nothing to append. Exiting.")
+        return
 
     # ---------- Train/val split (stratified, NO shuffling — features align with paths positionally) ----------
     rng = np.random.default_rng(0)
     def stratified_split(feats: np.ndarray, paths: list[Path], label: int):
         n = feats.shape[0]
+        if n == 0:
+            empty_f = np.zeros((0, 512), dtype=np.float32)
+            empty_l = np.zeros(0, dtype=np.int64)
+            return empty_f, empty_l, [], empty_f, empty_l, []
         n_val = int(round(n * args.val_holdout))
         idx = rng.permutation(n)
         val_idx = sorted(idx[:n_val].tolist())

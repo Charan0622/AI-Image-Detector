@@ -43,6 +43,7 @@ VARIANTS = {
     "clip_probe": {"cls": LinearProbeHead, "ckpt": "clip_probe_best.pth", "needs_dct": False},
     "hybrid": {"cls": HybridFromFeatures, "ckpt": "hybrid_best.pth", "needs_dct": True},
     "hybrid_robust": {"cls": HybridRobustFromFeatures, "ckpt": "hybrid_robust_best.pth", "needs_dct": True},
+    "hybrid_robust_v2": {"cls": HybridRobustFromFeatures, "ckpt": "hybrid_robust_v2_best.pth", "needs_dct": True},
     "freq_guided_no_robust": {"cls": FreqGuidedFromFeatures, "ckpt": "freq_guided_no_robust_best.pth", "needs_dct": True},
     "freq_guided": {"cls": FreqGuidedFromFeatures, "ckpt": "freq_guided_best.pth", "needs_dct": True},
 }

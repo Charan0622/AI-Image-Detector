@@ -1,0 +1,39 @@
+{
+  "model": "hybrid_robust_v2",
+  "best_val_auc": 0.9935,
+  "total_epochs": 3,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.0343,
+      "train_acc": 0.9882,
+      "val_loss": 0.1285,
+      "val_acc": 0.9602,
+      "val_auc": 0.9933,
+      "time_s": 5643.7
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0305,
+      "train_acc": 0.9893,
+      "val_loss": 0.1267,
+      "val_acc": 0.9609,
+      "val_auc": 0.9933,
+      "time_s": 3431.4
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0266,
+      "train_acc": 0.991,
+      "val_loss": 0.126,
+      "val_acc": 0.9615,
+      "val_auc": 0.9935,
+      "time_s": 1999.0
+    }
+  ],
+  "config": {
+    "epochs": 3,
+    "lr": 0.0001,
+    "init_from": "hybrid_robust_best.pth"
+  }
+}

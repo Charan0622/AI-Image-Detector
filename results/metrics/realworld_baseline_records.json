@@ -1,0 +1,5277 @@
+{
+  "hybrid_robust": [
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_000852.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8756,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.256
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003279.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0942,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.474
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003479.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003906.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0842,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_004166.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.465,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_005696.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0008,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.617
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_006007.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009117.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0052,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009359.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0842,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010329.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2586,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.274
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_011396.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7823,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012157.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012281.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0235,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.402
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012677.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013239.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9987,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013397.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.465,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1096,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.453
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_014593.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9868,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_016362.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1027,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_018290.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0312,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.513
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020380.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9949,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.165
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020927.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021320.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021418.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.446
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_022432.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9641,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.624
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_025204.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9906,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_026063.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9978,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_027461.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0046,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028222.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1516,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028658.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8798,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.335
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028894.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9822,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.099
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029257.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9272,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.348
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029872.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0909,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.089
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030496.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0005,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.057
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030513.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.498,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.622
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032088.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0072,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032099.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0143,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034672.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9234,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.651
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034994.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0112,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.212
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036049.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0278,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.318
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036422.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6169,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.32
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0757,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.279
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036464.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1045,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_037931.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5571,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.471
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_038428.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9991,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.385
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044119.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5309,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.093
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044598.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0053,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_045083.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_046567.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0572,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.006
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047053.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047401.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7786,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.445
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047820.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0823,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_048521.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0505,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.003
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049616.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6083,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.435
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049736.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9994,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.143
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049798.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0885,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.387
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049824.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9991,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.284
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_054988.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9987,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.254
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055303.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9287,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.129
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055393.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0058,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_058879.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0857,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_059430.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0325,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.512
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060218.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9252,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.199
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060590.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.997,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_066238.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9962,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.202
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070011.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1265,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070285.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0193,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.017
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071427.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9723,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071483.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2016,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.221
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_072358.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0002,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.316
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_073564.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9767,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_075675.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1298,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077237.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9666,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9569,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.24
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_078908.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0821,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.618
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079132.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079841.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2345,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.932
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_081071.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.996,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_082398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0058,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083228.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9976,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.829
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083321.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2316,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083811.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0005,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.552
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_084940.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.158
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_085182.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7286,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_086674.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9889,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.578
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_087842.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9918,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.214
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_088697.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_089594.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3124,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.587
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091507.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.217
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091925.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0012,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.687
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091989.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1866,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.507
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_092350.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1298,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_093851.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9767,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095569.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0992,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.182
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095648.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4535,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_096531.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9776,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.283
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097081.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097197.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0125,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.407
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_099459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2424,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_000.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.542
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_001.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.416
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_002.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9948,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_003.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.589
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_004.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9996,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.159
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_005.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9773,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.305
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_006.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.8321,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.206
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_007.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9981,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_008.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9932,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_009.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.609
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_010.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9854,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.523
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_011.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.346
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_012.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9636,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_013.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.7196,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.965
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_014.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9978,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.363
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_015.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.19
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_016.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.7718,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.466
+    }
+  ],
+  "hybrid": [
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_000852.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4142,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.256
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003279.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6974,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.474
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003479.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003906.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0507,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_004166.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7546,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_005696.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.617
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_006007.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009117.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0227,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009359.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0507,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010329.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9472,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.274
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_011396.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8155,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012157.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0003,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012281.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0151,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.402
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012677.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0003,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013239.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9986,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013397.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7546,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6379,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.453
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_014593.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9833,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_016362.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1091,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_018290.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0334,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.513
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020380.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.165
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020927.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021320.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021418.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0003,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.446
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_022432.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9975,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.624
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_025204.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9977,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_026063.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9984,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_027461.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0029,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028222.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4603,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028658.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9988,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.335
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028894.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9992,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.099
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029257.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9731,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.348
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029872.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0079,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.089
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030496.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0091,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.057
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030513.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2862,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.622
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032088.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0278,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032099.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0341,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034672.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8303,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.651
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034994.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0681,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.212
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036049.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1339,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.318
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036422.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2919,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.32
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1253,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.279
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036464.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0171,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_037931.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8922,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.471
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_038428.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.385
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044119.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9847,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.093
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044598.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1124,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_045083.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_046567.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0523,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.006
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047053.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0043,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047401.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9832,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.445
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047820.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0566,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_048521.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2808,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.003
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049616.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9568,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.435
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049736.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.143
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049798.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3479,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.387
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049824.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.284
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_054988.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.254
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055303.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9954,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.129
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055393.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_058879.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2076,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_059430.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0604,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.512
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060218.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9581,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.199
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060590.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_066238.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9996,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.202
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070011.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0593,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070285.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0539,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.017
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071427.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9969,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071483.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1105,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.221
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_072358.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.316
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_073564.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9933,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_075675.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0193,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077237.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9757,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9337,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.24
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_078908.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0724,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.618
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079132.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079841.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1929,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.932
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_081071.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_082398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083228.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9558,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.829
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083321.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2502,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083811.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0007,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.552
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_084940.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.158
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_085182.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8833,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_086674.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9065,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.578
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_087842.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9961,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.214
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_088697.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0043,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_089594.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2256,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.587
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091507.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.217
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091925.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0029,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.687
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091989.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5064,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.507
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_092350.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0193,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_093851.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9933,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095569.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0369,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.182
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095648.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3662,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_096531.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9226,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.283
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097081.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097197.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0456,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.407
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_099459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0369,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_000.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.542
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_001.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.416
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_002.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9942,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_003.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.589
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_004.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.159
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_005.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.305
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_006.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9315,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.206
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_007.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9977,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_008.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_009.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.609
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_010.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.523
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_011.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.346
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_012.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9895,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_013.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.5917,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.965
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_014.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9915,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.363
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_015.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.19
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_016.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.972,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.466
+    }
+  ],
+  "freq_guided": [
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_000852.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9118,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.256
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003279.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0305,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.474
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003479.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003906.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_004166.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9938,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_005696.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0021,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.617
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_006007.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9971,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009117.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0044,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009359.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010329.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.672,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9379,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.274
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_011396.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3335,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012157.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012281.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0799,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.402
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012677.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013239.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9934,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013397.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9938,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2827,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.453
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_014593.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9062,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_016362.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1211,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_018290.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7149,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.513
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020380.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9662,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.165
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020927.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021320.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021418.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0984,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.446
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_022432.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.983,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.624
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_025204.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9978,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_026063.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.962,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_027461.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0015,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028222.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1275,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028658.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7189,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.335
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028894.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4517,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.099
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029257.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9983,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.348
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029872.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.897,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.089
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030496.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0084,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.057
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030513.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8747,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.622
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032088.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4004,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032099.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0955,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034672.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9606,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.651
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034994.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.104,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.212
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036049.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.042,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.318
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036422.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5539,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.32
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.528,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.279
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036464.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0413,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_037931.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.991,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.471
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_038428.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9961,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.385
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044119.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.981,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.093
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044598.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9982,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_045083.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_046567.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0911,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.006
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047053.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047401.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9761,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.445
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047820.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0443,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_048521.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1431,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.003
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049616.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9783,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.435
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049736.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9801,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.143
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049798.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9788,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.387
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049824.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9928,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.284
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_054988.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9984,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.254
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055303.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4929,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.129
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055393.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0044,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_058879.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3862,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_059430.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1384,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.512
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060218.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9942,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.199
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060590.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.997,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_066238.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9971,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.202
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070011.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.26,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070285.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1444,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.017
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071427.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9876,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071483.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4877,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.221
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_072358.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0003,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.316
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_073564.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9648,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_075675.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.003,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077237.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9406,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9447,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.24
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_078908.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2594,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.618
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079132.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079841.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3318,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.932
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_081071.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9873,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_082398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0044,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083228.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9115,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.829
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083321.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4906,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083811.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0005,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.552
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_084940.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0006,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.158
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_085182.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2748,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_086674.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.938,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.578
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_087842.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.997,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.214
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_088697.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_089594.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8569,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.587
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091507.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0008,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.217
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091925.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.687
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091989.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9018,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.507
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_092350.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.003,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_093851.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9648,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095569.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0135,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.182
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095648.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5643,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_096531.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8374,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.283
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097081.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9946,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097197.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1579,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.407
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_099459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.168,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_000.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9996,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.542
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_001.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.416
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_002.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9933,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_003.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.589
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_004.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9997,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.159
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_005.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9949,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.305
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_006.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.8963,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.206
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_007.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.6491,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_008.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9964,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_009.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9975,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.609
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_010.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9643,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.523
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_011.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9992,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.346
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_012.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.8686,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_013.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.2502,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.965
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_014.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9988,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.363
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_015.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9985,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.19
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_016.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.5941,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.466
+    }
+  ],
+  "freq_guided_no_robust": [
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_000852.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6071,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.256
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003279.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.985,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.474
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003479.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9989,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003906.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0567,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_004166.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8376,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_005696.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1242,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.617
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_006007.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9962,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009117.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0022,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009359.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0567,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010329.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9011,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9733,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.274
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_011396.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3983,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012157.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012281.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.147,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.402
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012677.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013239.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.985,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013397.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8376,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3773,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.453
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_014593.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9797,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_016362.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0665,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_018290.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4913,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.513
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020380.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9916,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.165
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020927.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9994,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021320.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9989,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021418.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.446
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_022432.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9804,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.624
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_025204.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9872,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_026063.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9898,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_027461.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.001,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028222.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0837,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028658.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9334,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.335
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028894.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9448,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.099
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029257.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.987,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.348
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029872.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8034,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.089
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030496.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1268,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.057
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030513.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5121,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.622
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032088.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0013,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032099.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0162,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034672.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1954,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.651
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034994.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0649,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.212
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036049.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0856,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.318
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036422.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6798,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.32
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0067,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.279
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036464.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0437,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_037931.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9381,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.471
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_038428.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9995,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.385
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044119.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9666,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.093
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044598.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9245,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_045083.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9994,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_046567.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0164,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.006
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047053.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0185,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047401.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7057,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.445
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047820.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0166,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_048521.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0582,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.003
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049616.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9749,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.435
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049736.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.143
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049798.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3655,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.387
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049824.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9949,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.284
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_054988.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9977,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.254
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055303.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9151,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.129
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055393.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0006,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_058879.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2351,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_059430.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1115,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.512
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060218.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9058,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.199
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060590.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9952,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_066238.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9823,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.202
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070011.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0329,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070285.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4366,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.017
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071427.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9441,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071483.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.007,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.221
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_072358.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0002,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.316
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_073564.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.598,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_075675.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4713,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077237.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9612,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9078,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.24
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_078908.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0229,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.618
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079132.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9999,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079841.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1506,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.932
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_081071.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9913,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_082398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0006,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083228.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7188,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.829
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083321.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9772,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083811.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.003,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.552
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_084940.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0104,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.158
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_085182.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8984,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_086674.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6758,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.578
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_087842.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8833,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.214
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_088697.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0185,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_089594.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3808,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.587
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091507.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0019,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.217
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091925.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0019,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.687
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091989.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0749,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.507
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_092350.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4713,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_093851.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.598,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095569.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1589,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.182
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095648.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6131,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_096531.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.959,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.283
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097081.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.99,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097197.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8827,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.407
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_099459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0295,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_000.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9995,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.542
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_001.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.416
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_002.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9926,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_003.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 1.0,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.589
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_004.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9956,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.159
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_005.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9984,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.305
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_006.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9079,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.206
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_007.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9902,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_008.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9819,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_009.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9949,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.609
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_010.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9816,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.523
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_011.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9988,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.346
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_012.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.8917,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_013.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9608,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.965
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_014.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9928,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.363
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_015.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9987,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.19
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_016.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.7225,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.466
+    }
+  ],
+  "clip_probe": [
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_000852.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9291,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.256
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003279.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0705,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.474
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003479.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_003906.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.491,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_004166.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4714,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_005696.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1004,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.617
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_006007.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8259,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009117.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0182,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_009359.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.491,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.825
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010329.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5351,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_010459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9989,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.274
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_011396.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4666,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012157.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0185,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012281.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3695,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.402
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_012677.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0185,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.5
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013239.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9915,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013397.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4714,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.386
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_013435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7067,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.453
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_014593.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9918,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_016362.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9779,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_018290.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0591,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.513
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020380.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5714,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.165
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_020927.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9966,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021320.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9998,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.424
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_021418.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0296,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.446
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_022432.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9029,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.624
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_025204.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9699,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_026063.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9727,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_027461.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2038,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028222.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1485,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028658.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7971,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.335
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_028894.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9749,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.099
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029257.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9395,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.348
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_029872.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1974,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.089
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030496.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0604,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.057
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_030513.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5689,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.622
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032088.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.378,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_032099.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4192,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034672.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9754,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.651
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_034994.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5739,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.212
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036049.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2747,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.318
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036422.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2971,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.32
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036435.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7196,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.279
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_036464.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2598,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_037931.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9777,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.471
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_038428.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9924,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.385
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044119.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3802,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.093
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_044598.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2447,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_045083.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9966,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_046567.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6396,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.006
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047053.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0105,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047401.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6349,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.445
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_047820.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0477,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_048521.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6632,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.003
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049616.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6457,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.435
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049736.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2862,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.143
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049798.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7554,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.387
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_049824.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8225,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.284
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_054988.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9588,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.254
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055303.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5186,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.129
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_055393.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3088,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_058879.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8919,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_059430.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5057,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.512
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060218.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.519,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.199
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_060590.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.996,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_066238.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.974,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.202
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070011.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.1978,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_070285.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7407,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.017
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071427.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9172,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_071483.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8358,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.221
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_072358.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0104,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.316
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_073564.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7397,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_075675.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0757,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077237.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.5201,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_077398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6239,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.24
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_078908.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2308,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.618
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079132.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9065,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_079841.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.2496,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.932
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_081071.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.6586,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.259
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_082398.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3088,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083228.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.8211,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.829
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083321.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4208,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.577
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_083811.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0141,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.552
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_084940.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0034,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.158
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_085182.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3351,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_086674.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7512,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.578
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_087842.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9805,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.214
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_088697.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0105,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.225
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_089594.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7099,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.587
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091507.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0471,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.217
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091925.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.008,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.687
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_091989.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.3743,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.507
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_092350.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0757,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_093851.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7397,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.288
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095569.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.0585,
+      "verdict": "Real",
+      "band": "real",
+      "ood_score": 0.182
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_095648.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.901,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_096531.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9909,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.283
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097081.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.9993,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.252
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_097197.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.7442,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.407
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/real/picsum_099459.jpg",
+      "subset": "real_picsum",
+      "label": "real",
+      "fake_prob": 0.4878,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_000.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.8335,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.542
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_001.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9949,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.416
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_002.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.7567,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_003.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9941,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.589
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_004.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.945,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.159
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_005.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9448,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.305
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_006.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9198,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.206
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_007.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.891,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_008.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.8915,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_009.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9865,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.609
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_010.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9125,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.523
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_011.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9959,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.346
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_012.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.8126,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.0
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_013.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.1422,
+      "verdict": "Uncertain",
+      "band": "uncertain",
+      "ood_score": 0.965
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_014.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9311,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.363
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_015.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.9983,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.19
+    },
+    {
+      "path": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/modern_ai/modern_ai_016.jpg",
+      "subset": "fake_modern_ai",
+      "label": "fake",
+      "fake_prob": 0.939,
+      "verdict": "AI-Generated",
+      "band": "fake",
+      "ood_score": 0.466
+    }
+  ]
+}

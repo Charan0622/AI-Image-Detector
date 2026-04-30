@@ -1,0 +1,184 @@
+{
+  "manifest": "/Users/spartan/Documents/Deeplearning_Project/data/realworld_eval/manifest.csv",
+  "n_images": 117,
+  "models": {
+    "hybrid_robust": {
+      "overall_acc@0.5": 0.6239,
+      "real_fpr@0.5": 0.44,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.56,
+          "acc@0.85": 0.63,
+          "fpr@0.5": 0.44,
+          "fpr@0.85": 0.37,
+          "mean_fake_prob": 0.4636,
+          "mean_ood_score": 0.2681,
+          "bands": {
+            "fake": 36,
+            "real": 48,
+            "uncertain": 16
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 1.0,
+          "acc@0.85": 0.8235,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.9549,
+          "mean_ood_score": 0.3341,
+          "bands": {
+            "fake": 14,
+            "uncertain": 3
+          }
+        }
+      }
+    },
+    "hybrid": {
+      "overall_acc@0.5": 0.5897,
+      "real_fpr@0.5": 0.48,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.52,
+          "acc@0.85": 0.59,
+          "fpr@0.5": 0.48,
+          "fpr@0.85": 0.41,
+          "mean_fake_prob": 0.5,
+          "mean_ood_score": 0.2681,
+          "bands": {
+            "uncertain": 15,
+            "fake": 40,
+            "real": 45
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 1.0,
+          "acc@0.85": 0.9412,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.9687,
+          "mean_ood_score": 0.3341,
+          "bands": {
+            "fake": 16,
+            "uncertain": 1
+          }
+        }
+      }
+    },
+    "freq_guided": {
+      "overall_acc@0.5": 0.547,
+      "real_fpr@0.5": 0.52,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.48,
+          "acc@0.85": 0.55,
+          "fpr@0.5": 0.52,
+          "fpr@0.85": 0.45,
+          "mean_fake_prob": 0.5434,
+          "mean_ood_score": 0.2681,
+          "bands": {
+            "fake": 44,
+            "real": 38,
+            "uncertain": 18
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 0.9412,
+          "acc@0.85": 0.8235,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.8941,
+          "mean_ood_score": 0.3341,
+          "bands": {
+            "fake": 14,
+            "uncertain": 3
+          }
+        }
+      }
+    },
+    "freq_guided_no_robust": {
+      "overall_acc@0.5": 0.5556,
+      "real_fpr@0.5": 0.52,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.48,
+          "acc@0.85": 0.6,
+          "fpr@0.5": 0.52,
+          "fpr@0.85": 0.4,
+          "mean_fake_prob": 0.5226,
+          "mean_ood_score": 0.2681,
+          "bands": {
+            "uncertain": 23,
+            "fake": 40,
+            "real": 37
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 1.0,
+          "acc@0.85": 0.9412,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.9652,
+          "mean_ood_score": 0.3341,
+          "bands": {
+            "fake": 15,
+            "uncertain": 2
+          }
+        }
+      }
+    },
+    "clip_probe": {
+      "overall_acc@0.5": 0.5214,
+      "real_fpr@0.5": 0.55,
+      "subsets": {
+        "real_picsum": {
+          "n": 100,
+          "true_label": "real",
+          "acc@0.5": 0.45,
+          "acc@0.85": 0.73,
+          "fpr@0.5": 0.55,
+          "fpr@0.85": 0.27,
+          "mean_fake_prob": 0.5449,
+          "mean_ood_score": 0.2681,
+          "bands": {
+            "fake": 27,
+            "real": 29,
+            "uncertain": 44
+          }
+        },
+        "fake_modern_ai": {
+          "n": 17,
+          "true_label": "fake",
+          "acc@0.5": 0.9412,
+          "acc@0.85": 0.7647,
+          "fpr@0.5": null,
+          "fpr@0.85": null,
+          "mean_fake_prob": 0.8758,
+          "mean_ood_score": 0.3341,
+          "bands": {
+            "uncertain": 4,
+            "fake": 13
+          }
+        }
+      }
+    }
+  },
+  "subsets": {},
+  "tag": "baseline",
+  "timestamp": 1777489925.338209
+}

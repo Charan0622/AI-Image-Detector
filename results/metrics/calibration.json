@@ -23,6 +23,14 @@
     "ece_after": 0.0051,
     "n_samples": 4000
   },
+  "hybrid_robust_v2": {
+    "temperature": 1.7526,
+    "nll_before": 0.0752,
+    "nll_after": 0.0623,
+    "ece_before": 0.0134,
+    "ece_after": 0.0041,
+    "n_samples": 4000
+  },
   "freq_guided_no_robust": {
     "temperature": 1.8978,
     "nll_before": 0.0974,

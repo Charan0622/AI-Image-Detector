@@ -159,6 +159,12 @@ class ModelManager:
         elif name == "hybrid_robust":
             model = HybridRobustFromFeatures(**common_kwargs)
             ckpt_path = ckpt_dir / "hybrid_robust_best.pth"
+        elif name == "hybrid_robust_v2":
+            # v2 = hybrid_robust warm-fine-tuned with smartphone-aesthetic +
+            # double-JPEG augmentation on the expanded training set
+            # (see scripts/expand_training_data.py + src/train_hybrid_robust_v2.py).
+            model = HybridRobustFromFeatures(**common_kwargs)
+            ckpt_path = ckpt_dir / "hybrid_robust_v2_best.pth"
         elif name == "freq_guided":
             model = FreqGuidedFromFeatures(**common_kwargs)
             ckpt_path = ckpt_dir / "freq_guided_best.pth"
@@ -177,7 +183,7 @@ class ModelManager:
         self._models[name] = model
         return model
 
-    def predict(self, image_pil: Image.Image, model_name: str = "hybrid_robust") -> dict:
+    def predict(self, image_pil: Image.Image, model_name: str = "hybrid_robust_v2") -> dict:
         """Run prediction on a single image.
 
         Args:
@@ -222,13 +228,19 @@ class ModelManager:
         # OOD score: how far this image is from the training distribution
         ood_score = self._ood_score(clip_feat)
 
-        # Three-band verdict.
-        #   p < 0.30                                            → Real
-        #   p > 0.85                                            → AI-Generated
-        #   0.30 ≤ p ≤ 0.85, OR ood_score >= 0.7                → Uncertain
-        # Strong OOD score downgrades a confident verdict to Uncertain because
-        # the model is being asked about something it never trained on.
-        if ood_score >= 0.7:
+        # Four-band verdict.
+        # OOD threshold lowered from 0.7 → 0.55 now that the training set
+        # includes ~600 picsum smartphone-style real photos. The centroid
+        # is more permissive, so the same z-score is rarer and we want to
+        # fire the OOD flag on inputs we genuinely can't judge.
+        #
+        #   ood_score >= 0.55                  → Uncertain (out of dist)
+        #   p > 0.85                           → AI-Generated
+        #   p < 0.20                           → Real
+        #   0.20 ≤ p ≤ 0.55                    → Likely Real (lightly edited possible)
+        #   0.55 < p ≤ 0.85                    → Uncertain (borderline)
+        OOD_THRESHOLD = 0.55
+        if ood_score >= OOD_THRESHOLD:
             verdict = "Uncertain"
             band = "uncertain"
             ood_reason = "outside training distribution"
@@ -236,15 +248,24 @@ class ModelManager:
             verdict = "AI-Generated"
             band = "fake"
             ood_reason = None
-        elif fake_prob < 0.30:
+        elif fake_prob < 0.20:
             verdict = "Real"
             band = "real"
             ood_reason = None
+        elif fake_prob <= 0.55:
+            verdict = "Likely Real"
+            band = "likely_real"
+            ood_reason = "lightly edited possible"
         else:
             verdict = "Uncertain"
             band = "uncertain"
             ood_reason = "borderline confidence"
-        confidence = fake_prob if verdict == "AI-Generated" else (1 - fake_prob if verdict == "Real" else max(fake_prob, 1 - fake_prob))
+        if verdict == "AI-Generated":
+            confidence = fake_prob
+        elif verdict in ("Real", "Likely Real"):
+            confidence = 1 - fake_prob
+        else:
+            confidence = max(fake_prob, 1 - fake_prob)
 
         # Spatial heatmap via CLIP attention rollout — this actually aligns
         # with the original image, unlike the previous DCT-space Grad-CAM.

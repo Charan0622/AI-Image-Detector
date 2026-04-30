@@ -81,9 +81,10 @@ const API_URL = window.location.origin;
 // Colour by *band* (real / uncertain / fake), not raw probability — the
 // backend has the threshold logic and OOD detector, we just respect it.
 function colorForBand(band) {
-    if (band === "real")       return "#9ec27e";
-    if (band === "fake")       return "#d88280";
-    if (band === "uncertain")  return "#d9c97a";
+    if (band === "real")         return "#9ec27e";
+    if (band === "likely_real")  return "#bcd9a3";  // softer than full real
+    if (band === "fake")         return "#d88280";
+    if (band === "uncertain")    return "#d9c97a";
     return "#e6e6e6";
 }
 function setAccentFromResult(result) {
@@ -325,12 +326,14 @@ function Verdict({ result }) {
     const fakeProb = result.fake_probability ?? 0;
     const pct = Math.round(result.confidence * 100);
     const color = colorForBand(band);
-    const word = band === "fake" ? "Synthesised"
-              : band === "real" ? "Authentic"
-              : "Inconclusive";
-    const subtitle = band === "fake" ? "AI-generated."
-                  : band === "real" ? "A captured photograph."
-                  : "The model isn't confident about this image.";
+    const word = band === "fake"        ? "Synthesised"
+              : band === "real"          ? "Authentic"
+              : band === "likely_real"   ? "Likely Real"
+              :                            "Inconclusive";
+    const subtitle = band === "fake"        ? "AI-generated."
+                  : band === "real"          ? "A captured photograph."
+                  : band === "likely_real"   ? "A real photograph — possibly lightly edited or filtered."
+                  :                            "The model isn't confident about this image.";
 
     const oodPct = Math.round((result.ood_score ?? 0) * 100);
 
@@ -442,7 +445,10 @@ function Compare({ results }) {
                     const color = colorForBand(band);
                     const pct = Math.round(r.confidence * 100);
                     const isDefault = r.model_name === "hybrid_robust";
-                    const word = band === "fake" ? "Synthesised" : band === "real" ? "Authentic" : "Inconclusive";
+                    const word = band === "fake"      ? "Synthesised"
+                               : band === "real"        ? "Authentic"
+                               : band === "likely_real" ? "Likely Real"
+                               :                          "Inconclusive";
                     return (
                         <div key={i} className="flex items-center gap-4 text-sm">
                             <span className="w-40 text-[color:var(--mute)] shrink-0 flex items-center gap-2">

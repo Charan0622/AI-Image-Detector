@@ -140,8 +140,10 @@ def train_one_variant(variant: str, config: Config, device: torch.device, *, epo
     train_ds = AugmentedHybridDataset(train_feats, train_labels, train_paths, aug)
     val_ds = AugmentedHybridDataset(val_feats, val_labels, val_paths, None)
 
-    train_loader = DataLoader(train_ds, batch_size=16, shuffle=True, num_workers=2, pin_memory=False)
-    val_loader = DataLoader(val_ds, batch_size=16, shuffle=False, num_workers=2, pin_memory=False)
+    train_loader = DataLoader(train_ds, batch_size=config.train_batch_size, shuffle=True,
+                              num_workers=config.num_workers, pin_memory=False)
+    val_loader = DataLoader(val_ds, batch_size=config.train_batch_size, shuffle=False,
+                            num_workers=config.num_workers, pin_memory=False)
 
     # Build model + load v1 weights
     model = info["cls"](
@@ -229,9 +231,15 @@ def main() -> None:
                         choices=["hybrid_robust", "freq_guided", "all"])
     parser.add_argument("--epochs", type=int, default=8)
     parser.add_argument("--lr", type=float, default=1e-4)
+    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--num_workers", type=int, default=4)
     args = parser.parse_args()
 
     config = Config()
+    # Override DataLoader knobs from CLI so a bigger batch / more workers
+    # don't require editing the script.
+    config.train_batch_size = args.batch_size
+    config.num_workers = args.num_workers
     fix_seeds(config.seed)
     device = config.device
     print(f"Device: {device}")
