@@ -48,6 +48,13 @@ VARIANTS = {
         "save_ckpt": "hybrid_robust_v2_best.pth",
         "metrics_name": "hybrid_robust_v2",
     },
+    "hybrid_robust_v3": {
+        # Continues from v2 (best known) and trains on the v3-expanded set.
+        "cls": HybridRobustFromFeatures,
+        "load_ckpt": "hybrid_robust_v2_best.pth",
+        "save_ckpt": "hybrid_robust_v3_best.pth",
+        "metrics_name": "hybrid_robust_v3",
+    },
     "freq_guided": {
         "cls": FreqGuidedFromFeatures,
         "load_ckpt": "freq_guided_best.pth",
@@ -228,7 +235,7 @@ def train_one_variant(variant: str, config: Config, device: torch.device, *, epo
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--variant", default="hybrid_robust",
-                        choices=["hybrid_robust", "freq_guided", "all"])
+                        choices=["hybrid_robust", "hybrid_robust_v3", "freq_guided", "all"])
     parser.add_argument("--epochs", type=int, default=8)
     parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--batch_size", type=int, default=32)

@@ -165,6 +165,11 @@ class ModelManager:
             # (see scripts/expand_training_data.py + src/train_hybrid_robust_v2.py).
             model = HybridRobustFromFeatures(**common_kwargs)
             ckpt_path = ckpt_dir / "hybrid_robust_v2_best.pth"
+        elif name == "hybrid_robust_v3":
+            # v3 = v2 fine-tuned further on +3000 picsum real + ~1500
+            # diffusiondb SDXL images (see scripts/expand_v3.py).
+            model = HybridRobustFromFeatures(**common_kwargs)
+            ckpt_path = ckpt_dir / "hybrid_robust_v3_best.pth"
         elif name == "freq_guided":
             model = FreqGuidedFromFeatures(**common_kwargs)
             ckpt_path = ckpt_dir / "freq_guided_best.pth"

@@ -56,6 +56,7 @@ SUPPORTED_MODELS = (
     "hybrid",
     "hybrid_robust",
     "hybrid_robust_v2",
+    "hybrid_robust_v3",
     "freq_guided",
     "freq_guided_no_robust",
 )

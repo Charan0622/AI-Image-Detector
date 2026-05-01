@@ -44,6 +44,7 @@ VARIANTS = {
     "hybrid": {"cls": HybridFromFeatures, "ckpt": "hybrid_best.pth", "needs_dct": True},
     "hybrid_robust": {"cls": HybridRobustFromFeatures, "ckpt": "hybrid_robust_best.pth", "needs_dct": True},
     "hybrid_robust_v2": {"cls": HybridRobustFromFeatures, "ckpt": "hybrid_robust_v2_best.pth", "needs_dct": True},
+    "hybrid_robust_v3": {"cls": HybridRobustFromFeatures, "ckpt": "hybrid_robust_v3_best.pth", "needs_dct": True},
     "freq_guided_no_robust": {"cls": FreqGuidedFromFeatures, "ckpt": "freq_guided_no_robust_best.pth", "needs_dct": True},
     "freq_guided": {"cls": FreqGuidedFromFeatures, "ckpt": "freq_guided_best.pth", "needs_dct": True},
 }
