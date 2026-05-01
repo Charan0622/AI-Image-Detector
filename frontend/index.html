@@ -218,15 +218,15 @@ function UploadZone({ onImageSelect }) {
     const ref = useRef(null);
     return (
         <div
-            className={`hairline rounded p-14 text-center cursor-pointer transition-colors ${drag ? 'drag-active' : 'hover:border-[color:var(--mute)]'}`}
+            className={`hairline rounded p-10 text-center cursor-pointer transition-colors ${drag ? 'drag-active' : 'hover:border-[color:var(--mute)]'}`}
+            style={{ borderStyle: "dashed" }}
             onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
             onDragLeave={() => setDrag(false)}
             onDrop={(e) => { e.preventDefault(); setDrag(false); if (e.dataTransfer.files?.[0]) onImageSelect(e.dataTransfer.files[0]); }}
             onClick={() => ref.current?.click()}
         >
-            <div className="smallcaps mb-3">Specimen</div>
-            <div className="serif text-2xl">Drop an image to begin</div>
-            <div className="text-sm text-[color:var(--mute)] mt-2">or click to browse · JPEG, PNG · ≤10 MB</div>
+            <div className="serif text-lg italic">Drop a specimen here</div>
+            <div className="text-[11px] text-[color:var(--mute)] mt-1.5 mono">or click to browse</div>
             <input ref={ref} type="file" accept="image/*" className="hidden"
                 onChange={(e) => e.target.files?.[0] && onImageSelect(e.target.files[0])} />
         </div>
@@ -319,109 +319,147 @@ function ImageViewer({ result, previewUrl }) {
 }
 
 // ------------------------------------------------------------------
-// Verdict block — pure typography, no card, no border, no flourish.
+// Verdict block — instrument readout. No theatrical pronouncement;
+// the analyst reads numbers, not verdicts.
 // ------------------------------------------------------------------
 function Verdict({ result }) {
     if (!result) return null;
     const band = result.band || (result.verdict === "AI-Generated" ? "fake" : "real");
     const fakeProb = result.fake_probability ?? 0;
-    const pct = Math.round(result.confidence * 100);
+    const ood = result.ood_score ?? 0;
     const color = colorForBand(band);
-    const word = band === "fake"        ? "Synthesised"
-              : band === "real"          ? "Authentic"
-              : band === "likely_real"   ? "Likely Real"
-              : band === "likely_ai"     ? "Likely AI"
-              :                            "Inconclusive";
-    const subtitle = band === "fake"        ? "AI-generated."
-                  : band === "real"          ? "A captured photograph."
-                  : band === "likely_real"   ? "A real photograph — possibly lightly edited or filtered."
-                  : band === "likely_ai"     ? "Probably AI-generated, but the signal is borderline."
-                  :                            "The model isn't confident about this image.";
 
-    const oodPct = Math.round((result.ood_score ?? 0) * 100);
+    // OOD-driven confidence label — matches the backend's threshold logic
+    const confLabel =
+        ood >= 0.85 ? "very low" :
+        ood >= 0.55 ? "low" :
+        ood >= 0.30 ? "moderate" :
+                      "high";
+    const oodColor =
+        ood < 0.30 ? "#9ec27e" :
+        ood < 0.55 ? "#d9c97a" :
+        ood < 0.85 ? "#d9b08c" :
+                     "#d88280";
+
+    // One sentence interpretation, hedged. No exclamation, no italic verdict word.
+    const interp =
+        band === "fake"        ? "Reads as AI-generated." :
+        band === "real"        ? "Reads as a captured photograph." :
+        band === "likely_real" ? "Leans real — lightly edited cannot be ruled out." :
+        band === "likely_ai"   ? "Leans synthesised — signal is borderline." :
+                                 "Below the model's confidence threshold.";
+
+    const cal = useCal();
+    const T = cal[result.model_name]?.temperature;
 
     return (
-        <div className="fade">
-            <div className="smallcaps">Determination</div>
-            <div className="serif italic text-6xl md:text-7xl leading-none mt-3 tracking-tight"
-                style={{ color, fontWeight: 400 }}>
-                {word}.
-            </div>
-            <div className="serif italic text-lg text-[color:var(--mute)] mt-4">
-                {subtitle}
-            </div>
-
-            {/* explicit reason when uncertain */}
-            {band === "uncertain" && result.ood_reason && (
-                <div className="mt-4 p-3 rounded hairline text-sm leading-relaxed text-[color:var(--mute)]">
-                    <span className="smallcaps mr-2" style={{ color }}>Why uncertain</span>
-                    {result.ood_reason === "outside training distribution"
-                        ? "This image's CLIP features are far from anything the model saw during training (smartphone photo, modern AI generator, or unusual content). The reported probability shouldn't be trusted as a binary call."
-                        : "The model's calibrated probability sits between 30% and 85% — too close to the decision boundary to call confidently."}
+        <div className="fade space-y-9">
+            {/* PROBABILITY — primary readout, big tabular numerals */}
+            <div>
+                <div className="flex items-baseline justify-between mb-2">
+                    <span className="smallcaps">P(AI-generated)</span>
+                    <span className="mono text-[10px] text-[color:var(--mute)]">{result.inference_time_ms?.toFixed(0) || 0} ms</span>
                 </div>
-            )}
-
-            {/* seismograph confidence */}
-            <div className="mt-8">
-                <Seismograph value={pct / 100} color={color} />
-                <div className="flex justify-between mt-2 text-xs">
-                    <span className="smallcaps">{band === "uncertain" ? "Margin" : "Confidence"}</span>
-                    <span className="mono tabular" style={{ color }}>{pct.toFixed(0)}%</span>
+                <div className="mono tabular text-[64px] leading-none tracking-tight"
+                    style={{ color, fontVariantNumeric: "tabular-nums slashed-zero" }}>
+                    {fakeProb.toFixed(3)}
+                </div>
+                <div className="mt-3">
+                    <Seismograph value={fakeProb} color={color} />
                 </div>
             </div>
 
-            {/* measurements */}
-            <dl className="mt-10 space-y-2.5 text-sm">
-                <Row k="Verdict"      v={<span style={{color}} className="serif italic">{word}</span>} />
-                <Row k="P(AI)"        v={<span className="mono tabular">{fakeProb.toFixed(4)}</span>} />
-                <Row k="OOD score"    v={<OODBadge score={result.ood_score ?? 0} />} />
-                <Row k="Model"        v={<span className="mono">{result.model_name}</span>} />
-                <Row k="Temperature"  v={<TempChip model={result.model_name} />} />
-                <Row k="Inference"    v={<span className="mono tabular">{result.inference_time_ms?.toFixed(0) || 0} ms</span>} />
-            </dl>
+            <div className="rule" />
+
+            {/* SECONDARY READINGS */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+                <ReadingRow label="OOD distance" value={ood.toFixed(3)} valueColor={oodColor} />
+                <ReadingRow label="Confidence"   value={confLabel}      valueColor={oodColor} />
+                <ReadingRow label="Source model" value={result.model_name} mono />
+                <ReadingRow label="Calibration"  value={T != null ? `τ = ${T.toFixed(2)}` : "—"} mono />
+            </div>
+
+            <div className="rule" />
+
+            {/* INTERPRETATION — single hedged sentence */}
+            <div>
+                <div className="smallcaps mb-2">Interpretation</div>
+                <p className="serif text-xl leading-snug" style={{ color }}>
+                    {interp}
+                </p>
+                {ood >= 0.55 && (
+                    <p className="text-xs text-[color:var(--mute)] mt-3 leading-relaxed max-w-sm">
+                        This image sits {ood >= 0.85 ? "far" : "outside the dense region of"} the model's training distribution.
+                        Treat the reading as suggestive — not as a binary call.
+                    </p>
+                )}
+            </div>
         </div>
     );
 }
 
-function OODBadge({ score }) {
-    const pct = Math.round(score * 100);
-    const tone = score < 0.3 ? "in-dist" : score < 0.7 ? "edge" : "out-of-dist";
-    const color = score < 0.3 ? "#9ec27e" : score < 0.7 ? "#d9c97a" : "#d88280";
+function ReadingRow({ label, value, valueColor, mono }) {
     return (
-        <span className="mono tabular text-xs" style={{ color }}>
-            {pct}% <span className="text-[color:var(--mute)] ml-1">{tone}</span>
-        </span>
-    );
-}
-function Row({ k, v }) {
-    return (
-        <div className="flex items-center justify-between border-b hairline pb-2" style={{ borderColor: "var(--line)" }}>
-            <span className="smallcaps text-[10px]">{k}</span>
-            <span>{v}</span>
+        <div className="border-b hairline pb-2" style={{ borderColor: "var(--line)" }}>
+            <div className="smallcaps text-[10px] mb-1">{label}</div>
+            <div className={`${mono ? "mono" : "serif italic"} tabular text-base`}
+                style={{ color: valueColor || "var(--ink)" }}>
+                {value}
+            </div>
         </div>
     );
 }
 
 // ------------------------------------------------------------------
-// Evidence — plain typography, no cards, no bars.
+// Spectral readings — typeset like footnotes in a journal article.
 // ------------------------------------------------------------------
 function Evidence({ result }) {
     const items = result?.explanations;
     if (!items?.length) return null;
     return (
-        <div className="fade mt-10">
-            <div className="smallcaps mb-4">Spectral evidence</div>
-            <ol className="space-y-4 text-sm leading-relaxed">
+        <div className="fade mt-12">
+            <div className="smallcaps mb-5">Spectral readings</div>
+            <ol className="space-y-3 text-sm leading-relaxed">
                 {items.slice(0, 5).map((e, i) => (
-                    <li key={i} className="flex gap-4">
-                        <span className="mono text-[color:var(--dim)] tabular text-xs w-6 shrink-0 pt-0.5">{String(i+1).padStart(2, '0')}</span>
-                        <div>
-                            <div className="serif italic text-[color:var(--ink)]">{e.region}</div>
+                    <li key={i} className="flex gap-5">
+                        <span className="mono text-[color:var(--dim)] tabular text-[11px] w-8 shrink-0 pt-1 text-right">
+                            {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <div className="flex-1">
+                            <div className="serif italic text-[color:var(--ink)] text-[15px]">{e.region}</div>
                             <div className="text-[color:var(--mute)] mt-0.5">{e.reason}</div>
                         </div>
                     </li>
                 ))}
             </ol>
+        </div>
+    );
+}
+
+// ------------------------------------------------------------------
+// Methodology footer — always visible, earns trust by stating limits.
+// ------------------------------------------------------------------
+function MethodologyNote() {
+    return (
+        <div className="fade mt-16 pt-6 border-t" style={{ borderColor: "var(--line)" }}>
+            <div className="smallcaps mb-3">Methodology · limits</div>
+            <div className="text-[12px] leading-relaxed text-[color:var(--mute)] max-w-2xl space-y-2">
+                <p>
+                    <span className="serif italic">Backbone:</span> CLIP ViT-B/16, frozen.
+                    A small DCT-frequency head and fusion classifier are trained on top.
+                </p>
+                <p>
+                    <span className="serif italic">Training:</span> 192K GenImage samples
+                    (six 2023-era generators) plus 632 picsum smartphone-style real photos.
+                    Probabilities are temperature-calibrated on a held-out validation set.
+                </p>
+                <p>
+                    <span className="serif italic">Known limits:</span> the model has not
+                    seen 2024-25 generators (Gemini Nano-Banana, Flux, Imagen 3,
+                    Midjourney v6+) or images from your camera. Outputs on those inputs
+                    should be read as instrumental signal, not adjudication.
+                </p>
+            </div>
         </div>
     );
 }
@@ -742,11 +780,11 @@ function App() {
                 <nav className="flex gap-6 text-sm">
                     <button onClick={() => setView("detect")}
                         className={`transition-colors ${view === 'detect' ? 'text-[color:var(--ink)]' : 'text-[color:var(--mute)] hover:text-[color:var(--ink)]'}`}>
-                        Analyse
+                        Reading
                     </button>
                     <button onClick={() => setView("dashboard")}
                         className={`transition-colors ${view === 'dashboard' ? 'text-[color:var(--ink)]' : 'text-[color:var(--mute)] hover:text-[color:var(--ink)]'}`}>
-                        Evaluation
+                        Methods &amp; data
                     </button>
                 </nav>
             </header>
@@ -757,19 +795,25 @@ function App() {
 
                 {view === "detect" && (
                     <div>
-                        {/* Before any image is picked, a quiet prompt */}
+                        {/* Landing — instrument cover, not a hero. */}
                         {!previewUrl && !loading && (
-                            <div className="max-w-2xl">
-                                <div className="smallcaps mb-3">Case file</div>
-                                <h1 className="serif text-5xl md:text-6xl leading-[1.05] tracking-tight">
-                                    Is this image <span className="italic text-[color:var(--mute)]">captured</span> or <span className="italic text-[color:var(--mute)]">synthesised</span>?
-                                </h1>
-                                <p className="text-[color:var(--mute)] mt-5 max-w-lg leading-relaxed">
-                                    Frequency-guided CLIP detection with spatial evidence and calibrated confidence. Drop an image — photograph or AI-generated — and read the spectrum. The model trained on 2023-era generators (Stable Diffusion, Midjourney, ADM, GLIDE), so modern generators or unusual photos return an honest <span className="text-[color:var(--ink)]">Inconclusive</span> rather than a forced binary.
-                                </p>
-                                <div className="mt-10 max-w-2xl">
-                                    <UploadZone onImageSelect={handleImageSelect} />
+                            <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-16 max-w-5xl">
+                                <div>
+                                    <div className="smallcaps mb-3">Vol. 1 · Issue 1</div>
+                                    <h1 className="serif text-[44px] md:text-[56px] leading-[1.04] tracking-tight">
+                                        An instrument for reading the spectral signature of an image.
+                                    </h1>
+                                    <p className="text-[color:var(--mute)] mt-6 max-w-lg leading-relaxed text-[15px]">
+                                        Spectra reports a probability that an image was synthesised by a 2023-era diffusion or GAN model, the spatial regions its CLIP backbone attended to, and how far the input sits from the model's training distribution. It does not pronounce verdicts. It hands the analyst a reading.
+                                    </p>
                                 </div>
+                                <aside className="md:pt-2">
+                                    <div className="smallcaps mb-3">Submit a specimen</div>
+                                    <UploadZone onImageSelect={handleImageSelect} />
+                                    <p className="text-[11px] text-[color:var(--dim)] mt-4 leading-relaxed">
+                                        JPEG or PNG, ≤ 10 MB. Inputs are canonicalised to 224×224 JPEG Q=95 to match the training pipeline.
+                                    </p>
+                                </aside>
                             </div>
                         )}
 
@@ -779,14 +823,17 @@ function App() {
                                 {/* Left: image + heatmap */}
                                 <div>
                                     <div className="mb-6 flex items-baseline justify-between">
-                                        <div>
-                                            <div className="smallcaps">Specimen</div>
-                                            <div className="serif italic text-lg mt-0.5 truncate max-w-xs">{file?.name}</div>
+                                        <div className="min-w-0 flex-1 pr-4">
+                                            <div className="smallcaps">Specimen №&nbsp;001</div>
+                                            <div className="mono text-[11px] text-[color:var(--mute)] mt-1 truncate">
+                                                {file?.name}
+                                                {file && <span className="ml-2">· {(file.size / 1024).toFixed(0)} KB</span>}
+                                            </div>
                                         </div>
                                         <button
                                             onClick={() => { setPreviewUrl(null); setFile(null); setResult(null); setCompareResults(null); setAccentFromResult(null); }}
-                                            className="smallcaps text-[color:var(--mute)] hover:text-[color:var(--ink)] transition-colors">
-                                            Replace
+                                            className="smallcaps text-[color:var(--mute)] hover:text-[color:var(--ink)] transition-colors text-[10px]">
+                                            Replace specimen
                                         </button>
                                     </div>
 
@@ -827,13 +874,16 @@ function App() {
                                     {loading && <DCTLoader />}
                                     {!loading && !result && (
                                         <div className="text-[color:var(--mute)] text-sm">
-                                            <div className="smallcaps">Awaiting</div>
-                                            <div className="serif italic text-xl mt-1">No determination yet.</div>
+                                            <div className="smallcaps">No reading</div>
+                                            <p className="serif text-base mt-2 leading-snug max-w-xs">
+                                                The instrument has not yet examined this specimen.
+                                            </p>
                                         </div>
                                     )}
                                     {result && <Verdict result={result} />}
                                     {result && <Evidence result={result} />}
                                     {compareResults && <Compare results={compareResults} />}
+                                    {result && <MethodologyNote />}
                                 </div>
                             </div>
                         )}
