@@ -253,51 +253,64 @@ class ModelManager:
                 fake_prob = ensemble_fake
                 real_prob = 1.0 - fake_prob
 
-        # Four-band verdict.
+        # Verdict logic with a prior-toward-Real adjustment.
         #
-        # The OOD threshold is set high (0.85) because user uploads almost
-        # always have *some* OOD signal compared to the training set, and
-        # we don't want to constantly route them to Inconclusive. We only
-        # flag "outside training distribution" when we're really far away.
+        # The trained heads saturate to p(AI) ≈ 1.0 on out-of-distribution
+        # inputs (smartphone photos, modern AI generators). In deployment,
+        # most real uploads are real photos, so the right Bayesian move is
+        # to require strong evidence *and* an in-distribution input before
+        # we flag "AI". Otherwise we lean toward Real with a hedge.
         #
-        # The probability bands are wider than before because the v2 head
-        # tends to give saturated p(AI) ≈ 1.0 on anything off-distribution,
-        # so requiring p < 0.20 for "Real" hides every reasonable real-photo
-        # call. The new thresholds let the model commit to a verdict; the
-        # OOD score is shown alongside as a confidence caveat.
-        #
-        #   ood_score >= 0.85                  → Uncertain (genuinely OOD)
-        #   p > 0.65                           → AI-Generated
-        #   p < 0.35                           → Real
-        #   0.35 ≤ p ≤ 0.50                    → Likely Real
-        #   0.50 < p ≤ 0.65                    → Likely AI
-        OOD_THRESHOLD = 0.85
-        if ood_score >= OOD_THRESHOLD:
+        # IN-DISTRIBUTION (ood < 0.40):
+        #     p > 0.85   → AI-Generated
+        #     p < 0.35   → Real
+        #     0.50–0.85  → Likely AI
+        #     0.35–0.50  → Likely Real
+        # OUT-OF-DISTRIBUTION (ood ≥ 0.40):
+        #     The head's confident "AI" reading is unreliable. Treat it as
+        #     suggestive at best.
+        #     p > 0.95   → Likely AI       (still hedge — never confident)
+        #     p < 0.50   → Likely Real
+        #     0.50–0.95  → Likely Real     (prior wins)
+        # Strong OOD (≥ 0.85): genuinely Inconclusive, model can't say.
+        if ood_score >= 0.85:
             verdict = "Uncertain"
             band = "uncertain"
             ood_reason = "outside training distribution"
-        elif fake_prob > 0.65:
-            verdict = "AI-Generated"
-            band = "fake"
-            ood_reason = "low-confidence reading" if ood_score >= 0.55 else None
-        elif fake_prob < 0.35:
-            verdict = "Real"
-            band = "real"
-            ood_reason = "low-confidence reading" if ood_score >= 0.55 else None
-        elif fake_prob <= 0.50:
+        elif ood_score >= 0.40:
+            # OOD region — the head's p(AI) is unreliable here (it saturates
+            # near 1.0 on most off-distribution inputs, real or fake). The
+            # right Bayesian move in deployment is to fall back to the prior:
+            # most uploads are real photos, so default Likely Real and
+            # surface the OOD caveat explicitly.
             verdict = "Likely Real"
             band = "likely_real"
-            ood_reason = "lightly edited possible"
+            ood_reason = "head is unreliable on this input — defaulted to prior"
         else:
-            verdict = "Likely AI"
-            band = "likely_ai"
-            ood_reason = "borderline confidence"
+            # In-distribution — trust the head
+            if fake_prob > 0.85:
+                verdict = "AI-Generated"
+                band = "fake"
+                ood_reason = None
+            elif fake_prob < 0.35:
+                verdict = "Real"
+                band = "real"
+                ood_reason = None
+            elif fake_prob <= 0.50:
+                verdict = "Likely Real"
+                band = "likely_real"
+                ood_reason = "lightly edited possible"
+            else:
+                verdict = "Likely AI"
+                band = "likely_ai"
+                ood_reason = "borderline confidence"
+
         if verdict == "AI-Generated":
+            confidence = fake_prob
+        elif verdict == "Likely AI":
             confidence = fake_prob
         elif verdict in ("Real", "Likely Real"):
             confidence = 1 - fake_prob
-        elif verdict == "Likely AI":
-            confidence = fake_prob
         else:
             confidence = max(fake_prob, 1 - fake_prob)
 
