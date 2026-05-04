@@ -1,4 +1,4 @@
-# CLAUDE.md — AI-Generated Image Detection Project
+# Project Design Document — AI-Generated Image Detection
 
 ## ⚠️ ABSOLUTE RULES (NEVER VIOLATE)
 
@@ -48,7 +48,7 @@
 ~/aidetect/
 ├── .git/
 ├── .gitignore
-├── CLAUDE.md                    # This file (copy here)
+├── DESIGN.md                    # Project plan and design document
 ├── EXPLANATION.md               # Running log of everything done
 ├── README.md                    # Project documentation for reproducibility
 ├── requirements.txt             # Pinned dependencies
@@ -1468,19 +1468,19 @@ npm run dev  # Vite dev server on port 5173
 
 ---
 
-## FINAL NOTE TO CLAUDE CODE
+## IMPLEMENTATION NOTES
 
-When you start working on this project:
+When working through this project:
 
-1. Read this ENTIRE file first.
-2. Start with Phase 0. Do not skip ahead.
-3. After each phase, update EXPLANATION.md BEFORE asking to proceed.
-4. If you're unsure about anything, ASK the user. Don't guess.
-5. Treat the user's 15GB disk like gold. Check `df -h ~` obsessively.
-6. Every file you create must have a docstring explaining what it does.
-7. Test everything before claiming it works.
-8. When training, show progress bars and estimated time remaining.
-9. If a training run will take >2 hours on MPS, suggest Colab instead.
-10. Remember: the user's MacBook is their daily driver. Don't make it unusable.
+1. Read this entire document before starting.
+2. Begin with Phase 0; do not skip ahead.
+3. After each phase, update `EXPLANATION.md` with what was done.
+4. Validate decisions against the constraints in this document.
+5. Watch disk usage carefully — the laptop has a tight budget.
+6. Every Python file should have a module-level docstring.
+7. Test before claiming a feature is complete.
+8. Show progress (tqdm bars, ETA) on long-running operations.
+9. If a training run will exceed ~2 hours on MPS, consider Google Colab.
+10. The development laptop is also a daily driver — keep it usable.
 
-**START PHASE 0 NOW. Ask for permission before Phase 1.**
+**Begin with Phase 0.**
