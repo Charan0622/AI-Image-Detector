@@ -7,178 +7,318 @@
     <title>Spectra — CMPE 258 · Presentation</title>
     <link rel="stylesheet" href="https://unpkg.com/reveal.js@4/dist/reveal.css">
     <style>
+        /* ============================================================ */
+        /* Override reveal.js defaults entirely with Apple HIG palette   */
+        /* ============================================================ */
         :root {
+            --r-background-color: #000000;
+            --r-main-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", system-ui, sans-serif;
+            --r-main-font-size: 22px;
+            --r-main-color: #f5f5f7;
+            --r-block-margin: 20px;
+            --r-heading-margin: 0 0 22px 0;
+            --r-heading-font: -apple-system, "SF Pro Display", system-ui, sans-serif;
+            --r-heading-color: #f5f5f7;
+            --r-heading-line-height: 1.04;
+            --r-heading-letter-spacing: -0.022em;
+            --r-heading-text-transform: none;
+            --r-heading-text-shadow: none;
+            --r-heading-font-weight: 600;
+            --r-heading1-text-shadow: none;
+            --r-heading1-size: 64px;
+            --r-heading2-size: 48px;
+            --r-heading3-size: 32px;
+            --r-heading4-size: 24px;
+            --r-link-color: #0a84ff;
+            --r-link-color-dark: #0a84ff;
+            --r-link-color-hover: #0a84ff;
+            --r-selection-background-color: rgba(10,132,255,0.18);
+            --r-selection-color: #0a84ff;
+            --r-controls-color: #98989d;
+            --r-progress-color: #0a84ff;
+
             --bg: #000;
             --bg-elev: #1c1c1e;
+            --bg-elev-2: #2c2c2e;
             --ink: #f5f5f7;
             --mute: #98989d;
             --dim: #636366;
-            --line: rgba(255,255,255,0.08);
+            --line: rgba(255,255,255,0.10);
             --accent: #0a84ff;
+            --accent-2: #5856d6;
+            --accent-3: #bf5af2;
             --accent-soft: rgba(10,132,255,0.18);
             --real: #30d158;
             --fake: #ff453a;
             --warn: #ff9f0a;
+            --pink: #ff375f;
+            --teal: #64d2ff;
         }
-        html, body { background: var(--bg); }
+
+        html, body, .reveal-viewport { background: var(--bg) !important; }
+        body { margin: 0; }
+
         .reveal {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", system-ui, sans-serif;
+            font-family: var(--r-main-font);
             font-feature-settings: "ss01", "cv11";
             -webkit-font-smoothing: antialiased;
             color: var(--ink);
             letter-spacing: -0.011em;
         }
-        .reveal .display { font-family: -apple-system, "SF Pro Display", system-ui, sans-serif; letter-spacing: -0.022em; }
-        .reveal .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace; font-variant-numeric: tabular-nums slashed-zero; }
+        .reveal .slides { text-align: left; top: 0 !important; }
+        .reveal section { padding: 60px 72px; box-sizing: border-box; height: 100%; }
+        .reveal section.fill { padding: 0; }
 
-        .reveal .slides {
-            text-align: left;
-        }
-        .reveal section {
-            padding: 56px 64px;
-            box-sizing: border-box;
-        }
-        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-            font-family: -apple-system, "SF Pro Display", system-ui, sans-serif;
+        /* Headings — explicit overrides */
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+            font-family: var(--r-heading-font) !important;
             font-weight: 600;
             color: var(--ink);
             text-transform: none;
             letter-spacing: -0.022em;
             line-height: 1.04;
+            margin: 0 0 22px 0;
         }
-        .reveal h1 { font-size: 64px; }
-        .reveal h2 { font-size: 48px; }
-        .reveal h3 { font-size: 32px; }
-        .reveal p { color: var(--mute); font-size: 22px; line-height: 1.5; }
+        .reveal h1 { font-size: 72px; }
+        .reveal h2 { font-size: 52px; }
+        .reveal h3 { font-size: 28px; font-weight: 500; color: var(--mute); letter-spacing: -0.015em; }
+        .reveal h4 { font-size: 18px; font-weight: 500; color: var(--mute); letter-spacing: 0; }
+        .reveal p { font-family: var(--r-main-font); color: var(--mute); font-size: 22px; line-height: 1.5; margin: 0 0 18px 0; }
+        .reveal ul, .reveal ol { font-size: 19px; color: var(--mute); line-height: 1.65; }
+        .reveal ul li, .reveal ol li { margin-bottom: 6px; }
+        .reveal strong { color: var(--ink); font-weight: 600; }
+        .reveal em { font-style: italic; color: var(--ink); }
+        .reveal mark {
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 1px 7px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
 
+        /* Display utility */
+        .reveal .display { font-family: var(--r-heading-font); letter-spacing: -0.022em; }
+        .reveal .mono {
+            font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace !important;
+            font-variant-numeric: tabular-nums slashed-zero;
+        }
+        .reveal .smallcaps {
+            text-transform: uppercase;
+            letter-spacing: 0.10em;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--dim);
+        }
+
+        /* Pills */
         .pill {
             display: inline-block;
-            padding: 6px 14px;
+            padding: 7px 16px;
             border-radius: 100px;
             background: var(--accent-soft);
             color: var(--accent);
             font-size: 13px;
             font-weight: 590;
-            letter-spacing: 0;
             margin-bottom: 24px;
+            border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
         }
-        .pill-real { background: rgba(48,209,88,0.18); color: var(--real); }
-        .pill-fake { background: rgba(255,69,58,0.18); color: var(--fake); }
+        .pill-real { background: rgba(48,209,88,0.18); color: var(--real); border-color: rgba(48,209,88,0.30); }
+        .pill-fake { background: rgba(255,69,58,0.18); color: var(--fake); border-color: rgba(255,69,58,0.30); }
+        .pill-warn { background: rgba(255,159,10,0.18); color: var(--warn); border-color: rgba(255,159,10,0.30); }
+        .pill-pink { background: rgba(255,55,95,0.18); color: var(--pink); border-color: rgba(255,55,95,0.30); }
 
-        .smallcaps { text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; font-weight: 590; color: var(--dim); }
-
-        /* Stats grid */
-        .stats { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 32px; }
-        .stat-card {
+        /* Cards */
+        .card {
             background: var(--bg-elev);
             border: 1px solid var(--line);
-            border-radius: 18px;
-            padding: 20px 22px;
+            border-radius: 22px;
+            padding: 28px 32px;
         }
-        .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); font-weight: 500; }
-        .stat-value { font-family: -apple-system, "SF Pro Display", system-ui, sans-serif; font-size: 40px; font-weight: 600; margin-top: 8px; color: var(--ink); letter-spacing: -0.025em; }
-        .stat-unit { font-size: 22px; color: var(--mute); }
+        .card-tinted {
+            background: linear-gradient(135deg, rgba(10,132,255,0.15) 0%, rgba(88,86,214,0.15) 100%);
+            border: 1px solid rgba(10,132,255,0.25);
+            border-radius: 22px;
+            padding: 28px 32px;
+        }
+        .card-real {
+            background: linear-gradient(135deg, rgba(48,209,88,0.15) 0%, rgba(100,210,255,0.10) 100%);
+            border: 1px solid rgba(48,209,88,0.30);
+            border-radius: 22px;
+            padding: 28px 32px;
+        }
+        .card-fake {
+            background: linear-gradient(135deg, rgba(255,69,58,0.15) 0%, rgba(255,159,10,0.10) 100%);
+            border: 1px solid rgba(255,69,58,0.30);
+            border-radius: 22px;
+            padding: 28px 32px;
+        }
 
-        /* Comparison rows */
-        .row { display: flex; align-items: center; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 18px; }
-        .row:last-child { border-bottom: none; }
-        .row .label { width: 240px; color: var(--ink); font-weight: 500; }
-        .row .bar-track { flex: 1; height: 6px; background: var(--line); border-radius: 100px; overflow: hidden; }
-        .row .bar-fill { height: 100%; border-radius: 100px; }
-        .row .num { width: 80px; text-align: right; font-family: ui-monospace, "SF Mono", monospace; }
-
-        .grad-good { background: linear-gradient(90deg, var(--real), var(--accent)); }
-        .grad-mid  { background: linear-gradient(90deg, var(--warn), var(--accent)); }
-        .grad-bad  { background: linear-gradient(90deg, var(--fake), var(--warn)); }
-
-        /* Two-column */
-        .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 24px; }
-
-        /* Highlight number */
-        .hero-num {
-            font-family: -apple-system, "SF Pro Display", system-ui, sans-serif;
-            font-weight: 700;
-            font-size: 180px;
+        /* Stats */
+        .stats { display: grid; gap: 14px; }
+        .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); font-weight: 600; }
+        .stat-value {
+            font-family: var(--r-heading-font);
+            font-size: 44px; font-weight: 600;
+            margin-top: 6px;
+            color: var(--ink);
+            letter-spacing: -0.025em;
             line-height: 1;
-            letter-spacing: -0.04em;
-            background: linear-gradient(135deg, var(--accent), #5856d6);
+        }
+        .stat-unit { font-size: 24px; color: var(--mute); margin-left: 2px; }
+
+        /* Hero number — used for big reveal slides */
+        .hero-num {
+            font-family: var(--r-heading-font);
+            font-weight: 700;
+            font-size: 280px;
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2) 60%, var(--accent-3));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: 0 0 80px rgba(10,132,255,0.35);
+        }
+        .hero-num-fake {
+            background: linear-gradient(135deg, var(--fake), var(--warn));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 80px rgba(255,69,58,0.35);
+        }
+        .hero-num-real {
+            background: linear-gradient(135deg, var(--real), var(--teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 80px rgba(48,209,88,0.35);
+        }
+
+        /* Bar rows */
+        .row { display: flex; align-items: center; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+        .row:last-child { border-bottom: none; }
+        .row .label { width: 240px; color: var(--ink); font-weight: 500; flex-shrink: 0; }
+        .row .bar-track { flex: 1; height: 6px; background: var(--line); border-radius: 100px; overflow: hidden; }
+        .row .bar-fill { height: 100%; border-radius: 100px; }
+        .row .num { width: 70px; text-align: right; font-family: ui-monospace, "SF Mono", monospace; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+        .grad-good { background: linear-gradient(90deg, var(--real), var(--teal)); }
+        .grad-mid  { background: linear-gradient(90deg, var(--warn), var(--accent)); }
+        .grad-bad  { background: linear-gradient(90deg, var(--fake), var(--warn)); }
+        .grad-best { background: linear-gradient(90deg, var(--real), var(--accent), var(--accent-2)); box-shadow: 0 0 20px rgba(10,132,255,0.4); }
+
+        /* Layout */
+        .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+        /* Image frames */
+        .img-frame {
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+        }
+        .img-frame img { display: block; width: 100%; }
+
+        /* Spectral signature gradient (decorative) */
+        .spectrum {
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--real) 0%, var(--teal) 25%, var(--accent) 50%,
+                var(--accent-2) 65%, var(--accent-3) 80%,
+                var(--pink) 90%, var(--fake) 100%);
+            border-radius: 100px;
         }
 
         /* Footer */
         .footer {
             position: absolute;
-            bottom: 24px; left: 64px; right: 64px;
+            bottom: 28px; left: 72px; right: 72px;
             display: flex; justify-content: space-between;
-            font-size: 13px;
+            align-items: center;
+            font-size: 11px;
             color: var(--dim);
             font-family: ui-monospace, monospace;
+            letter-spacing: 0.06em;
         }
-        .footer .logo { display: inline-flex; align-items: center; gap: 8px; }
+        .footer .logo {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-weight: 600;
+        }
 
-        /* Code blocks */
-        code, pre {
+        /* Code */
+        .reveal code {
             font-family: ui-monospace, "SF Mono", Menlo, monospace !important;
-            font-size: 14px;
             background: var(--bg-elev);
-            color: var(--ink);
-            padding: 2px 8px;
-            border-radius: 6px;
-        }
-        pre {
-            display: block; padding: 16px 20px;
-            border-radius: 14px; border: 1px solid var(--line);
-            line-height: 1.55;
-            font-size: 14px;
-            overflow: auto;
-        }
-
-        /* Mark */
-        mark {
-            background: var(--accent-soft);
             color: var(--accent);
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            border: 1px solid var(--line);
         }
-
-        /* Chevron icon */
-        .arrow { display: inline-flex; vertical-align: middle; margin: 0 12px; color: var(--dim); }
-
-        /* Apple-curve transitions for reveal */
-        .reveal .slides > section.present {
-            transition: transform 480ms cubic-bezier(0.32, 0.72, 0, 1) !important;
-        }
-
-        /* Progress bar */
-        .reveal .progress { color: var(--accent); height: 3px; }
-
-        /* Controls */
-        .reveal .controls { color: var(--mute); }
-
-        /* Selection */
-        ::selection { background: var(--accent-soft); color: var(--accent); }
-
-        /* Logo SVG */
-        .spectra-logo {
-            stroke: var(--ink); stroke-width: 1.4; fill: none;
-        }
-
-        /* Mini chart */
-        .mini-chart { width: 100%; height: 240px; }
 
         /* Quote */
         blockquote {
             border-left: 3px solid var(--accent);
-            padding: 12px 0 12px 24px;
+            padding: 8px 0 8px 22px;
             font-style: italic;
-            font-family: -apple-system, "SF Pro Display", system-ui, sans-serif;
+            font-family: var(--r-heading-font);
             color: var(--ink);
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 400;
             line-height: 1.4;
             letter-spacing: -0.015em;
+            margin: 0;
+        }
+
+        /* Apple-curve transitions */
+        .reveal .slides section.present {
+            transition: transform 480ms cubic-bezier(0.32, 0.72, 0, 1) !important;
+        }
+
+        /* Fragments */
+        .reveal .fragment { transition: opacity 280ms cubic-bezier(0.32, 0.72, 0, 1), transform 280ms cubic-bezier(0.32, 0.72, 0, 1); }
+        .reveal .fragment.lift { transform: translateY(8px); opacity: 0; }
+        .reveal .fragment.lift.visible { transform: none; opacity: 1; }
+
+        /* Selection */
+        ::selection { background: var(--accent-soft); color: var(--accent); }
+
+        /* Dark progress bar */
+        .reveal .progress { background: var(--line); height: 3px; }
+        .reveal .progress span { background: var(--accent); }
+        .reveal .controls { color: var(--mute); }
+
+        /* Background grid (decorative) */
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(10,132,255,0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(88,86,214,0.10) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Demo image grid */
+        .demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .demo-item {
+            aspect-ratio: 1; border-radius: 12px; overflow: hidden;
+            position: relative; border: 1px solid var(--line);
+        }
+        .demo-item img { width: 100%; height: 100%; object-fit: cover; }
+        .demo-item .badge {
+            position: absolute; top: 8px; left: 8px;
+            font-size: 10px; font-weight: 600;
+            padding: 3px 8px; border-radius: 100px;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+        }
+        .badge-real { color: var(--real); border: 1px solid var(--real); }
+        .badge-fake { color: var(--fake); border: 1px solid var(--fake); }
+
+        /* Two-tone divider */
+        .divider {
+            height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent);
+            margin: 16px 0;
         }
     </style>
 </head>
@@ -186,524 +326,485 @@
 <div class="reveal">
 <div class="slides">
 
-<!-- ============================================================== -->
-<!-- 01: Title -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 01 · Title  ──────────────────────────────────────────────────── -->
+<!-- ================================================================ -->
 <section data-background-color="#000">
-    <div style="display: flex; flex-direction: column; justify-content: center; height: 540px;">
-        <div class="pill" style="margin-bottom: 28px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" class="spectra-logo" style="vertical-align: -2px; margin-right: 6px;"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
-            Spectra · vol. 1
-        </div>
-        <h1 class="display" style="font-size: 84px;">
+    <div class="grid-bg"></div>
+    <div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+        <div class="spectrum" style="width: 80px; margin-bottom: 32px;"></div>
+        <div class="pill" style="margin-bottom: 24px;">Spectra · vol. 1</div>
+        <h1 class="display" style="font-size: 96px; font-weight: 700; max-width: 1100px;">
             Tell real photographs <br>
-            from AI-generated images.
+            from <span style="background: linear-gradient(135deg, var(--accent), var(--accent-3)); -webkit-background-clip: text; background-clip: text; color: transparent;">AI-generated images.</span>
         </h1>
         <p style="margin-top: 32px; font-size: 24px; max-width: 780px;">
-            A frequency-guided CLIP detector with calibrated confidence and an honest read on what it can and can't see.
+            A frequency-guided CLIP detector with calibrated confidence and an honest read on what it can — and can't — see.
         </p>
-        <div class="smallcaps" style="margin-top: 56px;">
+        <div class="smallcaps" style="margin-top: 64px;">
             CMPE 258 · Charan Sai Gandham · Spring 2026
         </div>
     </div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 02: The problem -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 02 · The problem  ────────────────────────────────────────────── -->
+<!-- ================================================================ -->
 <section>
-    <span class="pill">The problem</span>
-    <h2>AI-generated images are everywhere. Detectors aren't.</h2>
-    <div class="cols" style="margin-top: 40px;">
-        <div>
-            <h3 style="font-size: 22px; color: var(--mute); font-weight: 500; margin-bottom: 16px;">Three forces colliding</h3>
-            <ul style="font-size: 20px; color: var(--mute); line-height: 1.7; padding-left: 20px;">
-                <li>Generative models keep getting better</li>
-                <li>Detectors overfit to specific generators</li>
-                <li>Real-world images differ from benchmark data</li>
-            </ul>
+    <span class="pill pill-warn">The problem</span>
+    <h2>Three forces collide.</h2>
+    <div class="cols-3" style="margin-top: 48px;">
+        <div class="card fragment fade-up">
+            <div style="font-size: 40px; margin-bottom: 12px;">📈</div>
+            <h4 style="color: var(--ink); font-size: 22px; font-weight: 600;">Models keep improving</h4>
+            <p style="font-size: 16px; margin-top: 8px;">Flux, Imagen 3, Midjourney v6+, Gemini Nano-Banana — all post-2024.</p>
         </div>
-        <div>
-            <blockquote>
-                A model can score 96% on the academic benchmark and still mislabel half of casual smartphone photos as AI-generated.
-            </blockquote>
+        <div class="card fragment fade-up">
+            <div style="font-size: 40px; margin-bottom: 12px;">🎯</div>
+            <h4 style="color: var(--ink); font-size: 22px; font-weight: 600;">Detectors overfit</h4>
+            <p style="font-size: 16px; margin-top: 8px;">Trained on one generator zoo, they fail on the next.</p>
+        </div>
+        <div class="card fragment fade-up">
+            <div style="font-size: 40px; margin-bottom: 12px;">📱</div>
+            <h4 style="color: var(--ink); font-size: 22px; font-weight: 600;">Real-world drift</h4>
+            <p style="font-size: 16px; margin-top: 8px;">Smartphone photos look unlike the curated benchmark "real" class.</p>
         </div>
     </div>
+    <div class="card-tinted fragment fade-up" style="margin-top: 40px;">
+        <blockquote>
+            A model can score <mark>96%</mark> on the academic benchmark and still mislabel half of casual smartphone photos as AI-generated.
+        </blockquote>
+    </div>
     <div class="footer">
-        <span class="logo"><span class="mono">SPECTRA</span></span>
-        <span class="mono">02 / 14</span>
+        <span class="logo">SPECTRA</span>
+        <span>02 / 14</span>
     </div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 03: Dataset -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 03 · Dataset  ────────────────────────────────────────────────── -->
+<!-- ================================================================ -->
 <section>
     <span class="pill">Dataset</span>
     <h2>GenImage benchmark</h2>
-    <p style="margin-top: 16px; font-size: 22px; max-width: 760px;">
+    <p style="margin-top: 8px; font-size: 22px; max-width: 820px;">
         192K balanced training images across six 2023-era generators.
-        12K held-out test images, 1K real + 1K fake per generator.
+        12K held-out test, 1K real + 1K fake per generator.
     </p>
-    <div class="stats" style="grid-template-columns: repeat(4, 1fr); margin-top: 40px;">
-        <div class="stat-card"><div class="stat-label">Train</div><div class="stat-value">192<span class="stat-unit">K</span></div></div>
-        <div class="stat-card"><div class="stat-label">Validation</div><div class="stat-value">48<span class="stat-unit">K</span></div></div>
-        <div class="stat-card"><div class="stat-label">Test</div><div class="stat-value">12<span class="stat-unit">K</span></div></div>
-        <div class="stat-card"><div class="stat-label">Generators</div><div class="stat-value">6</div></div>
+    <div class="cols-4" style="margin-top: 40px;">
+        <div class="card"><div class="stat-label">Train</div><div class="stat-value">192<span class="stat-unit">K</span></div></div>
+        <div class="card"><div class="stat-label">Validation</div><div class="stat-value">48<span class="stat-unit">K</span></div></div>
+        <div class="card"><div class="stat-label">Test</div><div class="stat-value">12<span class="stat-unit">K</span></div></div>
+        <div class="card"><div class="stat-label">Generators</div><div class="stat-value">6</div></div>
     </div>
-    <p style="margin-top: 28px; color: var(--dim); font-size: 16px;">
-        ADM · GLIDE · Midjourney · SD v1.5 · VQDM · Wukong
-    </p>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">03 / 14</span>
+    <div style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px;">
+        <span class="pill" style="background: var(--bg-elev); color: var(--mute); border-color: var(--line);">ADM</span>
+        <span class="pill" style="background: var(--bg-elev); color: var(--mute); border-color: var(--line);">GLIDE</span>
+        <span class="pill" style="background: var(--bg-elev); color: var(--mute); border-color: var(--line);">Midjourney</span>
+        <span class="pill" style="background: var(--bg-elev); color: var(--mute); border-color: var(--line);">Stable Diffusion v1.5</span>
+        <span class="pill" style="background: var(--bg-elev); color: var(--mute); border-color: var(--line);">VQ-Diffusion</span>
+        <span class="pill" style="background: var(--bg-elev); color: var(--mute); border-color: var(--line);">Wukong</span>
     </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>03 / 14</span></div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 04: Architecture overview -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 04 · Architecture  ──────────────────────────────────────────── -->
+<!-- ================================================================ -->
 <section>
     <span class="pill">Architecture</span>
-    <h2>Frozen CLIP, trainable heads</h2>
-    <div style="margin-top: 40px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 24px; padding: 36px;">
-        <svg viewBox="0 0 900 280" style="width: 100%;">
-            <!-- input -->
-            <rect x="20" y="100" width="120" height="80" rx="16" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/>
-            <text x="80" y="135" text-anchor="middle" fill="var(--ink)" font-size="14" font-family="-apple-system">Image</text>
-            <text x="80" y="155" text-anchor="middle" fill="var(--mute)" font-size="11" font-family="-apple-system">224 × 224</text>
+    <h2>Frozen CLIP, trainable heads.</h2>
+    <div style="margin-top: 32px; padding: 36px; background: linear-gradient(135deg, #0a0a0a, #161616); border: 1px solid var(--line); border-radius: 22px;">
+        <svg viewBox="0 0 920 280" style="width: 100%;">
+            <!-- gradient defs -->
+            <defs>
+                <linearGradient id="gAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0a84ff"/>
+                    <stop offset="100%" stop-color="#5856d6"/>
+                </linearGradient>
+                <linearGradient id="gWarn" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ff9f0a"/>
+                    <stop offset="100%" stop-color="#ff453a"/>
+                </linearGradient>
+            </defs>
 
-            <!-- arrow -->
-            <line x1="140" y1="140" x2="200" y2="140" stroke="var(--mute)" stroke-width="1.5"/>
-            <polygon points="200,140 195,135 195,145" fill="var(--mute)"/>
+            <!-- Image -->
+            <rect x="20" y="100" width="120" height="80" rx="16" fill="#1c1c1e" stroke="#444" stroke-width="1.5"/>
+            <text x="80" y="138" text-anchor="middle" fill="#f5f5f7" font-size="15" font-family="-apple-system" font-weight="500">Image</text>
+            <text x="80" y="158" text-anchor="middle" fill="#98989d" font-size="11" font-family="-apple-system">224 × 224</text>
+
+            <line x1="140" y1="140" x2="200" y2="140" stroke="#636366" stroke-width="1.5"/>
+            <polygon points="200,140 195,135 195,145" fill="#636366"/>
 
             <!-- CLIP -->
-            <rect x="200" y="80" width="180" height="60" rx="14" fill="rgba(10,132,255,0.12)" stroke="var(--accent)" stroke-width="1.5"/>
-            <text x="290" y="105" text-anchor="middle" fill="var(--accent)" font-size="14" font-family="-apple-system" font-weight="600">CLIP ViT-B/16</text>
-            <text x="290" y="125" text-anchor="middle" fill="var(--accent)" font-size="11" font-family="-apple-system">frozen · 512-d feature</text>
+            <rect x="200" y="80" width="200" height="60" rx="14" fill="rgba(10,132,255,0.15)" stroke="url(#gAccent)" stroke-width="1.5"/>
+            <text x="300" y="105" text-anchor="middle" fill="#0a84ff" font-size="15" font-family="-apple-system" font-weight="600">CLIP ViT-B/16</text>
+            <text x="300" y="125" text-anchor="middle" fill="#0a84ff" font-size="11" font-family="-apple-system">frozen · 512-d feature</text>
 
             <!-- DCT -->
-            <rect x="200" y="150" width="180" height="60" rx="14" fill="rgba(255,159,10,0.12)" stroke="var(--warn)" stroke-width="1.5"/>
-            <text x="290" y="175" text-anchor="middle" fill="var(--warn)" font-size="14" font-family="-apple-system" font-weight="600">DCT spectral CNN</text>
-            <text x="290" y="195" text-anchor="middle" fill="var(--warn)" font-size="11" font-family="-apple-system">trainable · 256-d feature</text>
+            <rect x="200" y="150" width="200" height="60" rx="14" fill="rgba(255,159,10,0.15)" stroke="url(#gWarn)" stroke-width="1.5"/>
+            <text x="300" y="175" text-anchor="middle" fill="#ff9f0a" font-size="15" font-family="-apple-system" font-weight="600">DCT spectral CNN</text>
+            <text x="300" y="195" text-anchor="middle" fill="#ff9f0a" font-size="11" font-family="-apple-system">trainable · 256-d feature</text>
 
-            <!-- arrows -->
-            <line x1="380" y1="110" x2="450" y2="130" stroke="var(--mute)" stroke-width="1.5"/>
-            <line x1="380" y1="180" x2="450" y2="160" stroke="var(--mute)" stroke-width="1.5"/>
+            <line x1="400" y1="110" x2="470" y2="130" stroke="#636366" stroke-width="1.5"/>
+            <line x1="400" y1="180" x2="470" y2="160" stroke="#636366" stroke-width="1.5"/>
 
             <!-- Fusion -->
-            <rect x="450" y="105" width="180" height="80" rx="14" fill="rgba(48,209,88,0.12)" stroke="var(--real)" stroke-width="1.5"/>
-            <text x="540" y="135" text-anchor="middle" fill="var(--real)" font-size="14" font-family="-apple-system" font-weight="600">Fusion head</text>
-            <text x="540" y="155" text-anchor="middle" fill="var(--real)" font-size="11" font-family="-apple-system">MLP · 1.5M params</text>
+            <rect x="470" y="105" width="180" height="80" rx="14" fill="rgba(48,209,88,0.15)" stroke="#30d158" stroke-width="1.5"/>
+            <text x="560" y="135" text-anchor="middle" fill="#30d158" font-size="15" font-family="-apple-system" font-weight="600">Fusion head</text>
+            <text x="560" y="155" text-anchor="middle" fill="#30d158" font-size="11" font-family="-apple-system">MLP · 1.5M params</text>
 
-            <!-- arrow -->
-            <line x1="630" y1="145" x2="690" y2="145" stroke="var(--mute)" stroke-width="1.5"/>
-            <polygon points="690,145 685,140 685,150" fill="var(--mute)"/>
+            <line x1="650" y1="145" x2="710" y2="145" stroke="#636366" stroke-width="1.5"/>
+            <polygon points="710,145 705,140 705,150" fill="#636366"/>
 
-            <!-- output -->
-            <rect x="690" y="105" width="190" height="80" rx="14" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/>
-            <text x="785" y="130" text-anchor="middle" fill="var(--ink)" font-size="14" font-family="-apple-system">P(AI-generated)</text>
-            <text x="785" y="150" text-anchor="middle" fill="var(--mute)" font-size="11" font-family="-apple-system">+ heatmap + OOD</text>
-            <text x="785" y="170" text-anchor="middle" fill="var(--mute)" font-size="11" font-family="-apple-system">+ calibrated confidence</text>
+            <!-- Output -->
+            <rect x="710" y="105" width="190" height="80" rx="14" fill="#1c1c1e" stroke="#444" stroke-width="1.5"/>
+            <text x="805" y="130" text-anchor="middle" fill="#f5f5f7" font-size="14" font-family="-apple-system" font-weight="500">P(AI-generated)</text>
+            <text x="805" y="150" text-anchor="middle" fill="#98989d" font-size="11" font-family="-apple-system">+ heatmap + OOD</text>
+            <text x="805" y="170" text-anchor="middle" fill="#98989d" font-size="11" font-family="-apple-system">+ calibrated confidence</text>
         </svg>
     </div>
-    <p style="margin-top: 32px; color: var(--mute); font-size: 18px;">
-        CLIP backbone stays frozen. Only the small DCT branch and fusion MLP train. Five architectural variants share this skeleton.
+    <p style="margin-top: 28px; font-size: 17px;">
+        CLIP backbone stays frozen. Only the small DCT branch and fusion MLP train.
+        <strong>Five architectural variants</strong> share this skeleton.
     </p>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">04 / 14</span>
-    </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>04 / 14</span></div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 05: Five-model ablation -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 05 · Five-model ablation  ───────────────────────────────────── -->
+<!-- ================================================================ -->
 <section>
     <span class="pill">Ablation</span>
-    <h2>Five architectures, controlled comparison</h2>
-    <div style="margin-top: 32px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px; padding: 24px 28px;">
+    <h2>Five architectures, controlled comparison.</h2>
+    <h3 style="margin-top: 8px;">Cross-generator AUC on six unseen generators</h3>
+    <div class="card" style="margin-top: 28px;">
         <div class="row">
             <span class="label">CLIP linear probe</span>
-            <div class="bar-track"><div class="bar-fill grad-mid" style="width: 95.5%;"></div></div>
+            <div class="bar-track"><div class="bar-fill grad-mid" style="width: 80%;"></div></div>
             <span class="num" style="color: var(--mute);">0.9553</span>
         </div>
         <div class="row">
             <span class="label">AIDE Hybrid</span>
-            <div class="bar-track"><div class="bar-fill grad-good" style="width: 99.42%;"></div></div>
+            <div class="bar-track"><div class="bar-fill grad-good" style="width: 97.5%;"></div></div>
             <span class="num">0.9942</span>
         </div>
         <div class="row">
-            <span class="label" style="color: var(--accent);">Hybrid + Robust Aug ★</span>
-            <div class="bar-track"><div class="bar-fill grad-good" style="width: 99.37%;"></div></div>
-            <span class="num" style="color: var(--accent);">0.9937</span>
+            <span class="label" style="color: var(--accent);">★ Hybrid + Robust Aug</span>
+            <div class="bar-track"><div class="bar-fill grad-best" style="width: 97.3%;"></div></div>
+            <span class="num" style="color: var(--accent); font-weight: 600;">0.9937</span>
         </div>
         <div class="row">
             <span class="label">FreqGuided (no robust)</span>
-            <div class="bar-track"><div class="bar-fill grad-good" style="width: 99.10%;"></div></div>
+            <div class="bar-track"><div class="bar-fill grad-good" style="width: 96%;"></div></div>
             <span class="num">0.9910</span>
         </div>
         <div class="row">
             <span class="label">FreqGuided (full)</span>
-            <div class="bar-track"><div class="bar-fill grad-good" style="width: 98.97%;"></div></div>
+            <div class="bar-track"><div class="bar-fill grad-good" style="width: 95.3%;"></div></div>
             <span class="num">0.9897</span>
         </div>
     </div>
-    <p style="margin-top: 24px; font-size: 17px; color: var(--mute);">
-        Cross-generator <span class="mono">AUC</span> on six unseen generators.
-        Adding the frequency branch is the largest gain (probe → hybrid: <mark>+0.039</mark>).
+    <p style="margin-top: 24px; font-size: 17px;">
+        Adding the frequency branch is the largest gain
+        <span class="mono" style="color: var(--accent);">(+0.039 AUC)</span>.
     </p>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">05 / 14</span>
-    </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>05 / 14</span></div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 06: Robustness -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 06 · Robustness  ────────────────────────────────────────────── -->
+<!-- ================================================================ -->
 <section>
-    <span class="pill">Robustness</span>
-    <h2>Survival under JPEG, blur, resize</h2>
-    <p style="margin-top: 12px; max-width: 780px;">
-        Same five models, evaluated across 7 degradations × 6 generators.
-    </p>
-    <div style="margin-top: 32px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px; padding: 24px 28px;">
+    <span class="pill pill-warn">Robustness</span>
+    <h2>Survival under JPEG, blur, resize.</h2>
+    <p style="margin-top: 8px;">Same five models · 7 degradations × 6 generators.</p>
+    <div class="card" style="margin-top: 28px;">
         <div class="row">
             <span class="label">CLIP linear probe</span>
-            <div class="bar-track"><div class="bar-fill grad-bad" style="width: 83.6%;"></div></div>
+            <div class="bar-track"><div class="bar-fill grad-bad" style="width: 60%;"></div></div>
             <span class="num" style="color: var(--mute);">0.836</span>
         </div>
         <div class="row">
             <span class="label">AIDE Hybrid</span>
-            <div class="bar-track"><div class="bar-fill grad-mid" style="width: 84.9%;"></div></div>
+            <div class="bar-track"><div class="bar-fill grad-mid" style="width: 65%;"></div></div>
             <span class="num">0.849</span>
         </div>
         <div class="row">
-            <span class="label" style="color: var(--accent);">Hybrid + Robust Aug ★</span>
-            <div class="bar-track"><div class="bar-fill grad-good" style="width: 88.4%;"></div></div>
-            <span class="num" style="color: var(--accent);">0.884</span>
+            <span class="label" style="color: var(--accent);">★ Hybrid + Robust Aug</span>
+            <div class="bar-track"><div class="bar-fill grad-best" style="width: 84%;"></div></div>
+            <span class="num" style="color: var(--accent); font-weight: 600;">0.884</span>
         </div>
         <div class="row">
             <span class="label">FreqGuided (no robust)</span>
-            <div class="bar-track"><div class="bar-fill grad-mid" style="width: 85.2%;"></div></div>
+            <div class="bar-track"><div class="bar-fill grad-mid" style="width: 67%;"></div></div>
             <span class="num">0.852</span>
         </div>
         <div class="row">
-            <span class="label">FreqGuided (full)</span>
-            <div class="bar-track"><div class="bar-fill grad-bad" style="width: 83.0%;"></div></div>
-            <span class="num">0.830</span>
+            <span class="label" style="color: var(--fake);">FreqGuided (full)</span>
+            <div class="bar-track"><div class="bar-fill grad-bad" style="width: 50%;"></div></div>
+            <span class="num" style="color: var(--fake);">0.830</span>
         </div>
     </div>
-    <p style="margin-top: 20px; font-size: 17px; color: var(--mute);">
-        <mark>FreqGuided (full)</mark> — the fanciest architecture combined with augmentation —
-        is <em>worse</em> than the simple CLIP probe. Architectural inductive bias and aggressive
-        data augmentation are not additive.
-    </p>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">06 / 14</span>
+    <div class="card-fake fragment fade-up" style="margin-top: 24px;">
+        <strong style="font-size: 18px;">⚠ Surprising negative finding.</strong>
+        <p style="margin-top: 8px; font-size: 17px; color: var(--ink);">
+            <mark style="background: rgba(255,69,58,0.18); color: var(--fake);">FreqGuided (full)</mark> — fanciest architecture combined with augmentation —
+            is <em>worse</em> than the simple CLIP probe. Architectural inductive bias and aggressive augmentation are <strong>not additive</strong>.
+        </p>
     </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>06 / 14</span></div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 07: Real-world gap -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 07 · Deployment gap — hero number  ──────────────────────────── -->
+<!-- ================================================================ -->
 <section data-background-color="#000">
-    <span class="pill pill-fake">Deployment gap</span>
-    <h2 style="margin-top: 8px;">A 96% benchmark detector calls 44% of smartphone photos AI.</h2>
-    <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; align-items: center;">
-        <div>
-            <div class="smallcaps">Held-out · 100 picsum smartphones + 17 modern AI</div>
-            <div class="hero-num" style="margin-top: 16px; background: linear-gradient(135deg, var(--fake), var(--warn));">44<span style="font-size: 90px;">%</span></div>
-            <div class="smallcaps" style="color: var(--fake);">Real-photo false-positive rate</div>
-        </div>
-        <div>
-            <p style="font-size: 19px;">
-                On a held-out set of casual smartphone photos —
-                images with HDR tonemapping, sensor noise, and Instagram-style colour grading —
-                the same model that scores 0.994 AUC on the benchmark
-                falsely flags <strong style="color: var(--ink);">44 of every 100 real photos</strong> as AI-generated.
-            </p>
-            <p style="font-size: 17px; color: var(--mute); margin-top: 16px;">
-                The benchmark hides the gap because its "real" class is ImageNet-style, not smartphone-style.
-            </p>
-        </div>
-    </div>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">07 / 14</span>
-    </div>
-</section>
-
-<!-- ============================================================== -->
-<!-- 08: The fix -->
-<!-- ============================================================== -->
-<section>
-    <span class="pill pill-real">The fix</span>
-    <h2>Smartphone-aesthetic augmentation + 632 picsum photos</h2>
-    <div style="margin-top: 32px;">
-        <div class="cols" style="grid-template-columns: 1fr 1.2fr;">
+    <div class="grid-bg"></div>
+    <div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+        <span class="pill pill-fake" style="align-self: flex-start;">Deployment gap</span>
+        <h2 style="font-size: 60px; max-width: 1000px;">
+            A 96% benchmark detector calls <span style="color: var(--fake);">44%</span> of smartphone photos AI.
+        </h2>
+        <div class="cols-2" style="margin-top: 60px; align-items: end;">
             <div>
-                <h3 style="font-size: 19px; color: var(--mute); font-weight: 500;">SmartphoneAesthetic</h3>
-                <ul style="font-size: 18px; color: var(--mute); line-height: 1.7; padding-left: 20px;">
-                    <li>ColorJitter (brightness, contrast, saturation, hue)</li>
-                    <li>Random gamma 0.7–1.4 (HDR tonemapping)</li>
-                    <li>Sensor read-noise σ ≤ 4/255</li>
-                    <li>±1 px chromatic aberration</li>
-                    <li>Double-JPEG re-encode (social media pipeline)</li>
-                </ul>
-                <h3 style="font-size: 19px; color: var(--mute); font-weight: 500; margin-top: 28px;">Plus</h3>
-                <p style="font-size: 18px;">632 picsum photos appended to training set.<br>Warm fine-tune for 3 epochs at 1/5× LR.</p>
+                <div class="smallcaps" style="margin-bottom: 12px;">Held-out · 100 picsum smartphones + 17 modern AI</div>
+                <div class="hero-num hero-num-fake">44<span style="font-size: 140px;">%</span></div>
+                <div class="smallcaps" style="color: var(--fake); margin-top: 12px;">Real-photo false-positive rate</div>
             </div>
             <div>
-                <div class="stats" style="grid-template-columns: 1fr 1fr;">
-                    <div class="stat-card" style="background: rgba(255,69,58,0.08); border-color: rgba(255,69,58,0.3);">
-                        <div class="stat-label">Before · v1</div>
-                        <div class="stat-value" style="color: var(--fake);">44<span class="stat-unit">%</span></div>
-                        <div class="smallcaps" style="margin-top: 4px;">Real FPR</div>
-                    </div>
-                    <div class="stat-card" style="background: rgba(48,209,88,0.08); border-color: rgba(48,209,88,0.3);">
-                        <div class="stat-label">After · v2</div>
-                        <div class="stat-value" style="color: var(--real);">7<span class="stat-unit">%</span></div>
-                        <div class="smallcaps" style="margin-top: 4px;">Real FPR</div>
-                    </div>
-                    <div class="stat-card" style="background: rgba(255,69,58,0.08); border-color: rgba(255,69,58,0.3);">
-                        <div class="stat-label">v1 accuracy</div>
-                        <div class="stat-value" style="color: var(--fake);">62<span class="stat-unit">%</span></div>
-                    </div>
-                    <div class="stat-card" style="background: rgba(48,209,88,0.08); border-color: rgba(48,209,88,0.3);">
-                        <div class="stat-label">v2 accuracy</div>
-                        <div class="stat-value" style="color: var(--real);">89<span class="stat-unit">%</span></div>
-                    </div>
-                </div>
-                <p style="margin-top: 16px; font-size: 16px; color: var(--mute);">
-                    GenImage val AUC drift: 0.9940 → 0.9935 (within noise).
-                    The fix doesn't sacrifice benchmark performance.
+                <p style="font-size: 19px; max-width: 460px;">
+                    On a held-out set of casual smartphone photos —
+                    images with HDR tonemapping, sensor noise, Instagram-style colour grading —
+                    the same model that scores <span class="mono">0.994 AUC</span> on the benchmark falsely flags
+                    <strong style="color: var(--ink);">44 of every 100 real photos</strong> as AI-generated.
+                </p>
+                <p style="font-size: 16px; color: var(--mute); margin-top: 14px;">
+                    The benchmark hides the gap because its "real" class is ImageNet-style, not smartphone-style.
                 </p>
             </div>
         </div>
     </div>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">08 / 14</span>
-    </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>07 / 14</span></div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 09: Negative findings -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 08 · The fix — before/after  ────────────────────────────────── -->
+<!-- ================================================================ -->
 <section>
-    <span class="pill">Negative findings</span>
-    <h2>What we tried and rejected</h2>
-    <div style="margin-top: 36px; display: grid; gap: 18px;">
-        <div class="stat-card" style="display: flex; align-items: center; gap: 24px;">
-            <div style="font-size: 32px;">🚫</div>
-            <div>
-                <div style="font-size: 18px; font-weight: 600;">Ensemble of all 5 heads</div>
-                <div style="font-size: 16px; color: var(--mute); margin-top: 4px;">
-                    <strong style="color: var(--fake);">−1.5 points robust AUC</strong> vs the best single model. All heads share the frozen CLIP backbone, so errors are correlated. Averaging adds the weaker models' mistakes without decorrelation benefit.
-                </div>
-            </div>
+    <span class="pill pill-real">The fix</span>
+    <h2>SmartphoneAesthetic + 632 photos.</h2>
+    <p style="margin-top: 8px;">Augmentation widens the model's "real" coverage. Warm fine-tune for 3 epochs.</p>
+    <div class="cols-2" style="margin-top: 36px; align-items: stretch;">
+        <div class="card-fake">
+            <div class="smallcaps" style="color: var(--fake);">Before · v1</div>
+            <div class="hero-num hero-num-fake" style="font-size: 140px; margin-top: 8px;">44<span style="font-size: 70px;">%</span></div>
+            <div style="font-size: 18px; color: var(--ink); margin-top: 8px;">Real-photo FPR · 62% accuracy</div>
         </div>
-        <div class="stat-card" style="display: flex; align-items: center; gap: 24px;">
-            <div style="font-size: 32px;">🚫</div>
-            <div>
-                <div style="font-size: 18px; font-weight: 600;">Test-time augmentation (horizontal flip)</div>
-                <div style="font-size: 16px; color: var(--mute); margin-top: 4px;">
-                    <strong style="color: var(--mute);">+0.001 AUC for 2× inference cost.</strong> Below noise floor. The model already has flip invariance through its augmentation training.
-                </div>
-            </div>
-        </div>
-        <div class="stat-card" style="display: flex; align-items: center; gap: 24px;">
-            <div style="font-size: 32px;">✓</div>
-            <div>
-                <div style="font-size: 18px; font-weight: 600;">Temperature scaling</div>
-                <div style="font-size: 16px; color: var(--mute); margin-top: 4px;">
-                    <strong style="color: var(--real);">ECE drops 2-4×.</strong> Hybrid was overconfident at T=2.45 (a 0.99 confidence was a 0.75 honest probability). Deployed.
-                </div>
-            </div>
+        <div class="card-real">
+            <div class="smallcaps" style="color: var(--real);">After · v2</div>
+            <div class="hero-num hero-num-real" style="font-size: 140px; margin-top: 8px;">7<span style="font-size: 70px;">%</span></div>
+            <div style="font-size: 18px; color: var(--ink); margin-top: 8px;">Real-photo FPR · 89% accuracy</div>
         </div>
     </div>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">09 / 14</span>
-    </div>
-</section>
-
-<!-- ============================================================== -->
-<!-- 10: Beyond our training data -->
-<!-- ============================================================== -->
-<section>
-    <span class="pill">Limits</span>
-    <h2>Modern generators we don't have data for</h2>
-    <p style="margin-top: 16px; font-size: 22px;">
-        Flux, Imagen 3, Midjourney v6+, Gemini Nano-Banana — released after our training data.
-    </p>
-    <div style="margin-top: 36px; padding: 24px 28px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px;">
-        <div class="smallcaps">Production strategy</div>
-        <h3 style="font-size: 24px; margin-top: 8px;">Ensemble at inference, not at training.</h3>
-        <p style="font-size: 18px; margin-top: 12px;">
-            Our 5 custom heads remain available for the research narrative
-            (clean GenImage benchmark, robustness ablation, calibration, OOD).
-        </p>
-        <p style="font-size: 18px; margin-top: 8px;">
-            For deployment we route through a public HuggingFace ViT-base detector
-            <code style="font-size: 14px;">haywoodsloan/ai-image-detector-deploy</code> that scores
-            <strong style="color: var(--real);">100% on smartphone photos</strong> and
-            <strong style="color: var(--real);">100% on Pollinations modern AI</strong>
-            — exactly the two failure modes our heads have.
-        </p>
-    </div>
-    <p style="margin-top: 24px; font-size: 15px; color: var(--dim);">
-        Honest framing: <em>we built and benchmarked five architectures; for production we ensemble with a public SOTA detector that covers modern generators we couldn't source training data for.</em>
-    </p>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">10 / 14</span>
-    </div>
-</section>
-
-<!-- ============================================================== -->
-<!-- 11: The product -->
-<!-- ============================================================== -->
-<section>
-    <span class="pill">The product</span>
-    <h2>Spectra · web app</h2>
-    <div class="cols" style="grid-template-columns: 1fr 1fr; margin-top: 28px;">
+    <div class="cols-2" style="margin-top: 28px; align-items: start;">
         <div>
-            <h3 style="font-size: 18px; color: var(--mute); font-weight: 500;">FastAPI backend</h3>
-            <ul style="font-size: 16px; color: var(--mute); line-height: 1.7; padding-left: 20px;">
-                <li>POST <code>/detect</code> · single-image prediction</li>
-                <li>POST <code>/detect/compare</code> · run all 5 models</li>
-                <li>GET <code>/dashboard/data</code> · benchmark metrics</li>
-                <li>Lazy-load CLIP encoder once, heads on demand</li>
+            <h4 style="font-size: 14px; color: var(--mute); font-weight: 500;">Augmentations added</h4>
+            <ul style="font-size: 16px; padding-left: 18px;">
+                <li>ColorJitter: brightness, contrast, saturation, hue</li>
+                <li>Random gamma 0.7–1.4 (HDR tonemapping)</li>
+                <li>Sensor read-noise σ ≤ 4/255</li>
+                <li>±1 px chromatic aberration</li>
+                <li>Double-JPEG (social media pipeline)</li>
             </ul>
-            <h3 style="font-size: 18px; color: var(--mute); font-weight: 500; margin-top: 24px;">React frontend</h3>
-            <ul style="font-size: 16px; color: var(--mute); line-height: 1.7; padding-left: 20px;">
-                <li>Apple HIG: SF Pro stack, glass nav, 22 px corners</li>
+        </div>
+        <div>
+            <h4 style="font-size: 14px; color: var(--mute); font-weight: 500;">Net impact</h4>
+            <p style="font-size: 16px;">
+                <strong style="color: var(--real);">+27 points accuracy</strong>,
+                <strong style="color: var(--real);">−37 points FPR</strong>.
+            </p>
+            <p style="font-size: 16px; color: var(--mute);">
+                GenImage val AUC drift: 0.9940 → 0.9935 — within noise. The fix doesn't sacrifice benchmark performance.
+            </p>
+        </div>
+    </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>08 / 14</span></div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 09 · Real plot — robustness curves  ────────────────────────── -->
+<!-- ================================================================ -->
+<section>
+    <span class="pill">Visualised</span>
+    <h2>Where each model breaks.</h2>
+    <p style="margin-top: 8px;">AUC across degradation severity, all five models overlaid.</p>
+    <div class="img-frame" style="margin-top: 24px;">
+        <img src="../../results/plots/robustness_all.png" alt="Robustness comparison" />
+    </div>
+    <p style="margin-top: 16px; font-size: 16px;">
+        Hybrid + Robust (purple) sustains the highest AUC across every degradation.
+        FreqGuided (full, blue) crashes hardest under blur — confirming the negative finding.
+    </p>
+    <div class="footer"><span class="logo">SPECTRA</span><span>09 / 14</span></div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 10 · Real-world improvement plot  ──────────────────────────── -->
+<!-- ================================================================ -->
+<section>
+    <span class="pill pill-real">Improvement</span>
+    <h2>v1 → v2, in one chart.</h2>
+    <div class="img-frame" style="margin-top: 28px;">
+        <img src="../../results/plots/realworld_improvement.png" alt="Real-world before/after" />
+    </div>
+    <p style="margin-top: 16px; font-size: 16px;">
+        Left: overall accuracy + real-photo FPR per model. Right: how the verdict bands re-distribute on 100 real picsum photos. v2 routes 75 to <span style="color: var(--real);">Real</span>, 5 to <span style="color: #bcd9a3;">Likely Real</span>, 17 to <span style="color: var(--warn);">Inconclusive</span> — only 3 wrong AI calls (down from 36 on v1).
+    </p>
+    <div class="footer"><span class="logo">SPECTRA</span><span>10 / 14</span></div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 11 · Negative findings  ─────────────────────────────────────── -->
+<!-- ================================================================ -->
+<section>
+    <span class="pill">Engineering decisions</span>
+    <h2>What we tried and rejected.</h2>
+    <div style="margin-top: 36px; display: grid; gap: 16px;">
+        <div class="card-fake" style="display: flex; align-items: center; gap: 24px; padding: 20px 28px;">
+            <div style="font-size: 28px; flex-shrink: 0;">🚫</div>
+            <div>
+                <div style="font-size: 18px; font-weight: 600; color: var(--ink);">Ensemble of all 5 heads</div>
+                <div style="font-size: 16px; margin-top: 4px;">
+                    <strong style="color: var(--fake);">−1.5 points robust AUC.</strong> All heads share the frozen CLIP backbone, so errors are correlated. No decorrelation benefit.
+                </div>
+            </div>
+        </div>
+        <div class="card-fake" style="display: flex; align-items: center; gap: 24px; padding: 20px 28px;">
+            <div style="font-size: 28px; flex-shrink: 0;">🚫</div>
+            <div>
+                <div style="font-size: 18px; font-weight: 600; color: var(--ink);">Test-time augmentation (h-flip)</div>
+                <div style="font-size: 16px; margin-top: 4px;">
+                    <strong>+0.001 AUC for 2× inference cost.</strong> Below noise floor. Model already has flip invariance from training augmentation.
+                </div>
+            </div>
+        </div>
+        <div class="card-real" style="display: flex; align-items: center; gap: 24px; padding: 20px 28px;">
+            <div style="font-size: 28px; flex-shrink: 0;">✓</div>
+            <div>
+                <div style="font-size: 18px; font-weight: 600; color: var(--ink);">Temperature scaling</div>
+                <div style="font-size: 16px; margin-top: 4px;">
+                    <strong style="color: var(--real);">ECE drops 2-4×.</strong> Hybrid was overconfident at T=2.45 — a 0.99 confidence was a 0.75 honest probability. Deployed.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>11 / 14</span></div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 12 · The product  ───────────────────────────────────────────── -->
+<!-- ================================================================ -->
+<section>
+    <span class="pill">Product</span>
+    <h2>Spectra · the web app.</h2>
+    <div class="cols-2" style="margin-top: 32px; gap: 56px;">
+        <div>
+            <h4 style="color: var(--ink); font-size: 18px; font-weight: 600;">FastAPI backend</h4>
+            <ul style="font-size: 15px; padding-left: 18px;">
+                <li><code>POST /detect</code> — single-image prediction</li>
+                <li><code>POST /detect/compare</code> — all 5 research models</li>
+                <li><code>GET /dashboard/data</code> — benchmark metrics</li>
+                <li>Lazy CLIP load, head models on demand</li>
+            </ul>
+            <h4 style="color: var(--ink); font-size: 18px; font-weight: 600; margin-top: 28px;">React frontend</h4>
+            <ul style="font-size: 15px; padding-left: 18px;">
+                <li>Apple HIG: SF Pro, glass nav, 22 px corners</li>
                 <li>Light + dark adaptive (auto via prefers-color-scheme)</li>
                 <li>Apple curve <code>cubic-bezier(0.32, 0.72, 0, 1)</code></li>
                 <li>Count-up percentage, gradient probability bar</li>
-                <li>Heatmap toggle + side-by-side comparison slider</li>
-                <li>EXIF metadata, calibration chip, OOD score</li>
+                <li>Heatmap toggle + comparison slider</li>
+                <li>EXIF metadata + OOD score chip</li>
             </ul>
         </div>
         <div>
-            <div style="border-radius: 22px; border: 1px solid var(--line); padding: 32px; background: var(--bg-elev);">
-                <div class="pill" style="margin-bottom: 18px;">Result</div>
-                <div style="font-family: -apple-system; font-size: 80px; font-weight: 600; letter-spacing: -0.025em; line-height: 1;">
+            <div class="card" style="padding: 32px;">
+                <span class="pill" style="margin-bottom: 18px;">Result</span>
+                <div style="font-family: var(--r-heading-font); font-size: 80px; font-weight: 600; letter-spacing: -0.025em; line-height: 1;">
                     87<span style="font-size: 48px; color: var(--mute);">%</span>
                 </div>
-                <div style="font-family: -apple-system, 'SF Pro Display'; font-size: 24px; font-weight: 500; margin-top: 6px;">AI-Generated</div>
+                <div style="font-family: var(--r-heading-font); font-size: 24px; font-weight: 500; margin-top: 6px;">AI-Generated</div>
                 <div style="font-size: 14px; color: var(--mute); margin-top: 4px;">Synthesised by a generative model.</div>
-                <div class="bar-track" style="margin-top: 24px; height: 8px;">
-                    <div class="bar-fill grad-bad" style="width: 87%;"></div>
+                <div style="margin-top: 24px; height: 8px; background: rgba(255,255,255,0.08); border-radius: 100px; overflow: hidden;">
+                    <div style="width: 87%; height: 100%; background: linear-gradient(90deg, var(--warn), var(--fake)); box-shadow: 0 0 16px rgba(255,69,58,0.5);"></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--dim); margin-top: 6px;">
                     <span>Authentic</span><span>AI-Generated</span>
                 </div>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+                    <div><div style="font-size: 9px; text-transform: uppercase; color: var(--dim); font-weight: 600;">Confidence</div><div style="font-size: 14px; font-weight: 500; margin-top: 4px;">High</div></div>
+                    <div><div style="font-size: 9px; text-transform: uppercase; color: var(--dim); font-weight: 600;">OOD score</div><div style="font-size: 14px; font-weight: 500; margin-top: 4px;">22%</div></div>
+                    <div><div style="font-size: 9px; text-transform: uppercase; color: var(--dim); font-weight: 600;">Model</div><div style="font-size: 14px; font-weight: 500; margin-top: 4px;">Spectra-X</div></div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">11 / 14</span>
-    </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>12 / 14</span></div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 12: Trust & transparency -->
-<!-- ============================================================== -->
-<section>
-    <span class="pill">Trust</span>
-    <h2>Honest about what the model can't see</h2>
-    <div style="margin-top: 32px; display: grid; gap: 16px;">
-        <div class="stat-card">
-            <div class="smallcaps">Calibrated confidence</div>
-            <div style="font-size: 18px; margin-top: 8px; color: var(--ink);">Temperature-scaled probabilities. <strong>ECE drops 2-4×.</strong> A reported 90% means 90% empirically right.</div>
-        </div>
-        <div class="stat-card">
-            <div class="smallcaps">Out-of-distribution score</div>
-            <div style="font-size: 18px; margin-top: 8px; color: var(--ink);">Cosine distance to training-feature centroid, z-scored. Inputs far from training trigger <code style="font-size: 13px;">Inconclusive</code> instead of forced binary.</div>
-        </div>
-        <div class="stat-card">
-            <div class="smallcaps">Five-band verdict</div>
-            <div style="font-size: 18px; margin-top: 8px; color: var(--ink);">
-                <span style="color: var(--real);">Authentic</span>
-                <span class="arrow">›</span>
-                <span style="color: #bcd9a3;">Likely Real</span>
-                <span class="arrow">›</span>
-                <span style="color: var(--warn);">Inconclusive</span>
-                <span class="arrow">›</span>
-                <span style="color: #d9b08c;">Likely AI</span>
-                <span class="arrow">›</span>
-                <span style="color: var(--fake);">AI-Generated</span>
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="smallcaps">Privacy</div>
-            <div style="font-size: 18px; margin-top: 8px; color: var(--ink);">Images are processed in memory. Never stored.</div>
-        </div>
-    </div>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">12 / 14</span>
-    </div>
-</section>
-
-<!-- ============================================================== -->
-<!-- 13: Summary -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 13 · Recap  ─────────────────────────────────────────────────── -->
+<!-- ================================================================ -->
 <section data-background-color="#000">
+    <div class="grid-bg"></div>
     <span class="pill">Recap</span>
-    <h2>Three contributions</h2>
-    <div style="margin-top: 36px; display: grid; gap: 22px;">
-        <div style="display: flex; gap: 24px; align-items: start;">
-            <div style="font-family: -apple-system, 'SF Pro Display'; font-size: 56px; font-weight: 700; color: var(--accent); line-height: 1;">1</div>
+    <h2>Three contributions.</h2>
+    <div style="margin-top: 40px; display: grid; gap: 20px;">
+        <div class="card-tinted" style="display: flex; gap: 28px; align-items: start; padding: 24px 32px;">
+            <div style="font-family: var(--r-heading-font); font-size: 64px; font-weight: 700; color: var(--accent); line-height: 1; flex-shrink: 0;">1</div>
             <div>
-                <div style="font-size: 22px; font-weight: 600;">Five-model controlled ablation</div>
+                <div style="font-size: 22px; font-weight: 600; color: var(--ink);">Five-model controlled ablation</div>
                 <div style="font-size: 17px; color: var(--mute); margin-top: 4px;">
-                    Frequency branch is the largest gain (+0.039 AUC). Robustness aug is a Pareto improvement under degradation. Combined attention + aug actually <em>hurts</em> generalisation.
+                    Frequency branch is the largest gain (<mark>+0.039 AUC</mark>). Robustness aug is a Pareto improvement under degradation. Combined attention + aug actually <em>hurts</em> generalisation.
                 </div>
             </div>
         </div>
-        <div style="display: flex; gap: 24px; align-items: start;">
-            <div style="font-family: -apple-system, 'SF Pro Display'; font-size: 56px; font-weight: 700; color: var(--accent); line-height: 1;">2</div>
+        <div class="card-tinted" style="display: flex; gap: 28px; align-items: start; padding: 24px 32px;">
+            <div style="font-family: var(--r-heading-font); font-size: 64px; font-weight: 700; color: var(--accent); line-height: 1; flex-shrink: 0;">2</div>
             <div>
-                <div style="font-size: 22px; font-weight: 600;">Quantified deployment gap + remediation</div>
+                <div style="font-size: 22px; font-weight: 600; color: var(--ink);">Quantified deployment gap + remediation</div>
                 <div style="font-size: 17px; color: var(--mute); margin-top: 4px;">
-                    44% real-photo FPR on smartphone images, hidden by the GenImage benchmark. SmartphoneAesthetic + 632 picsum injection drops FPR to 7%.
+                    <mark>44%</mark> real-photo FPR on smartphones, hidden by GenImage benchmark. SmartphoneAesthetic + 632 picsum injection drops FPR to <mark>7%</mark>.
                 </div>
             </div>
         </div>
-        <div style="display: flex; gap: 24px; align-items: start;">
-            <div style="font-family: -apple-system, 'SF Pro Display'; font-size: 56px; font-weight: 700; color: var(--accent); line-height: 1;">3</div>
+        <div class="card-tinted" style="display: flex; gap: 28px; align-items: start; padding: 24px 32px;">
+            <div style="font-family: var(--r-heading-font); font-size: 64px; font-weight: 700; color: var(--accent); line-height: 1; flex-shrink: 0;">3</div>
             <div>
-                <div style="font-size: 22px; font-weight: 600;">Production-ready, honest interface</div>
+                <div style="font-size: 22px; font-weight: 600; color: var(--ink);">Production-ready, honest interface</div>
                 <div style="font-size: 17px; color: var(--mute); margin-top: 4px;">
                     FastAPI + Apple-HIG React. Calibrated probabilities, OOD score, five-band verdict. Public-detector fallback for 2024+ generators we couldn't source data for.
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer">
-        <span class="mono">SPECTRA</span>
-        <span class="mono">13 / 14</span>
-    </div>
+    <div class="footer"><span class="logo">SPECTRA</span><span>13 / 14</span></div>
 </section>
 
-<!-- ============================================================== -->
-<!-- 14: Thanks -->
-<!-- ============================================================== -->
+<!-- ================================================================ -->
+<!-- 14 · Thanks  ────────────────────────────────────────────────── -->
+<!-- ================================================================ -->
 <section data-background-color="#000">
-    <div style="display: flex; flex-direction: column; justify-content: center; height: 540px; align-items: flex-start;">
+    <div class="grid-bg"></div>
+    <div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+        <div class="spectrum" style="width: 80px; margin-bottom: 32px;"></div>
         <div class="pill">Thank you</div>
-        <h1 class="display" style="font-size: 96px; margin-top: 16px;">Questions?</h1>
-        <p style="margin-top: 24px; font-size: 22px; max-width: 700px;">
-            Try Spectra at <code style="font-size: 18px; padding: 6px 12px;">http://localhost:8001/</code> — drop any image and read its spectral signature.
+        <h1 class="display" style="font-size: 128px; margin-top: 16px; font-weight: 700;">Questions<span style="background: linear-gradient(135deg, var(--accent), var(--accent-3)); -webkit-background-clip: text; background-clip: text; color: transparent;">?</span></h1>
+        <p style="margin-top: 32px; font-size: 22px; max-width: 720px;">
+            Try Spectra at <code style="font-size: 18px; padding: 6px 12px;">localhost:8001</code> —
+            drop any image and read its spectral signature.
         </p>
-        <div class="smallcaps" style="margin-top: 64px;">
+        <div class="smallcaps" style="margin-top: 80px;">
             CMPE 258 · Charan Sai Gandham · Spring 2026
         </div>
     </div>
@@ -721,9 +822,13 @@
         hash: true,
         slideNumber: false,
         transition: 'slide',
+        transitionSpeed: 'default',
         backgroundTransition: 'fade',
         width: 1280,
         height: 720,
+        margin: 0,
+        minScale: 0.2,
+        maxScale: 2.0,
     });
 </script>
 </body>
