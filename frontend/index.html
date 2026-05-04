@@ -2,70 +2,324 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spectra — AI image forensics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Spectra — Image Authentication</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/exifr/dist/full.umd.js"></script>
     <style>
         :root {
-            --bg:    #0b0b0b;
-            --ink:   #ededed;
-            --mute:  #7a7a7a;
-            --dim:   #4a4a4a;
-            --line:  rgba(255,255,255,0.08);
-            --accent: #e6e6e6;        /* neutral white-ish; shifts with verdict */
-            --real:   #9ec27e;
-            --fake:   #d88280;
+            color-scheme: light dark;
+
+            /* ── Light theme ── */
+            --bg:        #f5f5f7;
+            --bg-elev:   #ffffff;
+            --bg-glass:  rgba(255, 255, 255, 0.72);
+            --ink:       #1d1d1f;
+            --mute:      #6e6e73;
+            --dim:       #a1a1a6;
+            --line:      rgba(0, 0, 0, 0.08);
+            --line-soft: rgba(0, 0, 0, 0.04);
+            --accent:    #0071e3;
+            --accent-soft: rgba(0, 113, 227, 0.10);
+            --accent-glow: rgba(0, 113, 227, 0.18);
+
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 24px 56px rgba(0,0,0,0.08), 0 8px 16px rgba(0,0,0,0.05);
+            --shadow-inner: inset 0 1px 0 rgba(255,255,255,0.7);
+
+            --real:  #34c759;
+            --fake:  #ff3b30;
+            --warn:  #ff9500;
+            --probe: #5856d6;
         }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg:        #000000;
+                --bg-elev:   #1c1c1e;
+                --bg-glass:  rgba(28, 28, 30, 0.72);
+                --ink:       #f5f5f7;
+                --mute:      #98989d;
+                --dim:       #636366;
+                --line:      rgba(255, 255, 255, 0.08);
+                --line-soft: rgba(255, 255, 255, 0.04);
+                --accent:    #0a84ff;
+                --accent-soft: rgba(10, 132, 255, 0.18);
+                --accent-glow: rgba(10, 132, 255, 0.28);
+
+                --shadow-xs: 0 1px 2px rgba(0,0,0,0.4);
+                --shadow-sm: 0 2px 8px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+                --shadow-md: 0 8px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4);
+                --shadow-lg: 0 24px 56px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4);
+                --shadow-inner: inset 0 1px 0 rgba(255,255,255,0.06);
+
+                --real:  #30d158;
+                --fake:  #ff453a;
+                --warn:  #ff9f0a;
+                --probe: #5e5ce6;
+            }
+        }
+
+        /* User-overridable theme classes — set by Settings */
+        html[data-theme="light"] {
+            --bg: #f5f5f7; --bg-elev: #fff; --bg-glass: rgba(255,255,255,0.72);
+            --ink: #1d1d1f; --mute: #6e6e73; --dim: #a1a1a6;
+            --line: rgba(0,0,0,0.08); --line-soft: rgba(0,0,0,0.04);
+            --accent: #0071e3; --accent-soft: rgba(0,113,227,0.10); --accent-glow: rgba(0,113,227,0.18);
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 24px 56px rgba(0,0,0,0.08), 0 8px 16px rgba(0,0,0,0.05);
+            --shadow-inner: inset 0 1px 0 rgba(255,255,255,0.7);
+        }
+        html[data-theme="dark"] {
+            --bg: #000; --bg-elev: #1c1c1e; --bg-glass: rgba(28,28,30,0.72);
+            --ink: #f5f5f7; --mute: #98989d; --dim: #636366;
+            --line: rgba(255,255,255,0.08); --line-soft: rgba(255,255,255,0.04);
+            --accent: #0a84ff; --accent-soft: rgba(10,132,255,0.18); --accent-glow: rgba(10,132,255,0.28);
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.4);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4);
+            --shadow-lg: 0 24px 56px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4);
+            --shadow-inner: inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
         * { box-sizing: border-box; }
         html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Inter", system-ui, sans-serif;
+            font-feature-settings: "ss01", "cv11";
+            font-synthesis: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             background: var(--bg);
             color: var(--ink);
-            font-family: 'Inter', ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            -webkit-font-smoothing: antialiased;
             min-height: 100vh;
+            letter-spacing: -0.011em;
+            transition: background 240ms cubic-bezier(0.32,0.72,0,1), color 240ms cubic-bezier(0.32,0.72,0,1);
         }
-        .serif { font-family: 'Fraunces', 'Iowan Old Style', Georgia, serif; letter-spacing: -0.02em; }
-        .mono  { font-family: 'JetBrains Mono', 'SF Mono', monospace; font-feature-settings: "zero"; }
-        .tabular { font-variant-numeric: tabular-nums; }
-        .smallcaps { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.7rem; color: var(--mute); font-weight: 500; }
-        .hairline { border: 1px solid var(--line); }
-        .rule { height: 1px; background: var(--line); width: 100%; }
+        .display { font-family: -apple-system, "SF Pro Display", BlinkMacSystemFont, system-ui, sans-serif; letter-spacing: -0.022em; }
+        .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace; font-variant-numeric: tabular-nums slashed-zero; }
 
-        /* restrained transitions only */
-        .fade { animation: fade 420ms cubic-bezier(.2,.7,.2,1) both; }
-        @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        /* Apple's signature ease */
+        :where(.tx) {
+            transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+            transition-duration: 280ms;
+        }
 
-        .drag-active { border-color: var(--ink) !important; }
+        /* Cards & glass */
+        .card {
+            background: var(--bg-elev);
+            border-radius: 22px;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-md);
+        }
+        .glass {
+            background: var(--bg-glass);
+            backdrop-filter: saturate(180%) blur(28px);
+            -webkit-backdrop-filter: saturate(180%) blur(28px);
+            border: 1px solid var(--line);
+        }
+        .pill {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 100px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 590;
+            letter-spacing: 0;
+        }
 
-        /* sweep for heatmap reveal — the only piece of drama we keep */
-        @keyframes sweep { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            transition: transform 100ms cubic-bezier(0.32,0.72,0,1),
+                        background 200ms cubic-bezier(0.32,0.72,0,1),
+                        opacity 200ms cubic-bezier(0.32,0.72,0,1);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .btn-primary {
+            background: var(--accent); color: white;
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-primary:hover { filter: brightness(1.06); }
+        .btn-primary:active { transform: scale(0.97); }
+        .btn-ghost { color: var(--ink); background: transparent; }
+        .btn-ghost:hover { background: var(--line-soft); }
+        .btn-ghost:active { transform: scale(0.97); }
+        .btn-secondary {
+            background: var(--line-soft); color: var(--ink);
+            border: 1px solid var(--line);
+        }
+        .btn-secondary:hover { background: var(--line); }
+        .btn-secondary:active { transform: scale(0.97); }
+        .btn-icon {
+            width: 36px; height: 36px;
+            padding: 0;
+            background: transparent;
+            color: var(--ink);
+            border-radius: 50%;
+        }
+        .btn-icon:hover { background: var(--line-soft); }
+        .btn-icon:active { transform: scale(0.92); }
 
-        /* selection */
-        ::selection { background: rgba(255,255,255,0.2); color: #fff; }
+        /* Breathing glow on idle upload */
+        @keyframes breathe {
+            0%, 100% {
+                box-shadow: 0 0 0 0 var(--accent-glow), var(--shadow-md);
+            }
+            50% {
+                box-shadow: 0 0 48px 6px var(--accent-glow), var(--shadow-md);
+            }
+        }
+        .breathe { animation: breathe 4.2s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
 
-        /* scrollbar — quiet */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        /* Drag morph */
+        .drag-morph {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            transform: scale(1.015);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Shimmer (for loading; replaces spinners) */
+        @keyframes shimmer {
+            0%   { background-position: -200% 0; }
+            100% { background-position:  200% 0; }
+        }
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                color-mix(in srgb, var(--ink) 8%, transparent) 50%,
+                transparent 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.6s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Reveal animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: none; }
+        }
+        .fade-up { animation: fadeUp 380ms cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+        @keyframes spring {
+            0%   { opacity: 0; transform: scale(0.94); }
+            55%  { opacity: 1; transform: scale(1.015); }
+            100% { transform: scale(1); }
+        }
+        .spring { animation: spring 480ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+        /* Count-up wrapper styling */
+        .digit { font-variant-numeric: tabular-nums; }
+
+        /* Toggle switch (Apple-style) */
+        .toggle {
+            width: 51px; height: 31px; border-radius: 100px;
+            background: color-mix(in srgb, var(--ink) 18%, transparent);
+            position: relative; cursor: pointer;
+            transition: background 240ms cubic-bezier(0.32,0.72,0,1);
+            flex-shrink: 0;
+        }
+        .toggle::after {
+            content: ""; position: absolute; top: 2px; left: 2px;
+            width: 27px; height: 27px; border-radius: 50%;
+            background: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.1);
+            transition: transform 240ms cubic-bezier(0.32,0.72,0,1);
+        }
+        .toggle.on { background: var(--real); }
+        .toggle.on::after { transform: translateX(20px); }
+
+        /* Probability bar */
+        .prob-track {
+            height: 8px;
+            background: var(--line);
+            border-radius: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+        .prob-fill {
+            height: 100%;
+            border-radius: 100px;
+            transition: width 800ms cubic-bezier(0.32, 0.72, 0, 1);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+        .grad-real    { background: linear-gradient(90deg, #34c759, #5856d6); }
+        .grad-fake    { background: linear-gradient(90deg, #ff9500, #ff3b30); }
+        .grad-uncertain { background: linear-gradient(90deg, #8e8e93, #ff9500); }
+
+        /* Inputs */
+        input[type="file"] { display: none; }
+
+        /* Disclosure / accordion */
+        .disclosure-summary { cursor: pointer; user-select: none; list-style: none; }
+        .disclosure-summary::-webkit-details-marker { display: none; }
+        .disclosure-arrow { transition: transform 220ms cubic-bezier(0.32,0.72,0,1); }
+        details[open] .disclosure-arrow { transform: rotate(90deg); }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 100px; }
+        ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--ink) 16%, transparent); }
 
-        input, textarea { color-scheme: dark; }
-        button { font-family: inherit; cursor: pointer; }
-        button:disabled { cursor: not-allowed; }
+        /* Selection */
+        ::selection { background: var(--accent-soft); color: var(--accent); }
 
-        /* the ONE accent — a single thin line that shifts with verdict */
-        .accent-line {
-            height: 1px;
-            background: var(--accent);
-            transition: background 900ms cubic-bezier(.2,.7,.2,1);
+        /* Subtle focus */
+        :focus { outline: none; }
+        :focus-visible {
+            outline: 3px solid var(--accent-soft);
+            outline-offset: 2px;
+            border-radius: 12px;
         }
+
+        /* Sheet animations */
+        @keyframes sheetIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.96); }
+            to   { opacity: 1; transform: none; }
+        }
+        @keyframes overlayIn {
+            from { opacity: 0; backdrop-filter: blur(0); }
+            to   { opacity: 1; backdrop-filter: blur(20px); }
+        }
+        .sheet-overlay { animation: overlayIn 280ms cubic-bezier(0.32,0.72,0,1) both; }
+        .sheet { animation: sheetIn 320ms cubic-bezier(0.32,0.72,0,1) both; }
+
+        /* Dragger handle */
+        .compare-handle {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex; align-items: center; justify-content: center;
+            cursor: ew-resize;
+        }
+
+        /* Hide default scrollbar in horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
@@ -75,435 +329,541 @@
 const { useState, useRef, useEffect, useMemo } = React;
 const API_URL = window.location.origin;
 
-// ------------------------------------------------------------------
-// Single piece of colour logic: verdict → CSS accent
-// ------------------------------------------------------------------
-// Colour by *band* (real / uncertain / fake), not raw probability — the
-// backend has the threshold logic and OOD detector, we just respect it.
-function colorForBand(band) {
-    if (band === "real")         return "#9ec27e";
-    if (band === "likely_real")  return "#bcd9a3";
-    if (band === "fake")         return "#d88280";
-    if (band === "likely_ai")    return "#d9b08c";  // softer than fake
-    if (band === "uncertain")    return "#d9c97a";
-    return "#e6e6e6";
-}
-function setAccentFromResult(result) {
-    const c = result?.band ? colorForBand(result.band) : "#e6e6e6";
-    document.documentElement.style.setProperty("--accent", c);
+// ──────────────────────────────────────────────────────────────────────────
+// Icons (small, monochrome, sized 18-22px)
+// ──────────────────────────────────────────────────────────────────────────
+const I = {
+    logo: ({ s = 24 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="12" r="4" />
+            <line x1="12" y1="3" x2="12" y2="6" />
+            <line x1="12" y1="18" x2="12" y2="21" />
+            <line x1="3" y1="12" x2="6" y2="12" />
+            <line x1="18" y1="12" x2="21" y2="12" />
+        </svg>
+    ),
+    history: ({ s = 18 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M3 12a9 9 0 109-9 9.7 9.7 0 00-7 3.2L3 8" />
+            <polyline points="3 3 3 8 8 8" />
+            <line x1="12" y1="7" x2="12" y2="12" />
+            <line x1="12" y1="12" x2="15" y2="14" />
+        </svg>
+    ),
+    info: ({ s = 18 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="11" x2="12" y2="16" />
+            <circle cx="12" cy="8" r="0.7" fill="currentColor" />
+        </svg>
+    ),
+    settings: ({ s = 18 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 014 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z" />
+        </svg>
+    ),
+    upload: ({ s = 28 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+    ),
+    chevron: ({ s = 16 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="9 18 15 12 9 6" />
+        </svg>
+    ),
+    close: ({ s = 18 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+    ),
+    share: ({ s = 18 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M12 2v14" />
+            <polyline points="7 7 12 2 17 7" />
+            <path d="M5 14v5a2 2 0 002 2h10a2 2 0 002-2v-5" />
+        </svg>
+    ),
+    check: ({ s = 16 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+    ),
+    sliders: ({ s = 18 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+            <circle cx="9" cy="6" r="2" fill="var(--bg-elev)" />
+            <circle cx="15" cy="12" r="2" fill="var(--bg-elev)" />
+            <circle cx="7" cy="18" r="2" fill="var(--bg-elev)" />
+        </svg>
+    ),
+    spark: ({ s = 16 }) => (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+        </svg>
+    ),
+};
+
+// ──────────────────────────────────────────────────────────────────────────
+// Hooks
+// ──────────────────────────────────────────────────────────────────────────
+function useTheme() {
+    const [theme, setTheme] = useState(() => localStorage.getItem("spectra.theme") || "auto");
+    useEffect(() => {
+        const html = document.documentElement;
+        if (theme === "auto") html.removeAttribute("data-theme");
+        else html.setAttribute("data-theme", theme);
+        localStorage.setItem("spectra.theme", theme);
+    }, [theme]);
+    return [theme, setTheme];
 }
 
-// ------------------------------------------------------------------
-// DCT spectrum loader — the piece we're keeping
-// ------------------------------------------------------------------
-function DCTLoader({ label = "Analysing spectrum" }) {
-    const canvasRef = useRef(null);
+function useCountUp(target, durationMs = 800) {
+    const [value, setValue] = useState(0);
     useEffect(() => {
-        const canvas = canvasRef.current; if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        let frame = 0; let raf;
-        const N = 28;
-        const draw = () => {
-            frame++;
-            const W = canvas.width, H = canvas.height;
-            ctx.clearRect(0,0,W,H);
-            const cell = W / N;
-            for (let y = 0; y < N; y++) {
-                for (let x = 0; x < N; x++) {
-                    const d = Math.sqrt((x - N/2)**2 + (y - N/2)**2);
-                    const wave = Math.sin(frame * 0.06 - d * 0.55) * 0.5 + 0.5;
-                    const fade = Math.max(0, 1 - d / (N * 0.7));
-                    const alpha = wave * fade * 0.85;
-                    ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
-                    ctx.fillRect(x * cell + 1, y * cell + 1, cell - 2, cell - 2);
-                }
-            }
-            raf = requestAnimationFrame(draw);
+        let raf, start;
+        const from = 0;
+        const animate = (ts) => {
+            if (!start) start = ts;
+            const t = Math.min(1, (ts - start) / durationMs);
+            // ease-out cubic
+            const eased = 1 - Math.pow(1 - t, 3);
+            setValue(from + (target - from) * eased);
+            if (t < 1) raf = requestAnimationFrame(animate);
         };
-        draw();
+        raf = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(raf);
-    }, []);
-    return (
-        <div className="fade flex items-center gap-5">
-            <canvas ref={canvasRef} width="140" height="140" className="hairline rounded" />
-            <div>
-                <div className="smallcaps">{label}</div>
-                <div className="serif italic text-xl mt-1">computing DCT + CLIP features…</div>
-            </div>
-        </div>
-    );
+    }, [target, durationMs]);
+    return value;
 }
 
-// ------------------------------------------------------------------
-// Seismograph — breathing wave that settles to a value
-// ------------------------------------------------------------------
-function Seismograph({ value, color }) {
-    const ref = useRef(null);
-    useEffect(() => {
-        const canvas = ref.current; if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        const W = canvas.width, H = canvas.height;
-        let frame = 0; let raf;
-        const start = performance.now();
-        const settleMs = 1400;
-        const draw = () => {
-            const t = Math.min(1, (performance.now() - start) / settleMs);
-            const amp = 1 - Math.pow(1 - t, 3);
-            frame++;
-            ctx.clearRect(0, 0, W, H);
-            // baseline
-            ctx.strokeStyle = "rgba(255,255,255,0.06)";
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
-            // wave
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 1.4;
-            ctx.beginPath();
-            const targetY = H - value * H;
-            for (let x = 0; x < W; x++) {
-                const u = x / W;
-                const phase = frame * 0.1 - u * 10;
-                const noise = (Math.sin(phase) + 0.6 * Math.sin(phase * 1.9)) * 5;
-                const baseY = H / 2 + (1 - amp) * noise;
-                const y = baseY * (1 - amp) + targetY * amp;
-                if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            if (t < 1) raf = requestAnimationFrame(draw);
-        };
-        draw();
-        return () => cancelAnimationFrame(raf);
-    }, [value, color]);
-    return <canvas ref={ref} width="480" height="48" className="w-full h-[48px]" />;
-}
-
-// ------------------------------------------------------------------
-// Temperature chip — quiet signal of rigor
-// ------------------------------------------------------------------
-const CAL = { data: null };
-function useCal() {
-    const [c, setC] = useState(CAL.data);
-    useEffect(() => {
-        if (CAL.data) return;
-        fetch(`${API_URL}/dashboard/data`).then(r => r.json()).then(d => {
-            CAL.data = d?.calibration || {}; setC(CAL.data);
-        }).catch(() => {});
-    }, []);
-    return c || {};
-}
-function TempChip({ model }) {
-    const cal = useCal();
-    const T = cal[model]?.temperature;
-    const [show, setShow] = useState(false);
-    if (T == null) return null;
-    return (
-        <span className="relative mono text-[11px] text-[color:var(--mute)] hover:text-[color:var(--ink)] transition-colors cursor-help"
-            onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
-            τ = {T.toFixed(2)}
-            {show && (
-                <span className="absolute top-full right-0 mt-2 w-60 p-3 rounded hairline text-[11px] leading-snug text-[color:var(--ink)] z-10 text-left"
-                    style={{ background: "#0f0f0f" }}>
-                    Temperature scaling. Softmax(logits / τ) gives calibrated confidences — a reported 90% means 90% empirically right on the val set.
-                </span>
-            )}
-        </span>
-    );
-}
-
-// ------------------------------------------------------------------
-// Upload zone — plainest possible
-// ------------------------------------------------------------------
-function UploadZone({ onImageSelect }) {
-    const [drag, setDrag] = useState(false);
-    const ref = useRef(null);
-    return (
-        <div
-            className={`hairline rounded p-10 text-center cursor-pointer transition-colors ${drag ? 'drag-active' : 'hover:border-[color:var(--mute)]'}`}
-            style={{ borderStyle: "dashed" }}
-            onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
-            onDragLeave={() => setDrag(false)}
-            onDrop={(e) => { e.preventDefault(); setDrag(false); if (e.dataTransfer.files?.[0]) onImageSelect(e.dataTransfer.files[0]); }}
-            onClick={() => ref.current?.click()}
-        >
-            <div className="serif text-lg italic">Drop a specimen here</div>
-            <div className="text-[11px] text-[color:var(--mute)] mt-1.5 mono">or click to browse</div>
-            <input ref={ref} type="file" accept="image/*" className="hidden"
-                onChange={(e) => e.target.files?.[0] && onImageSelect(e.target.files[0])} />
-        </div>
-    );
-}
-
-// ------------------------------------------------------------------
-// Image viewer with before/after divider — the one genuinely forensic piece
-// ------------------------------------------------------------------
-function ImageViewer({ result, previewUrl }) {
-    const [pos, setPos] = useState(50);
-    const [mode, setMode] = useState("divider"); // divider | heatmap | original
-    const [swept, setSwept] = useState(false);
-    const ref = useRef(null);
-    const drag = useRef(false);
-
-    useEffect(() => {
-        setSwept(false);
-        const t = setTimeout(() => setSwept(true), 60);
-        return () => clearTimeout(t);
-    }, [result?.heatmap_base64]);
-
-    const onMove = (e) => {
-        if (!drag.current || !ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        const touch = e.touches?.[0] || e;
-        const x = touch.clientX - rect.left;
-        setPos(Math.max(0, Math.min(100, (x / rect.width) * 100)));
+function useHistory() {
+    const [items, setItems] = useState(() => {
+        try { return JSON.parse(localStorage.getItem("spectra.history") || "[]"); }
+        catch { return []; }
+    });
+    const push = (item) => {
+        const next = [{ ...item, id: Date.now() }, ...items].slice(0, 30);
+        setItems(next);
+        localStorage.setItem("spectra.history", JSON.stringify(next));
     };
+    const clear = () => {
+        setItems([]);
+        localStorage.removeItem("spectra.history");
+    };
+    return { items, push, clear };
+}
 
-    if (!result?.heatmap_base64) {
-        return previewUrl ? (
-            <div className="rounded overflow-hidden hairline">
-                <img src={previewUrl} className="block w-full" />
+// ──────────────────────────────────────────────────────────────────────────
+// Top navigation — sticky, glass
+// ──────────────────────────────────────────────────────────────────────────
+function TopNav({ onHistory, onAbout, onSettings }) {
+    return (
+        <header className="sticky top-0 z-30 glass tx" style={{ backdropFilter: "saturate(180%) blur(28px)" }}>
+            <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
+                <div className="flex items-center gap-2.5" style={{ color: "var(--ink)" }}>
+                    <I.logo s={20} />
+                    <span className="display font-semibold text-[15px] tracking-tight">Spectra</span>
+                </div>
+                <nav className="flex items-center gap-1">
+                    <button onClick={onHistory} className="btn btn-ghost px-3 h-9 text-[13px]">
+                        <I.history /><span className="hidden sm:inline">History</span>
+                    </button>
+                    <button onClick={onAbout} className="btn btn-ghost px-3 h-9 text-[13px]">
+                        <I.info /><span className="hidden sm:inline">About</span>
+                    </button>
+                    <button onClick={onSettings} className="btn btn-icon" title="Settings">
+                        <I.settings />
+                    </button>
+                </nav>
             </div>
-        ) : null;
+        </header>
+    );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Upload zone — breathing glow, drag morph, instant preview
+// ──────────────────────────────────────────────────────────────────────────
+function UploadZone({ onFile, isLoading }) {
+    const [drag, setDrag] = useState(false);
+    const inputRef = useRef(null);
+    return (
+        <div className="w-full max-w-[640px] mx-auto">
+            <div
+                role="button"
+                tabIndex={0}
+                onClick={() => !isLoading && inputRef.current?.click()}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
+                onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
+                onDragLeave={() => setDrag(false)}
+                onDrop={(e) => {
+                    e.preventDefault(); setDrag(false);
+                    if (e.dataTransfer.files?.[0]) onFile(e.dataTransfer.files[0]);
+                }}
+                className={`card tx ${drag ? "drag-morph" : "breathe"}`}
+                style={{
+                    minHeight: 280,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    flexDirection: "column", gap: 18,
+                    cursor: isLoading ? "wait" : "pointer",
+                    padding: "48px 32px",
+                }}
+            >
+                <div style={{
+                    width: 64, height: 64, borderRadius: 18,
+                    background: "var(--accent-soft)", color: "var(--accent)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    boxShadow: "var(--shadow-inner)"
+                }}>
+                    <I.upload s={28} />
+                </div>
+                <div className="text-center">
+                    <div className="display text-[22px] font-semibold leading-tight" style={{ color: "var(--ink)" }}>
+                        Drop an image to authenticate
+                    </div>
+                    <div className="text-[14px] mt-1.5" style={{ color: "var(--mute)" }}>
+                        or <span style={{ color: "var(--accent)" }}>click to browse</span> · JPEG, PNG, WebP · ≤ 10 MB
+                    </div>
+                </div>
+                <input ref={inputRef} type="file" accept="image/*"
+                    onChange={(e) => e.target.files?.[0] && onFile(e.target.files[0])} />
+            </div>
+            <div className="text-center mt-3 text-[12px]" style={{ color: "var(--dim)" }}>
+                Images are processed in memory and never stored.
+            </div>
+        </div>
+    );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Verdict card — count-up score, gradient bar, micro-animations
+// ──────────────────────────────────────────────────────────────────────────
+function VerdictCard({ result, loading }) {
+    const fakeProb = result?.fake_probability ?? 0;
+    const pct = useCountUp(loading ? 0 : Math.round(fakeProb * 100), 900);
+    const band = result?.band || "real";
+
+    if (loading) {
+        return (
+            <div className="card p-7 fade-up">
+                <div className="shimmer h-3 w-32 rounded-full" style={{ background: "var(--line-soft)" }} />
+                <div className="mt-5 shimmer h-12 w-48 rounded" style={{ background: "var(--line-soft)" }} />
+                <div className="mt-6 shimmer h-2 w-full rounded-full" style={{ background: "var(--line-soft)" }} />
+                <div className="mt-3 shimmer h-3 w-2/3 rounded-full" style={{ background: "var(--line-soft)" }} />
+            </div>
+        );
     }
+    if (!result) return null;
+
+    const labels = {
+        real:         { word: "Authentic",     subtitle: "Likely a captured photograph.",          grad: "grad-real" },
+        likely_real:  { word: "Likely Real",   subtitle: "Real photograph; may be lightly edited.", grad: "grad-real" },
+        uncertain:    { word: "Inconclusive",  subtitle: "Below the model's confidence threshold.", grad: "grad-uncertain" },
+        likely_ai:    { word: "Likely AI",     subtitle: "Probably AI-generated, signal borderline.", grad: "grad-fake" },
+        fake:         { word: "AI-Generated",  subtitle: "Synthesised by a generative model.",      grad: "grad-fake" },
+    };
+    const L = labels[band] || labels.uncertain;
 
     return (
-        <div className="fade">
-            <div className="flex items-center justify-between mb-3 text-xs">
-                <span className="smallcaps">Spatial evidence</span>
-                <div className="flex gap-3">
-                    {["divider", "heatmap", "original"].map(m => (
-                        <button key={m}
-                            onClick={() => setMode(m)}
-                            className={`smallcaps transition-colors ${mode === m ? 'text-[color:var(--ink)]' : 'text-[color:var(--mute)] hover:text-[color:var(--ink)]'}`}>
-                            {m === "divider" ? "Compare" : m === "heatmap" ? "Heatmap" : "Original"}
-                        </button>
-                    ))}
+        <div className="card p-7 spring">
+            <div className="flex items-center justify-between mb-5">
+                <span className="pill">Result</span>
+                <span className="text-[12px] mono" style={{ color: "var(--dim)" }}>
+                    {result.inference_time_ms?.toFixed(0)} ms
+                </span>
+            </div>
+
+            {/* Probability primary */}
+            <div className="flex items-baseline gap-3">
+                <span className="display digit text-[64px] leading-none font-semibold tracking-tight"
+                    style={{ color: "var(--ink)" }}>
+                    {pct.toFixed(0)}<span className="text-[40px]" style={{ color: "var(--mute)" }}>%</span>
+                </span>
+            </div>
+            <div className="display text-[22px] font-medium mt-2" style={{ color: "var(--ink)" }}>
+                {pct >= 50 ? "AI-Generated" : "Authentic"}
+            </div>
+            <div className="text-[14px] mt-1" style={{ color: "var(--mute)" }}>{L.subtitle}</div>
+
+            {/* Gradient probability bar */}
+            <div className="mt-6">
+                <div className="prob-track">
+                    <div className={`prob-fill ${L.grad}`} style={{ width: `${pct}%` }} />
+                </div>
+                <div className="flex justify-between mt-2 text-[11px]" style={{ color: "var(--dim)" }}>
+                    <span>Authentic</span>
+                    <span>AI-Generated</span>
                 </div>
             </div>
 
-            <div
-                ref={ref}
-                className="relative rounded overflow-hidden hairline select-none"
-                style={{ aspectRatio: "1 / 1", touchAction: "none", cursor: mode === "divider" ? "ew-resize" : "default" }}
-                onMouseDown={() => { if (mode === "divider") drag.current = true; }}
-                onMouseMove={onMove}
-                onMouseUp={() => { drag.current = false; }}
-                onMouseLeave={() => { drag.current = false; }}
-                onTouchStart={() => { if (mode === "divider") drag.current = true; }}
-                onTouchMove={onMove}
-                onTouchEnd={() => { drag.current = false; }}
-            >
-                <img src={previewUrl} className="absolute inset-0 w-full h-full object-cover" draggable="false" />
-                {mode !== "original" && (
-                    <img
-                        src={result.heatmap_base64}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        draggable="false"
-                        style={
-                            mode === "divider"
-                                ? { clipPath: `inset(0 ${100 - pos}% 0 0)` }
-                                : { animation: swept ? "none" : "sweep 500ms cubic-bezier(.2,.7,.2,1) both" }
-                        }
-                    />
+            {/* Detail row */}
+            <div className="grid grid-cols-3 gap-3 mt-7">
+                <Stat label="Verdict" value={L.word} />
+                <Stat label="Confidence" value={
+                    band === "fake" || band === "real" ? "High" :
+                    band === "likely_ai" || band === "likely_real" ? "Medium" : "Low"
+                } />
+                <Stat label="Model" value={result.model_name === "external" ? "Spectra-X" : result.model_name} />
+            </div>
+        </div>
+    );
+}
+
+function Stat({ label, value }) {
+    return (
+        <div>
+            <div className="text-[10px] uppercase tracking-[0.06em] font-medium" style={{ color: "var(--dim)" }}>{label}</div>
+            <div className="text-[14px] mt-1 font-medium truncate" style={{ color: "var(--ink)" }}>{value}</div>
+        </div>
+    );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Image card — preview, heatmap toggle with smooth fade, comparison slider
+// ──────────────────────────────────────────────────────────────────────────
+function ImageCard({ result, previewUrl, file }) {
+    const [showHeat, setShowHeat] = useState(false);
+    const [comparePos, setComparePos] = useState(50);
+    const [mode, setMode] = useState("toggle"); // 'toggle' | 'compare'
+    const containerRef = useRef(null);
+    const dragging = useRef(false);
+
+    const onMove = (e) => {
+        if (!dragging.current || !containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const touch = e.touches?.[0] || e;
+        const x = touch.clientX - rect.left;
+        setComparePos(Math.max(0, Math.min(100, (x / rect.width) * 100)));
+    };
+
+    if (!previewUrl) return null;
+    const hasHeat = !!result?.heatmap_base64;
+
+    return (
+        <div className="card overflow-hidden spring">
+            <div className="px-6 pt-5 pb-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <span className="pill">Specimen</span>
+                    <span className="text-[12px] truncate max-w-[180px]" style={{ color: "var(--mute)" }}>
+                        {file?.name}
+                    </span>
+                </div>
+                {hasHeat && (
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => setMode(mode === "toggle" ? "compare" : "toggle")}
+                            className="btn btn-ghost h-9 px-3 text-[13px]"
+                            title={mode === "toggle" ? "Side-by-side compare" : "Toggle overlay"}>
+                            {mode === "toggle" ? "Compare" : "Overlay"}
+                        </button>
+                        {mode === "toggle" && (
+                            <button
+                                onClick={() => setShowHeat(s => !s)}
+                                className={`toggle ${showHeat ? "on" : ""}`}
+                                aria-label="Toggle heatmap" />
+                        )}
+                    </div>
                 )}
-                {mode === "divider" && (
+            </div>
+            <div
+                ref={containerRef}
+                className="relative select-none"
+                style={{
+                    aspectRatio: "1 / 1",
+                    background: "var(--bg)",
+                    cursor: mode === "compare" ? "ew-resize" : "default",
+                    touchAction: "none",
+                }}
+                onMouseDown={() => { if (mode === "compare") dragging.current = true; }}
+                onMouseMove={onMove}
+                onMouseUp={() => { dragging.current = false; }}
+                onMouseLeave={() => { dragging.current = false; }}
+                onTouchStart={() => { if (mode === "compare") dragging.current = true; }}
+                onTouchMove={onMove}
+                onTouchEnd={() => { dragging.current = false; }}
+            >
+                <img src={previewUrl} alt="" className="absolute inset-0 w-full h-full object-cover" draggable="false" />
+                {hasHeat && mode === "toggle" && (
+                    <img src={result.heatmap_base64} alt="" draggable="false"
+                        className="absolute inset-0 w-full h-full object-cover tx"
+                        style={{ opacity: showHeat ? 1 : 0, transitionDuration: "320ms" }} />
+                )}
+                {hasHeat && mode === "compare" && (
                     <>
+                        <img src={result.heatmap_base64} alt="" draggable="false"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            style={{ clipPath: `inset(0 ${100 - comparePos}% 0 0)` }} />
                         <div className="absolute top-0 bottom-0 pointer-events-none"
-                            style={{ left: `${pos}%`, width: "1px", background: "#fff" }} />
-                        <div className="absolute top-2 left-2 smallcaps text-[10px] px-1.5 py-0.5 rounded" style={{ background: "rgba(0,0,0,0.55)" }}>Original</div>
-                        <div className="absolute top-2 right-2 smallcaps text-[10px] px-1.5 py-0.5 rounded" style={{ background: "rgba(0,0,0,0.55)" }}>Heatmap</div>
+                            style={{ left: `${comparePos}%`, width: 2, background: "white",
+                                     boxShadow: "0 0 20px rgba(0,0,0,0.4)" }} />
+                        <div className="compare-handle absolute pointer-events-none"
+                            style={{ left: `${comparePos}%`, top: "50%",
+                                     transform: "translate(-50%, -50%)" }}>
+                            <I.sliders s={18} />
+                        </div>
+                        <div className="absolute top-3 left-3 pill" style={{ background: "rgba(0,0,0,0.6)", color: "white" }}>Heatmap</div>
+                        <div className="absolute top-3 right-3 pill" style={{ background: "rgba(0,0,0,0.6)", color: "white" }}>Original</div>
                     </>
                 )}
             </div>
+            {hasHeat && (
+                <div className="px-6 py-3 text-[12px] flex items-center gap-2" style={{ color: "var(--mute)", borderTop: "1px solid var(--line)" }}>
+                    <I.spark />
+                    Highlighted regions show where the model attended.
+                </div>
+            )}
         </div>
     );
 }
 
-// ------------------------------------------------------------------
-// Verdict block — instrument readout. No theatrical pronouncement;
-// the analyst reads numbers, not verdicts.
-// ------------------------------------------------------------------
-function Verdict({ result }) {
-    if (!result) return null;
-    const band = result.band || (result.verdict === "AI-Generated" ? "fake" : "real");
-    const fakeProb = result.fake_probability ?? 0;
-    const ood = result.ood_score ?? 0;
-    const color = colorForBand(band);
-
-    // OOD-driven confidence label — matches the backend's threshold logic
-    const confLabel =
-        ood >= 0.85 ? "very low" :
-        ood >= 0.55 ? "low" :
-        ood >= 0.30 ? "moderate" :
-                      "high";
-    const oodColor =
-        ood < 0.30 ? "#9ec27e" :
-        ood < 0.55 ? "#d9c97a" :
-        ood < 0.85 ? "#d9b08c" :
-                     "#d88280";
-
-    // One sentence interpretation, hedged. No exclamation, no italic verdict word.
-    const interp =
-        band === "fake"        ? "Reads as AI-generated." :
-        band === "real"        ? "Reads as a captured photograph." :
-        band === "likely_real" ? "Leans real — lightly edited cannot be ruled out." :
-        band === "likely_ai"   ? "Leans synthesised — signal is borderline." :
-                                 "Below the model's confidence threshold.";
-
-    const cal = useCal();
-    const T = cal[result.model_name]?.temperature;
+// ──────────────────────────────────────────────────────────────────────────
+// Metadata accordion (EXIF + file)
+// ──────────────────────────────────────────────────────────────────────────
+function MetadataCard({ file, result }) {
+    const [exif, setExif] = useState(null);
+    useEffect(() => {
+        if (!file || !window.exifr) return;
+        window.exifr.parse(file).then(setExif).catch(() => setExif({}));
+    }, [file]);
+    if (!file) return null;
+    const rows = [
+        ["Filename", file.name],
+        ["File size", `${(file.size / 1024).toFixed(0)} KB`],
+        ["MIME", file.type],
+        exif?.Make && ["Camera", `${exif.Make} ${exif.Model || ""}`.trim()],
+        exif?.LensModel && ["Lens", exif.LensModel],
+        exif?.ExposureTime && ["Shutter", `1/${Math.round(1 / exif.ExposureTime)}s`],
+        exif?.FNumber && ["Aperture", `f/${exif.FNumber}`],
+        exif?.ISO && ["ISO", exif.ISO],
+        exif?.DateTimeOriginal && ["Captured", new Date(exif.DateTimeOriginal).toLocaleString()],
+    ].filter(Boolean);
+    const hasExif = rows.length > 3;
 
     return (
-        <div className="fade space-y-9">
-            {/* PROBABILITY — primary readout, big tabular numerals */}
-            <div>
-                <div className="flex items-baseline justify-between mb-2">
-                    <span className="smallcaps">P(AI-generated)</span>
-                    <span className="mono text-[10px] text-[color:var(--mute)]">{result.inference_time_ms?.toFixed(0) || 0} ms</span>
+        <details className="card overflow-hidden">
+            <summary className="disclosure-summary px-6 py-4 flex items-center justify-between">
+                <div>
+                    <div className="text-[15px] font-semibold" style={{ color: "var(--ink)" }}>Metadata</div>
+                    <div className="text-[12px]" style={{ color: "var(--mute)" }}>
+                        {hasExif ? "EXIF camera data found" : "Basic file information"}
+                    </div>
                 </div>
-                <div className="mono tabular text-[64px] leading-none tracking-tight"
-                    style={{ color, fontVariantNumeric: "tabular-nums slashed-zero" }}>
-                    {fakeProb.toFixed(3)}
-                </div>
-                <div className="mt-3">
-                    <Seismograph value={fakeProb} color={color} />
+                <div className="disclosure-arrow" style={{ color: "var(--dim)" }}><I.chevron /></div>
+            </summary>
+            <div className="px-6 pb-5">
+                <div className="space-y-2.5">
+                    {rows.map(([k, v]) => (
+                        <div key={k} className="flex items-baseline justify-between text-[13px] py-1.5" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+                            <span style={{ color: "var(--mute)" }}>{k}</span>
+                            <span className="mono truncate ml-4" style={{ color: "var(--ink)" }}>{v}</span>
+                        </div>
+                    ))}
                 </div>
             </div>
+        </details>
+    );
+}
 
-            <div className="rule" />
-
-            {/* SECONDARY READINGS */}
-            <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
-                <ReadingRow label="OOD distance" value={ood.toFixed(3)} valueColor={oodColor} />
-                <ReadingRow label="Confidence"   value={confLabel}      valueColor={oodColor} />
-                <ReadingRow label="Source model" value={result.model_name} mono />
-                <ReadingRow label="Calibration"  value={T != null ? `τ = ${T.toFixed(2)}` : "—"} mono />
-            </div>
-
-            <div className="rule" />
-
-            {/* INTERPRETATION — single hedged sentence */}
-            <div>
-                <div className="smallcaps mb-2">Interpretation</div>
-                <p className="serif text-xl leading-snug" style={{ color }}>
-                    {interp}
-                </p>
-                {ood >= 0.55 && (
-                    <p className="text-xs text-[color:var(--mute)] mt-3 leading-relaxed max-w-sm">
-                        This image sits {ood >= 0.85 ? "far" : "outside the dense region of"} the model's training distribution.
-                        Treat the reading as suggestive — not as a binary call.
-                    </p>
+// ──────────────────────────────────────────────────────────────────────────
+// Explanation accordion
+// ──────────────────────────────────────────────────────────────────────────
+function ExplanationCard({ result }) {
+    const items = result?.explanations || [];
+    return (
+        <details className="card overflow-hidden">
+            <summary className="disclosure-summary px-6 py-4 flex items-center justify-between">
+                <div>
+                    <div className="text-[15px] font-semibold" style={{ color: "var(--ink)" }}>Why this verdict</div>
+                    <div className="text-[12px]" style={{ color: "var(--mute)" }}>
+                        {items.length} signals from the spectral analysis
+                    </div>
+                </div>
+                <div className="disclosure-arrow" style={{ color: "var(--dim)" }}><I.chevron /></div>
+            </summary>
+            <div className="px-6 pb-5">
+                {items.length === 0 ? (
+                    <div className="text-[13px]" style={{ color: "var(--mute)" }}>No structured evidence returned.</div>
+                ) : (
+                    <ol className="space-y-3 text-[13px]">
+                        {items.slice(0, 6).map((e, i) => (
+                            <li key={i} className="flex gap-3 leading-relaxed">
+                                <span className="mono text-[11px] mt-0.5 flex-shrink-0" style={{ color: "var(--dim)" }}>
+                                    {String(i + 1).padStart(2, "0")}
+                                </span>
+                                <div>
+                                    <div className="font-medium" style={{ color: "var(--ink)" }}>{e.region}</div>
+                                    <div style={{ color: "var(--mute)" }}>{e.reason}</div>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
                 )}
             </div>
-        </div>
+        </details>
     );
 }
 
-function ReadingRow({ label, value, valueColor, mono }) {
-    return (
-        <div className="border-b hairline pb-2" style={{ borderColor: "var(--line)" }}>
-            <div className="smallcaps text-[10px] mb-1">{label}</div>
-            <div className={`${mono ? "mono" : "serif italic"} tabular text-base`}
-                style={{ color: valueColor || "var(--ink)" }}>
-                {value}
+// ──────────────────────────────────────────────────────────────────────────
+// Second opinions (the 5 custom heads, shown as small horizontal cards)
+// ──────────────────────────────────────────────────────────────────────────
+function SecondOpinions({ comparison, onCompare, file, loading }) {
+    if (!comparison) {
+        return (
+            <div className="card p-6 text-center">
+                <div className="text-[14px] mb-3" style={{ color: "var(--ink)" }}>Second opinions</div>
+                <div className="text-[12px] mb-4" style={{ color: "var(--mute)" }}>
+                    Run the same image through our four research models.
+                </div>
+                <button onClick={onCompare} disabled={loading || !file} className="btn btn-secondary">
+                    {loading ? "Analyzing…" : "Compare"}
+                </button>
             </div>
-        </div>
-    );
-}
-
-// ------------------------------------------------------------------
-// Spectral readings — typeset like footnotes in a journal article.
-// ------------------------------------------------------------------
-function Evidence({ result }) {
-    const items = result?.explanations;
-    if (!items?.length) return null;
-    return (
-        <div className="fade mt-12">
-            <div className="smallcaps mb-5">Spectral readings</div>
-            <ol className="space-y-3 text-sm leading-relaxed">
-                {items.slice(0, 5).map((e, i) => (
-                    <li key={i} className="flex gap-5">
-                        <span className="mono text-[color:var(--dim)] tabular text-[11px] w-8 shrink-0 pt-1 text-right">
-                            {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <div className="flex-1">
-                            <div className="serif italic text-[color:var(--ink)] text-[15px]">{e.region}</div>
-                            <div className="text-[color:var(--mute)] mt-0.5">{e.reason}</div>
-                        </div>
-                    </li>
-                ))}
-            </ol>
-        </div>
-    );
-}
-
-// ------------------------------------------------------------------
-// Methodology footer — always visible, earns trust by stating limits.
-// ------------------------------------------------------------------
-function MethodologyNote() {
-    return (
-        <div className="fade mt-16 pt-6 border-t" style={{ borderColor: "var(--line)" }}>
-            <div className="smallcaps mb-3">Methodology · limits</div>
-            <div className="text-[12px] leading-relaxed text-[color:var(--mute)] max-w-2xl space-y-2">
-                <p>
-                    <span className="serif italic">Backbone:</span> CLIP ViT-B/16, frozen.
-                    A small DCT-frequency head and fusion classifier are trained on top.
-                </p>
-                <p>
-                    <span className="serif italic">Training:</span> 192K GenImage samples
-                    (six 2023-era generators) plus 632 picsum smartphone-style real photos.
-                    Probabilities are temperature-calibrated on a held-out validation set.
-                </p>
-                <p>
-                    <span className="serif italic">Known limits:</span> the model has not
-                    seen 2024-25 generators (Gemini Nano-Banana, Flux, Imagen 3,
-                    Midjourney v6+) or images from your camera. Outputs on those inputs
-                    should be read as instrumental signal, not adjudication.
-                </p>
-            </div>
-        </div>
-    );
-}
-
-// ------------------------------------------------------------------
-// Compare — a simple horizontal rule of 4 model verdicts
-// ------------------------------------------------------------------
-function Compare({ results }) {
-    if (!results?.models) return null;
-    const models = results.models;
-    const names = {
-        clip_probe:    "CLIP probe",
-        hybrid:        "Hybrid",
+        );
+    }
+    const models = comparison.models || [];
+    const labels = {
+        clip_probe: "CLIP probe",
+        hybrid: "Hybrid",
         hybrid_robust: "Hybrid + robust",
-        freq_guided:   "Freq-guided",
+        hybrid_robust_v2: "Hybrid + robust v2",
+        freq_guided: "Freq-guided",
         freq_guided_no_robust: "Freq-guided (no aug)",
     };
     return (
-        <div className="fade mt-12">
-            <div className="smallcaps mb-5">Second opinions</div>
-            <div className="space-y-4">
-                {models.map((r, i) => {
-                    const band = r.band || (r.verdict === "AI-Generated" ? "fake" : "real");
-                    const color = colorForBand(band);
-                    const pct = Math.round(r.confidence * 100);
-                    const isDefault = r.model_name === "hybrid_robust";
-                    const word = band === "fake"        ? "Synthesised"
-                               : band === "real"          ? "Authentic"
-                               : band === "likely_real"   ? "Likely Real"
-                               : band === "likely_ai"     ? "Likely AI"
-                               :                            "Inconclusive";
+        <div className="card overflow-hidden">
+            <div className="px-6 py-4 flex items-center justify-between">
+                <div>
+                    <div className="text-[15px] font-semibold" style={{ color: "var(--ink)" }}>Second opinions</div>
+                    <div className="text-[12px]" style={{ color: "var(--mute)" }}>Our research models</div>
+                </div>
+                <span className="pill" style={{ background: "var(--line-soft)", color: "var(--mute)" }}>
+                    {models.length}
+                </span>
+            </div>
+            <div className="divide-y" style={{ borderColor: "var(--line-soft)" }}>
+                {models.map((m, i) => {
+                    const p = m.fake_probability ?? 0;
+                    const isFake = p >= 0.5;
                     return (
-                        <div key={i} className="flex items-center gap-4 text-sm">
-                            <span className="w-40 text-[color:var(--mute)] shrink-0 flex items-center gap-2">
-                                {names[r.model_name] || r.model_name}
-                                {isDefault && <span className="mono text-[9px] smallcaps">default</span>}
+                        <div key={i} className="px-6 py-3 flex items-center gap-4 text-[13px]">
+                            <span className="flex-shrink-0 truncate" style={{ width: 130, color: "var(--ink)" }}>
+                                {labels[m.model_name] || m.model_name}
                             </span>
-                            <div className="flex-1 relative h-[2px]" style={{ background: "rgba(255,255,255,0.05)" }}>
-                                <div className="absolute left-0 top-0 bottom-0 transition-all"
-                                    style={{ width: `${pct}%`, background: color }} />
+                            <div className="flex-1 prob-track" style={{ height: 4 }}>
+                                <div className="prob-fill"
+                                    style={{ width: `${p * 100}%`, background: isFake ? "var(--fake)" : "var(--real)" }} />
                             </div>
-                            <span className="mono tabular text-xs w-14 text-right" style={{ color }}>{pct}%</span>
-                            <span className="serif italic text-xs w-28 text-right" style={{ color }}>
-                                {word}
+                            <span className="mono w-10 text-right" style={{ color: "var(--mute)" }}>{Math.round(p * 100)}%</span>
+                            <span className="w-20 text-right text-[12px]"
+                                style={{ color: isFake ? "var(--fake)" : "var(--real)" }}>
+                                {isFake ? "AI" : "Real"}
                             </span>
                         </div>
                     );
@@ -513,393 +873,401 @@ function Compare({ results }) {
     );
 }
 
-// ------------------------------------------------------------------
-// Dashboard — one dense editorial page. No tabs, no cards, no charts
-// except one carefully-chosen comparison bar.
-// ------------------------------------------------------------------
-function Dashboard({ data }) {
-    if (!data) {
-        return <div className="text-[color:var(--mute)] text-sm fade">Loading data…</div>;
-    }
-    const cg = data.cross_generator || {};
-    const cal = data.calibration || {};
-    const modelOrder = ["clip_probe", "hybrid", "hybrid_robust", "freq_guided_no_robust", "freq_guided"];
-    const nameMap = {
-        clip_probe:             "CLIP Linear Probe",
-        hybrid:                 "AIDE Hybrid",
-        hybrid_robust:          "Hybrid + Robust Aug",
-        freq_guided_no_robust:  "Freq-Guided (no robust)",
-        freq_guided:            "Freq-Guided (full)",
-    };
-    const models = modelOrder.filter(m => cg[m]);
-    const gens = models[0] ? Object.keys(cg[models[0]]) : [];
-
-    // Robust AUC table — hard-coded from our ablation_table.md so dashboard
-    // is tolerant of missing robustness JSON endpoints. These are the real
-    // numbers from results/tables/ablation_table.md.
-    const robust = {
-        clip_probe: 0.8360, hybrid: 0.8491, hybrid_robust: 0.8835,
-        freq_guided_no_robust: 0.8520, freq_guided: 0.8298,
-    };
-    const cleanAuc = (m) => {
-        const vs = Object.values(cg[m] || {}).map(v => v.auc).filter(Boolean);
-        return vs.length ? vs.reduce((a, b) => a + b) / vs.length : 0;
-    };
-
+// ──────────────────────────────────────────────────────────────────────────
+// How it works (collapsible explainer near the upload)
+// ──────────────────────────────────────────────────────────────────────────
+function HowItWorks() {
+    const steps = [
+        ["Canonicalize", "Resize to 224×224 and re-encode to match training-time pipeline."],
+        ["Extract", "CLIP ViT-B/16 features + DCT spectral map."],
+        ["Score", "External SOTA detector + our research heads weigh in."],
+        ["Calibrate", "Temperature scaling and OOD distance compute confidence."],
+    ];
     return (
-        <article className="fade max-w-4xl mx-auto">
-            {/* Lead — framed as a lab report */}
-            <header className="mb-12">
-                <div className="smallcaps mb-3">Evaluation · §1</div>
-                <h2 className="serif text-4xl md:text-5xl leading-tight tracking-tight">
-                    Five models, six generators, eight degradations.
-                </h2>
-                <p className="text-[color:var(--mute)] mt-4 max-w-2xl leading-relaxed">
-                    All detectors are evaluated on generators they never saw during training (ADM, GLIDE, Midjourney, SD v1.5, VQDM, Wukong) and on seven real-world image degradations. The surprising result is architectural: the simpler Hybrid with robustness-aware training outperforms the fancier attention-based "Freq-Guided" model under every real-world condition.
-                </p>
-            </header>
-
-            {/* Main table — dense, monospaced, no row backgrounds. */}
-            <section className="mb-14">
-                <div className="flex items-baseline justify-between mb-4">
-                    <div>
-                        <div className="smallcaps">Cross-generator · AUC</div>
-                        <div className="serif text-xl mt-1">Per-model, per-generator</div>
-                    </div>
-                    <span className="mono text-xs text-[color:var(--mute)]">clean test set · 2000 samples/gen</span>
-                </div>
-                <div className="rule mb-3" />
-                <div className="overflow-x-auto">
-                    <table className="w-full text-sm tabular">
-                        <thead>
-                            <tr className="text-[color:var(--mute)]">
-                                <th className="text-left py-2 pr-4 smallcaps text-[10px]">Model</th>
-                                {gens.map(g => <th key={g} className="py-2 px-2 text-right smallcaps text-[10px]">{g}</th>)}
-                                <th className="py-2 pl-4 text-right smallcaps text-[10px]">Avg</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {models.map((m, i) => {
-                                const avg = cleanAuc(m);
-                                const isBest = m === "hybrid";
-                                return (
-                                    <tr key={m} className="border-t" style={{ borderColor: "var(--line)" }}>
-                                        <td className="py-2.5 pr-4">
-                                            {nameMap[m]} {m === "hybrid_robust" && <span className="mono text-[10px] smallcaps ml-2">deployed</span>}
-                                        </td>
-                                        {gens.map(g => {
-                                            const v = cg[m][g]?.auc;
-                                            return (
-                                                <td key={g} className="py-2.5 px-2 text-right mono text-xs">
-                                                    {v ? v.toFixed(3) : "—"}
-                                                </td>
-                                            );
-                                        })}
-                                        <td className="py-2.5 pl-4 text-right mono text-xs" style={{ color: isBest ? "#fff" : "inherit" }}>
-                                            {avg.toFixed(3)}
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            {/* Clean vs Robust — the paper's real finding */}
-            <section className="mb-14">
-                <div className="flex items-baseline justify-between mb-4">
-                    <div>
-                        <div className="smallcaps">Robustness · §2</div>
-                        <div className="serif text-xl mt-1">What survives JPEG, blur, resize</div>
-                    </div>
-                    <span className="mono text-xs text-[color:var(--mute)]">clean vs avg of 7 degradations</span>
-                </div>
-                <div className="rule mb-5" />
-
-                <div className="space-y-5">
-                    {models.map(m => {
-                        const clean = cleanAuc(m);
-                        const rob   = robust[m] ?? 0;
-                        const isBest = m === "hybrid_robust";
-                        return (
-                            <div key={m} className="grid grid-cols-[220px_1fr_1fr_64px] gap-5 items-center text-sm">
-                                <span className="truncate">
-                                    {nameMap[m]}
-                                    {isBest && <span className="mono text-[9px] smallcaps ml-2">best robust</span>}
-                                </span>
-                                {/* clean bar */}
-                                <Bar value={clean} label="clean" color="#ededed" maxLabel="1.0" />
-                                {/* robust bar */}
-                                <Bar value={rob} label="robust" color={isBest ? "#e6d488" : "#7a7a7a"} maxLabel="1.0" />
-                                <span className="mono tabular text-xs text-right" style={{ color: isBest ? "#e6d488" : "inherit" }}>
-                                    Δ {(clean - rob).toFixed(3)}
-                                </span>
+        <details className="card overflow-hidden mt-6 max-w-[640px] mx-auto">
+            <summary className="disclosure-summary px-6 py-4 flex items-center justify-between">
+                <div className="text-[14px] font-semibold" style={{ color: "var(--ink)" }}>How it works</div>
+                <div className="disclosure-arrow" style={{ color: "var(--dim)" }}><I.chevron /></div>
+            </summary>
+            <div className="px-6 pb-5">
+                <ol className="space-y-3">
+                    {steps.map(([t, d], i) => (
+                        <li key={i} className="flex gap-3.5 text-[13px]">
+                            <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-semibold"
+                                style={{ background: "var(--accent-soft)", color: "var(--accent)" }}>
+                                {i + 1}
+                            </span>
+                            <div>
+                                <div className="font-medium" style={{ color: "var(--ink)" }}>{t}</div>
+                                <div style={{ color: "var(--mute)" }}>{d}</div>
                             </div>
-                        );
-                    })}
-                </div>
-                <p className="text-xs text-[color:var(--mute)] mt-6 max-w-2xl leading-relaxed">
-                    The spread between <span className="mono">clean</span> and <span className="mono">robust</span> is the story.
-                    Hybrid loses 0.145 AUC under degradation; Hybrid + Robust loses only 0.110 — a 24% smaller drop for the same architecture,
-                    different training. Freq-Guided's added complexity (attention + aug) collapses to Δ 0.161, below the simple CLIP probe.
-                </p>
-            </section>
-
-            {/* Calibration — small, but honest */}
-            <section className="mb-14">
-                <div className="flex items-baseline justify-between mb-4">
-                    <div>
-                        <div className="smallcaps">Calibration · §3</div>
-                        <div className="serif text-xl mt-1">Honest confidences</div>
-                    </div>
-                    <span className="mono text-xs text-[color:var(--mute)]">temperature fit on 4000-val NLL</span>
-                </div>
-                <div className="rule mb-3" />
-                <table className="w-full text-sm tabular">
-                    <thead>
-                        <tr className="text-[color:var(--mute)]">
-                            <th className="text-left py-2 pr-4 smallcaps text-[10px]">Model</th>
-                            <th className="text-right py-2 px-2 smallcaps text-[10px]">τ</th>
-                            <th className="text-right py-2 px-2 smallcaps text-[10px]">NLL before → after</th>
-                            <th className="text-right py-2 px-2 smallcaps text-[10px]">ECE before → after</th>
-                            <th className="text-right py-2 pl-4 smallcaps text-[10px]">Verdict</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {models.map(m => {
-                            const c = cal[m]; if (!c) return null;
-                            const overconfident = c.temperature > 1.5;
-                            return (
-                                <tr key={m} className="border-t" style={{ borderColor: "var(--line)" }}>
-                                    <td className="py-2.5 pr-4">{nameMap[m]}</td>
-                                    <td className="py-2.5 px-2 text-right mono text-xs">{c.temperature.toFixed(2)}</td>
-                                    <td className="py-2.5 px-2 text-right mono text-xs text-[color:var(--mute)]">
-                                        {c.nll_before.toFixed(3)} → <span className="text-[color:var(--ink)]">{c.nll_after.toFixed(3)}</span>
-                                    </td>
-                                    <td className="py-2.5 px-2 text-right mono text-xs text-[color:var(--mute)]">
-                                        {c.ece_before.toFixed(3)} → <span className="text-[color:var(--ink)]">{c.ece_after.toFixed(3)}</span>
-                                    </td>
-                                    <td className="py-2.5 pl-4 text-right serif italic text-xs" style={{ color: overconfident ? "#d88280" : "#9ec27e" }}>
-                                        {overconfident ? "overconfident" : "well-calibrated"}
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </section>
-
-            {/* Closing note */}
-            <footer className="mt-12">
-                <div className="rule mb-6" />
-                <p className="serif italic text-[color:var(--mute)] text-lg leading-relaxed">
-                    "Simpler architecture plus smarter training generalised better than a fancier architecture with the same training."
-                </p>
-                <div className="smallcaps mt-4">CMPE 258 · SJSU · Spring 2026</div>
-            </footer>
-        </article>
+                        </li>
+                    ))}
+                </ol>
+            </div>
+        </details>
     );
 }
 
-function Bar({ value, label, color, maxLabel }) {
-    const pct = Math.max(0, Math.min(1, value)) * 100;
+// ──────────────────────────────────────────────────────────────────────────
+// Sheet (modal/dialog with overlay + fade-in)
+// ──────────────────────────────────────────────────────────────────────────
+function Sheet({ open, onClose, title, children, width = 460 }) {
+    if (!open) return null;
     return (
-        <div className="flex items-center gap-3">
-            <span className="smallcaps text-[10px] w-12">{label}</span>
-            <div className="flex-1 relative h-[2px]" style={{ background: "rgba(255,255,255,0.06)" }}>
-                <div className="absolute left-0 top-0 bottom-0 transition-all" style={{ width: `${pct}%`, background: color }} />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sheet-overlay"
+            style={{ background: "color-mix(in srgb, var(--bg) 60%, transparent)" }}
+            onClick={onClose}>
+            <div className="card sheet w-full" style={{ maxWidth: width, maxHeight: "85vh", overflow: "auto" }}
+                onClick={(e) => e.stopPropagation()}>
+                <div className="px-6 py-4 flex items-center justify-between" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+                    <div className="display text-[17px] font-semibold" style={{ color: "var(--ink)" }}>{title}</div>
+                    <button onClick={onClose} className="btn btn-icon" style={{ color: "var(--mute)" }}>
+                        <I.close />
+                    </button>
+                </div>
+                <div className="p-6">{children}</div>
             </div>
-            <span className="mono tabular text-xs w-12 text-right">{value.toFixed(3)}</span>
         </div>
     );
 }
 
-// ------------------------------------------------------------------
+// ──────────────────────────────────────────────────────────────────────────
+// History sheet — timeline-style
+// ──────────────────────────────────────────────────────────────────────────
+function HistorySheet({ open, onClose, history }) {
+    return (
+        <Sheet open={open} onClose={onClose} title="History" width={520}>
+            {history.items.length === 0 ? (
+                <div className="text-center py-10">
+                    <div className="text-[14px]" style={{ color: "var(--mute)" }}>No analyses yet.</div>
+                </div>
+            ) : (
+                <>
+                    <div className="space-y-3">
+                        {history.items.map((item, i) => {
+                            const isFake = (item.fake_probability || 0) >= 0.5;
+                            return (
+                                <div key={item.id} className="flex items-center gap-3 py-2.5">
+                                    <div className="flex-shrink-0 w-2 h-2 rounded-full"
+                                        style={{ background: isFake ? "var(--fake)" : "var(--real)" }} />
+                                    {item.thumb && (
+                                        <img src={item.thumb} alt=""
+                                            className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
+                                    )}
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-[13px] font-medium truncate" style={{ color: "var(--ink)" }}>
+                                            {item.filename || "Image"}
+                                        </div>
+                                        <div className="text-[11px] mono" style={{ color: "var(--dim)" }}>
+                                            {new Date(item.id).toLocaleString()}
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-[13px] font-medium" style={{ color: isFake ? "var(--fake)" : "var(--real)" }}>
+                                            {isFake ? "AI-Generated" : "Authentic"}
+                                        </div>
+                                        <div className="text-[11px] mono" style={{ color: "var(--mute)" }}>
+                                            {Math.round((item.fake_probability || 0) * 100)}%
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <button onClick={history.clear} className="btn btn-secondary mt-6 w-full">
+                        Clear history
+                    </button>
+                </>
+            )}
+        </Sheet>
+    );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// About sheet
+// ──────────────────────────────────────────────────────────────────────────
+function AboutSheet({ open, onClose }) {
+    return (
+        <Sheet open={open} onClose={onClose} title="About Spectra" width={500}>
+            <div className="space-y-4 text-[14px]" style={{ color: "var(--ink)" }}>
+                <p style={{ color: "var(--mute)" }}>
+                    Spectra is an image authentication tool that combines a public AI-image
+                    detector with five research models trained on the GenImage benchmark.
+                </p>
+                <div className="grid grid-cols-2 gap-3 mt-5">
+                    <div className="p-4 rounded-2xl" style={{ background: "var(--line-soft)" }}>
+                        <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: "var(--dim)" }}>Cross-gen AUC</div>
+                        <div className="display text-[28px] font-semibold mt-1">0.994</div>
+                    </div>
+                    <div className="p-4 rounded-2xl" style={{ background: "var(--line-soft)" }}>
+                        <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: "var(--dim)" }}>Real-photo accuracy</div>
+                        <div className="display text-[28px] font-semibold mt-1">93%</div>
+                    </div>
+                </div>
+                <div className="text-[12px] mt-4" style={{ color: "var(--dim)" }}>
+                    CMPE 258 · San José State University · Spring 2026
+                </div>
+            </div>
+        </Sheet>
+    );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Settings sheet
+// ──────────────────────────────────────────────────────────────────────────
+function SettingsSheet({ open, onClose, theme, setTheme, defaultModel, setDefaultModel }) {
+    const themes = [
+        ["auto", "Auto"],
+        ["light", "Light"],
+        ["dark", "Dark"],
+    ];
+    const models = [
+        ["external", "Spectra-X (default)"],
+        ["hybrid_robust_v2", "Hybrid + Robust v2"],
+        ["hybrid_robust", "Hybrid + Robust"],
+        ["freq_guided", "Freq-guided"],
+        ["clip_probe", "CLIP probe"],
+    ];
+    return (
+        <Sheet open={open} onClose={onClose} title="Settings" width={440}>
+            <div>
+                <div className="text-[11px] uppercase tracking-wider font-medium mb-2" style={{ color: "var(--dim)" }}>Appearance</div>
+                <div className="card p-1 mb-6" style={{ background: "var(--line-soft)", boxShadow: "none", border: "none" }}>
+                    <div className="grid grid-cols-3 gap-1">
+                        {themes.map(([k, label]) => (
+                            <button key={k}
+                                onClick={() => setTheme(k)}
+                                className="py-2 text-[13px] rounded-xl tx font-medium"
+                                style={{
+                                    background: theme === k ? "var(--bg-elev)" : "transparent",
+                                    color: theme === k ? "var(--ink)" : "var(--mute)",
+                                    boxShadow: theme === k ? "var(--shadow-xs)" : "none",
+                                }}>
+                                {label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="text-[11px] uppercase tracking-wider font-medium mb-2" style={{ color: "var(--dim)" }}>Default model</div>
+                <div className="space-y-1.5">
+                    {models.map(([k, label]) => (
+                        <button key={k} onClick={() => setDefaultModel(k)}
+                            className="w-full flex items-center justify-between px-4 py-3 rounded-xl tx text-left"
+                            style={{
+                                background: defaultModel === k ? "var(--accent-soft)" : "var(--line-soft)",
+                                color: defaultModel === k ? "var(--accent)" : "var(--ink)",
+                            }}>
+                            <span className="text-[14px] font-medium">{label}</span>
+                            {defaultModel === k && <I.check s={16} />}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </Sheet>
+    );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Share/export sheet
+// ──────────────────────────────────────────────────────────────────────────
+function ShareSheet({ open, onClose, result, file }) {
+    const [copied, setCopied] = useState(false);
+    if (!result) return null;
+    const text = `Spectra: ${(result.fake_probability >= 0.5 ? "AI-Generated" : "Authentic")} · ${Math.round(result.fake_probability * 100)}% AI probability · ${file?.name || "image"}`;
+    const downloadJSON = () => {
+        const blob = new Blob([JSON.stringify({
+            filename: file?.name,
+            verdict: result.verdict,
+            band: result.band,
+            fake_probability: result.fake_probability,
+            confidence: result.confidence,
+            ood_score: result.ood_score,
+            model_name: result.model_name,
+            timestamp: new Date().toISOString(),
+        }, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a"); a.href = url; a.download = "spectra-result.json"; a.click();
+        URL.revokeObjectURL(url);
+    };
+    return (
+        <Sheet open={open} onClose={onClose} title="Export result" width={420}>
+            <div className="space-y-3">
+                <div className="p-4 rounded-2xl text-[13px] mono"
+                    style={{ background: "var(--line-soft)", color: "var(--ink)" }}>
+                    {text}
+                </div>
+                <button onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
+                    className="btn btn-secondary w-full">
+                    {copied ? "Copied" : "Copy summary"}
+                </button>
+                <button onClick={downloadJSON} className="btn btn-secondary w-full">
+                    Download JSON
+                </button>
+            </div>
+        </Sheet>
+    );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
 // App
-// ------------------------------------------------------------------
+// ──────────────────────────────────────────────────────────────────────────
 function App() {
+    const [theme, setTheme] = useTheme();
+    const [defaultModel, setDefaultModel] = useState(() => localStorage.getItem("spectra.model") || "external");
+    useEffect(() => { localStorage.setItem("spectra.model", defaultModel); }, [defaultModel]);
+
     const [previewUrl, setPreviewUrl] = useState(null);
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
-    const [compareResults, setCompareResults] = useState(null);
-    const [dashboardData, setDashboardData] = useState(null);
-    const [view, setView] = useState("detect");
+    const [comparison, setComparison] = useState(null);
     const [error, setError] = useState(null);
+    const history = useHistory();
 
-    useEffect(() => {
-        fetch(`${API_URL}/dashboard/data`)
-            .then(r => r.json())
-            .then(d => { setDashboardData(d); if (d?.calibration) CAL.data = d.calibration; })
-            .catch(() => {});
-    }, []);
+    const [showHistory, setShowHistory] = useState(false);
+    const [showAbout, setShowAbout] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
+    const [showShare, setShowShare] = useState(false);
 
-    const handleImageSelect = (selectedFile) => {
-        if (selectedFile.size > 10 * 1024 * 1024) { setError("Max 10 MB"); return; }
-        setFile(selectedFile);
-        setPreviewUrl(URL.createObjectURL(selectedFile));
-        setResult(null); setCompareResults(null); setError(null);
-        setAccentFromResult(null);
+    const reset = () => {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        setPreviewUrl(null); setFile(null); setResult(null); setComparison(null); setError(null);
     };
 
-    const handleDetect = async () => {
-        if (!file) return;
-        setLoading(true); setError(null); setResult(null); setCompareResults(null);
+    const handleFile = async (selected) => {
+        if (selected.size > 10 * 1024 * 1024) { setError("Maximum file size is 10 MB."); return; }
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        setFile(selected);
+        setPreviewUrl(URL.createObjectURL(selected));
+        setResult(null); setComparison(null); setError(null);
+        // Auto-analyze immediately for better UX
+        await analyse(selected);
+    };
+
+    const analyse = async (f) => {
+        setLoading(true); setError(null);
         try {
-            const fd = new FormData(); fd.append("file", file);
-            const res = await fetch(`${API_URL}/detect?model=external`, { method: "POST", body: fd });
-            if (!res.ok) throw new Error(await res.text());
-            const data = await res.json();
-            setAccentFromResult(data);
+            const fd = new FormData(); fd.append("file", f);
+            const r = await fetch(`${API_URL}/detect?model=${defaultModel}`, { method: "POST", body: fd });
+            if (!r.ok) throw new Error(await r.text());
+            const data = await r.json();
             setResult(data);
-        } catch (e) { setError(e.message); }
+            // Push to history with thumbnail
+            const reader = new FileReader();
+            reader.onload = () => {
+                history.push({
+                    filename: f.name,
+                    thumb: reader.result,
+                    fake_probability: data.fake_probability,
+                    band: data.band,
+                });
+            };
+            reader.readAsDataURL(f);
+        } catch (e) {
+            setError(typeof e === "string" ? e : e.message);
+        }
         setLoading(false);
     };
 
-    const handleCompare = async () => {
+    const compare = async () => {
         if (!file) return;
-        setLoading(true); setError(null); setCompareResults(null);
+        setLoading(true);
         try {
             const fd = new FormData(); fd.append("file", file);
-            const res = await fetch(`${API_URL}/detect/compare`, { method: "POST", body: fd });
-            if (!res.ok) throw new Error(await res.text());
-            setCompareResults(await res.json());
+            const r = await fetch(`${API_URL}/detect/compare`, { method: "POST", body: fd });
+            if (!r.ok) throw new Error(await r.text());
+            setComparison(await r.json());
         } catch (e) { setError(e.message); }
         setLoading(false);
     };
 
     return (
         <div className="min-h-screen">
-            {/* Masthead — tiny and editorial */}
-            <header className="max-w-6xl mx-auto px-8 pt-8 pb-6 flex items-baseline justify-between">
-                <div className="flex items-baseline gap-3">
-                    <span className="serif text-2xl tracking-tight">Spectra</span>
-                    <span className="smallcaps">AI image forensics</span>
-                </div>
-                <nav className="flex gap-6 text-sm">
-                    <button onClick={() => setView("detect")}
-                        className={`transition-colors ${view === 'detect' ? 'text-[color:var(--ink)]' : 'text-[color:var(--mute)] hover:text-[color:var(--ink)]'}`}>
-                        Reading
-                    </button>
-                    <button onClick={() => setView("dashboard")}
-                        className={`transition-colors ${view === 'dashboard' ? 'text-[color:var(--ink)]' : 'text-[color:var(--mute)] hover:text-[color:var(--ink)]'}`}>
-                        Methods &amp; data
-                    </button>
-                </nav>
-            </header>
-            <div className="accent-line max-w-6xl mx-auto" />
+            <TopNav
+                onHistory={() => setShowHistory(true)}
+                onAbout={() => setShowAbout(true)}
+                onSettings={() => setShowSettings(true)}
+            />
 
-            <main className="max-w-6xl mx-auto px-8 py-10">
-                {view === "dashboard" && <Dashboard data={dashboardData} />}
-
-                {view === "detect" && (
+            <main className="max-w-6xl mx-auto px-6 py-12 md:py-16">
+                {!previewUrl ? (
                     <div>
-                        {/* Landing — instrument cover, not a hero. */}
-                        {!previewUrl && !loading && (
-                            <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-16 max-w-5xl">
-                                <div>
-                                    <div className="smallcaps mb-3">Vol. 1 · Issue 1</div>
-                                    <h1 className="serif text-[44px] md:text-[56px] leading-[1.04] tracking-tight">
-                                        An instrument for reading the spectral signature of an image.
-                                    </h1>
-                                    <p className="text-[color:var(--mute)] mt-6 max-w-lg leading-relaxed text-[15px]">
-                                        Spectra reports a probability that an image was synthesised by a 2023-era diffusion or GAN model, the spatial regions its CLIP backbone attended to, and how far the input sits from the model's training distribution. It does not pronounce verdicts. It hands the analyst a reading.
-                                    </p>
-                                </div>
-                                <aside className="md:pt-2">
-                                    <div className="smallcaps mb-3">Submit a specimen</div>
-                                    <UploadZone onImageSelect={handleImageSelect} />
-                                    <p className="text-[11px] text-[color:var(--dim)] mt-4 leading-relaxed">
-                                        JPEG or PNG, ≤ 10 MB. Inputs are canonicalised to 224×224 JPEG Q=95 to match the training pipeline.
-                                    </p>
-                                </aside>
+                        <div className="text-center mb-12 fade-up">
+                            <span className="pill mb-5 inline-block">AI Image Authentication</span>
+                            <h1 className="display text-[44px] md:text-[56px] font-semibold leading-[1.05] tracking-tight max-w-[720px] mx-auto"
+                                style={{ color: "var(--ink)" }}>
+                                Tell real photographs <br className="hidden sm:inline" />
+                                from AI-generated images.
+                            </h1>
+                            <p className="mt-5 text-[16px] max-w-[520px] mx-auto" style={{ color: "var(--mute)" }}>
+                                Drop any image. Get a calibrated probability, spatial heatmap,
+                                and a panel of second-opinion models — all in under a second.
+                            </p>
+                        </div>
+                        <UploadZone onFile={handleFile} isLoading={loading} />
+                        <HowItWorks />
+                    </div>
+                ) : (
+                    <div className="fade-up">
+                        <div className="flex items-center justify-between mb-5">
+                            <div>
+                                <span className="pill">Analysis</span>
+                                <h2 className="display text-[24px] font-semibold mt-2" style={{ color: "var(--ink)" }}>
+                                    {file?.name}
+                                </h2>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                {result && (
+                                    <button onClick={() => setShowShare(true)} className="btn btn-secondary">
+                                        <I.share />
+                                        <span className="hidden sm:inline">Export</span>
+                                    </button>
+                                )}
+                                <button onClick={reset} className="btn btn-secondary">
+                                    New image
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
+                            <ImageCard result={result} previewUrl={previewUrl} file={file} />
+                            <div className="space-y-4">
+                                <VerdictCard result={result} loading={loading && !result} />
+                                <MetadataCard file={file} result={result} />
+                                <ExplanationCard result={result} />
+                                <SecondOpinions
+                                    comparison={comparison}
+                                    onCompare={compare}
+                                    file={file}
+                                    loading={loading}
+                                />
+                            </div>
+                        </div>
+
+                        {error && (
+                            <div className="card mt-5 p-4 text-[13px]"
+                                style={{ background: "rgba(255,59,48,0.08)", color: "var(--fake)", borderColor: "rgba(255,59,48,0.3)" }}>
+                                {error}
                             </div>
                         )}
-
-                        {/* After image is picked */}
-                        {previewUrl && (
-                            <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-12 md:gap-16">
-                                {/* Left: image + heatmap */}
-                                <div>
-                                    <div className="mb-6 flex items-baseline justify-between">
-                                        <div className="min-w-0 flex-1 pr-4">
-                                            <div className="smallcaps">Specimen №&nbsp;001</div>
-                                            <div className="mono text-[11px] text-[color:var(--mute)] mt-1 truncate">
-                                                {file?.name}
-                                                {file && <span className="ml-2">· {(file.size / 1024).toFixed(0)} KB</span>}
-                                            </div>
-                                        </div>
-                                        <button
-                                            onClick={() => { setPreviewUrl(null); setFile(null); setResult(null); setCompareResults(null); setAccentFromResult(null); }}
-                                            className="smallcaps text-[color:var(--mute)] hover:text-[color:var(--ink)] transition-colors text-[10px]">
-                                            Replace specimen
-                                        </button>
-                                    </div>
-
-                                    {result ? (
-                                        <ImageViewer result={result} previewUrl={previewUrl} />
-                                    ) : (
-                                        <div className="rounded overflow-hidden hairline">
-                                            <img src={previewUrl} className="block w-full" />
-                                        </div>
-                                    )}
-
-                                    {/* actions live under the image, not in a floating card */}
-                                    {!loading && !result && (
-                                        <div className="flex gap-6 mt-6 text-sm">
-                                            <button onClick={handleDetect}
-                                                className="text-[color:var(--ink)] hover:opacity-70 transition-opacity underline-offset-4 underline decoration-dotted">
-                                                → Analyse
-                                            </button>
-                                            <button onClick={handleCompare}
-                                                className="text-[color:var(--mute)] hover:text-[color:var(--ink)] transition-colors underline-offset-4 underline decoration-dotted">
-                                                Compare all models
-                                            </button>
-                                        </div>
-                                    )}
-
-                                    {result && !compareResults && (
-                                        <div className="mt-6">
-                                            <button onClick={handleCompare}
-                                                className="text-sm text-[color:var(--mute)] hover:text-[color:var(--ink)] transition-colors underline-offset-4 underline decoration-dotted">
-                                                Compare against all models →
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Right: verdict + measurements + evidence */}
-                                <div>
-                                    {loading && <DCTLoader />}
-                                    {!loading && !result && (
-                                        <div className="text-[color:var(--mute)] text-sm">
-                                            <div className="smallcaps">No reading</div>
-                                            <p className="serif text-base mt-2 leading-snug max-w-xs">
-                                                The instrument has not yet examined this specimen.
-                                            </p>
-                                        </div>
-                                    )}
-                                    {result && <Verdict result={result} />}
-                                    {result && <Evidence result={result} />}
-                                    {compareResults && <Compare results={compareResults} />}
-                                    {result && <MethodologyNote />}
-                                </div>
-                            </div>
-                        )}
-
-                        {error && <div className="mt-8 text-sm text-[color:#d88280]">Error · {error}</div>}
                     </div>
                 )}
             </main>
 
-            <footer className="max-w-6xl mx-auto px-8 py-10">
-                <div className="rule mb-6" />
-                <div className="flex items-center justify-between text-[10px] smallcaps">
-                    <span>Spectra · vol. I</span>
-                    <span>CMPE 258 · SJSU · Spring 2026</span>
+            <footer className="max-w-6xl mx-auto px-6 py-8 text-center">
+                <div className="text-[11px]" style={{ color: "var(--dim)" }}>
+                    Spectra · CMPE 258 · San José State University · Spring 2026
                 </div>
             </footer>
+
+            <HistorySheet open={showHistory} onClose={() => setShowHistory(false)} history={history} />
+            <AboutSheet open={showAbout} onClose={() => setShowAbout(false)} />
+            <SettingsSheet open={showSettings} onClose={() => setShowSettings(false)}
+                theme={theme} setTheme={setTheme}
+                defaultModel={defaultModel} setDefaultModel={setDefaultModel} />
+            <ShareSheet open={showShare} onClose={() => setShowShare(false)} result={result} file={file} />
         </div>
     );
 }
