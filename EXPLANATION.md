@@ -12,7 +12,7 @@
 - Fixed `pytorch-grad-cam` → `grad-cam` package name for Python 3.12 compatibility
 - Verified MPS backend is available and functional
 - Verified OpenCLIP ViT-B/16 loads successfully (149.6M params)
-- Created full directory structure per CLAUDE.md specification
+- Created full directory structure per the project design document
 - Created `setup.sh` for one-command reproducible setup
 - Created `.env` with MPS fallback and seed configuration
 - Created `scripts/verify_setup.py` verification script
@@ -29,7 +29,7 @@
 - `.env` — Environment variables (gitignored)
 - `requirements.txt` — Pinned project dependencies
 - `setup.sh` — One-command environment setup script
-- `CLAUDE.md` — Project instructions and plan
+- `DESIGN.md` — Project plan and design document
 - `PROJECT_PLAN.md` — High-level project plan
 - `EXPLANATION.md` — This file
 - `scripts/verify_setup.py` — Environment verification script

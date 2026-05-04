@@ -12,3 +12,6 @@ dist/
 wandb/
 frontend/node_modules/
 .venv/
+.claude/
+*.bak
+*.npy.before_expand.bak

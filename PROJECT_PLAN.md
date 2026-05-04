@@ -11,7 +11,6 @@
 | Machine | MacBook Air M5, 16GB unified RAM, 15GB free disk |
 | GPU | Apple MPS backend (~equivalent to a low-end discrete GPU for training) |
 | Cloud compute | None paid — but **Google Colab free tier** gives T4 GPU (15GB VRAM, ~12hrs/session) |
-| Coding help | Claude Code Max (use heavily for boilerplate, debugging, refactoring) |
 | Dataset budget | GenImage full = **~500GB** → you can only use a **tiny subset** (~3-5GB) |
 
 **Bottom line:** You cannot train from scratch on your laptop. Your strategy must be **fine-tuning frozen foundation models with lightweight heads**, and offloading any heavier training to Colab.
