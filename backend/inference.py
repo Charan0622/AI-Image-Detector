@@ -188,7 +188,58 @@ class ModelManager:
         self._models[name] = model
         return model
 
-    def predict(self, image_pil: Image.Image, model_name: str = "hybrid_robust_v2") -> dict:
+    def _predict_external(self, image_pil: Image.Image) -> dict:
+        """Run the public HF detector and shape the response like our own."""
+        import base64
+        from backend.external_detector import get_external_detector
+        from src.gradcam_utils import clip_attention_rollout, create_heatmap_overlay
+
+        det = get_external_detector()
+        ext = det.predict(image_pil)
+        fake_prob = ext["fake_probability"]
+
+        # Apply our own band logic (consistent UI), but without OOD override
+        # — the external detector handles its own distribution coverage.
+        if fake_prob > 0.85:
+            verdict, band, ood_reason = "AI-Generated", "fake", None
+        elif fake_prob < 0.30:
+            verdict, band, ood_reason = "Real", "real", None
+        elif fake_prob > 0.55:
+            verdict, band, ood_reason = "Likely AI", "likely_ai", None
+        else:
+            verdict, band, ood_reason = "Likely Real", "likely_real", None
+        confidence = fake_prob if "AI" in verdict else (1 - fake_prob)
+
+        # Heatmap: still use CLIP attention rollout for spatial evidence
+        heatmap_b64 = None
+        try:
+            encoder = self._get_clip_encoder()
+            img_tensor = self.transform(image_pil.convert("RGB")).unsqueeze(0).to(self.device)
+            heatmap_np = clip_attention_rollout(encoder, img_tensor, self.device)
+            overlay = create_heatmap_overlay(image_pil.convert("RGB"), heatmap_np, alpha=0.65)
+            buf = io.BytesIO()
+            overlay.save(buf, format="PNG")
+            heatmap_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+        except Exception as e:
+            print(f"[external] heatmap failed: {e}")
+
+        return {
+            "verdict": verdict,
+            "band": band,
+            "confidence": round(confidence, 4),
+            "fake_probability": round(fake_prob, 4),
+            "ood_score": 0.0,  # external detector has its own coverage; we don't compute OOD here
+            "ood_reason": ood_reason,
+            "heatmap_base64": f"data:image/png;base64,{heatmap_b64}" if heatmap_b64 else None,
+            "explanations": [
+                {"region": "global", "reason": f"External detector top label: {ext['label_top']} ({fake_prob:.3f})", "severity": fake_prob},
+            ],
+            "model_name": "external",
+            "inference_time_ms": round(ext["inference_time_ms"], 1),
+            "external_raw": ext["raw"],
+        }
+
+    def predict(self, image_pil: Image.Image, model_name: str = "external") -> dict:
         """Run prediction on a single image.
 
         Args:
@@ -201,6 +252,11 @@ class ModelManager:
         import time
 
         t0 = time.time()
+
+        # Short-circuit: external HuggingFace detector — operates on the
+        # raw PIL image, no CLIP feature extraction needed.
+        if model_name == "external":
+            return self._predict_external(image_pil)
 
         # Canonicalize the upload to match training preprocessing exactly.
         # Training data was 224x224 LANCZOS + JPEG Q=95. Skipping this step

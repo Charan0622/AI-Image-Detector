@@ -52,6 +52,7 @@ def get_manager() -> ModelManager:
 
 
 SUPPORTED_MODELS = (
+    "external",
     "clip_probe",
     "hybrid",
     "hybrid_robust",
@@ -71,7 +72,7 @@ async def health_check() -> dict:
 @app.post("/detect")
 async def detect_image(
     file: UploadFile = File(...),
-    model: str = "hybrid_robust_v2",
+    model: str = "external",
 ) -> dict:
     """Detect if an image is AI-generated.
 

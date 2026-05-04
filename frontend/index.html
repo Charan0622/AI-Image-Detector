@@ -748,7 +748,7 @@ function App() {
         setLoading(true); setError(null); setResult(null); setCompareResults(null);
         try {
             const fd = new FormData(); fd.append("file", file);
-            const res = await fetch(`${API_URL}/detect?model=hybrid_robust_v2`, { method: "POST", body: fd });
+            const res = await fetch(`${API_URL}/detect?model=external`, { method: "POST", body: fd });
             if (!res.ok) throw new Error(await res.text());
             const data = await res.json();
             setAccentFromResult(data);
